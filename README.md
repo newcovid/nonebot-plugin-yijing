@@ -239,6 +239,12 @@ twine check dist/*
 
 服务器升级、换镜像、换 htmlrender/Playwright 基线后，建议按照 `docs/server-smoke-test.md` 执行真实群聊冒烟测试。
 
+## 更多文档
+
+- `docs/server-smoke-test.md`：服务器升级、包安装、真实群聊命令验收清单。
+- `docs/data-collation.md`：经传资料库补录、来源、状态与校勘流程。
+- `docs/release.md`：构建、验包、发布、服务器验证与 PyPI 发布流程。
+
 ## 许可证
 
 本项目使用 MIT License。详见 `LICENSE`。
