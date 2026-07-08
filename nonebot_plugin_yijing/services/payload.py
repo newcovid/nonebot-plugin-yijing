@@ -1,11 +1,15 @@
 from __future__ import annotations
 
-import json
 from typing import Any
 
-from ..core.caster import moving_positions
 from ..core.data import find_hexagram, get_hexagram_text, hexagram_by_seq, sources
-from ..core.hexagram import ResolvedHexagram, line_label, render_line_shape, resolve_by_lines, resolve_static_hexagram
+from ..core.hexagram import (
+    ResolvedHexagram,
+    line_label,
+    render_line_shape,
+    resolve_by_lines,
+    resolve_static_hexagram,
+)
 from ..services.repository import record_to_dict
 
 LINE_NAME = {6: "老阴", 7: "少阳", 8: "少阴", 9: "老阳"}
