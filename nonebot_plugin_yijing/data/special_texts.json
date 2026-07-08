@@ -1,0 +1,26 @@
+[
+  {
+    "id": "qian_yongjiu",
+    "hexagram_seq": 1,
+    "hexagram_name": "乾",
+    "label": "用九",
+    "kind": "special_line_text",
+    "applies_when": "乾卦六爻皆为老阳或解读乾卦特殊辞时参考。",
+    "text": "用九：见群龙无首，吉。",
+    "source_id": "wikisource_zhouyi",
+    "status": "seeded",
+    "notes": "乾卦特殊辞，不属于普通六爻位置之一。"
+  },
+  {
+    "id": "kun_yongliu",
+    "hexagram_seq": 2,
+    "hexagram_name": "坤",
+    "label": "用六",
+    "kind": "special_line_text",
+    "applies_when": "坤卦六爻皆为老阴或解读坤卦特殊辞时参考。",
+    "text": "用六：利永贞。",
+    "source_id": "wikisource_zhouyi",
+    "status": "seeded",
+    "notes": "坤卦特殊辞，不属于普通六爻位置之一。"
+  }
+]

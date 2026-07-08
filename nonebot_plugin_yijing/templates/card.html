@@ -105,7 +105,21 @@
     <div class="section">
       <h2>原始经传资料</h2>
       <p class="classic"><span class="tag">卦辞</span>{{ primary_text.guaci.text }}</p>
+      {% if primary_text.tuan and primary_text.tuan.status != "placeholder" %}
+      <p class="classic"><span class="tag">彖传</span>{{ primary_text.tuan.text }}</p>
+      {% endif %}
       <p class="classic"><span class="tag">大象</span>{{ primary_text.xiang.daxiang }}</p>
+      {% if primary_text.wenyan and primary_text.wenyan.status != "placeholder" %}
+      <p class="classic"><span class="tag">文言</span>{{ primary_text.wenyan.text }}</p>
+      {% endif %}
+      {% if primary_text.special_texts %}
+      <p class="classic"><span class="tag">特殊辞</span></p>
+      <ul>
+        {% for item in primary_text.special_texts %}
+        <li>{{ item.label }}：{{ item.text }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
       <p class="classic"><span class="tag">六爻</span></p>
       <ul>
         {% for row in line_rows|reverse %}
