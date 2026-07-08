@@ -26,6 +26,8 @@ async def get_or_create_group_config(session: AsyncSession, group_id: str) -> Gr
             default_method=plugin_config.yijing_default_method,
             cooldown_seconds=plugin_config.yijing_cooldown_seconds,
             daily_limit=plugin_config.yijing_daily_limit_per_user,
+            duplicate_window_minutes=plugin_config.yijing_duplicate_window_minutes,
+            history_minutes_for_llm=plugin_config.yijing_history_minutes_for_llm,
             llm_enabled=plugin_config.yijing_llm_enabled,
         )
         session.add(cfg)
