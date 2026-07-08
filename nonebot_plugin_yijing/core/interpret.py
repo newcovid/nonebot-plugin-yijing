@@ -51,7 +51,6 @@ def build_local_interpretation(
     random_mode: bool = False,
 ) -> dict[str, Any]:
     primary_text = get_hexagram_text(int(resolved.primary["seq"]))
-    changed_text = get_hexagram_text(int(resolved.changed["seq"])) if resolved.changed else None
     moving = resolved.moving_positions
     p_name = resolved.primary["name"]
     c_name = resolved.changed["name"] if resolved.changed else "无变卦"
