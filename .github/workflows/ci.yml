@@ -9,6 +9,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python-version: ["3.10", "3.11", "3.12"]
     steps:
@@ -16,11 +17,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install package
+      - name: Install package and development tools
         run: |
           python -m pip install -U pip
-          python -m pip install -e . pytest pytest-asyncio
+          python -m pip install -e ".[dev]"
+      - name: Ruff
+        run: ruff check .
       - name: Compile
         run: python -m compileall nonebot_plugin_yijing
       - name: Test
         run: pytest -q
+      - name: Build distributions
+        run: python -m build --sdist --wheel .
+      - name: Check distributions
+        run: twine check dist/*
