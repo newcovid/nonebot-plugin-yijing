@@ -7,6 +7,8 @@ from typing import Any
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
+TEXT_STATUSES = {"placeholder", "draft", "seeded", "checked", "verified"}
+
 
 def load_json(name: str) -> Any:
     return json.loads((DATA_DIR / name).read_text(encoding="utf-8"))
@@ -23,6 +25,16 @@ def hexagrams() -> list[dict[str, Any]]:
 
 
 @lru_cache(maxsize=1)
+def lines() -> list[dict[str, Any]]:
+    return load_json("lines.json")
+
+
+@lru_cache(maxsize=1)
+def lines_by_hexagram_position() -> dict[tuple[int, int], dict[str, Any]]:
+    return {(int(i["hexagram_seq"]), int(i["position"])): i for i in lines()}
+
+
+@lru_cache(maxsize=1)
 def guaci() -> dict[int, dict[str, Any]]:
     return {int(i["hexagram_seq"]): i for i in load_json("guaci.json")}
 
@@ -32,9 +44,124 @@ def yaoci() -> dict[tuple[int, int], dict[str, Any]]:
     return {(int(i["hexagram_seq"]), int(i["position"])): i for i in load_json("yaoci.json")}
 
 
+def _normalize_xiaoxiang(
+    hexagram_seq: int,
+    raw_items: Any,
+    *,
+    source_id: str | None,
+    status: str | None,
+) -> list[dict[str, Any]]:
+    """Return small-image records with a stable list-of-objects shape.
+
+    Early alpha data allowed ``xiaoxiang`` to be an empty list or a mapping such as
+    ``{"1": "..."}``. Runtime code normalizes both forms so old seed data does
+    not leak schema instability into rendering or LLM prompts.
+    """
+
+    if isinstance(raw_items, dict):
+        normalized = []
+        for key, text in sorted(raw_items.items(), key=lambda item: int(item[0])):
+            position = int(key)
+            line = lines_by_hexagram_position().get((hexagram_seq, position), {})
+            normalized.append(
+                {
+                    "position": position,
+                    "line_label": line.get("line_label", ""),
+                    "text": text,
+                    "source_id": source_id,
+                    "status": status or "placeholder",
+                }
+            )
+        return normalized
+
+    if isinstance(raw_items, list):
+        normalized = []
+        for item in raw_items:
+            if isinstance(item, dict):
+                normalized.append(item)
+            else:
+                normalized.append(
+                    {
+                        "position": None,
+                        "line_label": "",
+                        "text": str(item),
+                        "source_id": source_id,
+                        "status": status or "placeholder",
+                    }
+                )
+        return normalized
+
+    return []
+
+
+def _normalize_xiang_record(item: dict[str, Any]) -> dict[str, Any]:
+    seq = int(item["hexagram_seq"])
+    source_id = item.get("daxiang_source_id") or item.get("source_id")
+    status = item.get("daxiang_status") or item.get("status")
+    normalized = dict(item)
+    normalized["xiaoxiang"] = _normalize_xiaoxiang(
+        seq,
+        item.get("xiaoxiang", []),
+        source_id=source_id,
+        status=status,
+    )
+    normalized["xiaoxiang_by_position"] = {
+        str(i["position"]): i for i in normalized["xiaoxiang"] if i.get("position") is not None
+    }
+    return normalized
+
+
 @lru_cache(maxsize=1)
 def xiang() -> dict[int, dict[str, Any]]:
-    return {int(i["hexagram_seq"]): i for i in load_json("xiang.json")}
+    return {int(i["hexagram_seq"]): _normalize_xiang_record(i) for i in load_json("xiang.json")}
+
+
+@lru_cache(maxsize=1)
+def tuan() -> dict[int, dict[str, Any]]:
+    return {int(i["hexagram_seq"]): i for i in load_json("tuan.json")}
+
+
+@lru_cache(maxsize=1)
+def wenyan() -> dict[int, dict[str, Any]]:
+    return {int(i["hexagram_seq"]): i for i in load_json("wenyan.json")}
+
+
+@lru_cache(maxsize=1)
+def xici_shang() -> list[dict[str, Any]]:
+    return load_json("xici_shang.json")
+
+
+@lru_cache(maxsize=1)
+def xici_xia() -> list[dict[str, Any]]:
+    return load_json("xici_xia.json")
+
+
+@lru_cache(maxsize=1)
+def shuogua() -> list[dict[str, Any]]:
+    return load_json("shuogua.json")
+
+
+@lru_cache(maxsize=1)
+def xugua() -> list[dict[str, Any]]:
+    return load_json("xugua.json")
+
+
+@lru_cache(maxsize=1)
+def zagua() -> list[dict[str, Any]]:
+    return load_json("zagua.json")
+
+
+@lru_cache(maxsize=1)
+def special_texts() -> list[dict[str, Any]]:
+    return load_json("special_texts.json")
+
+
+@lru_cache(maxsize=1)
+def special_texts_by_hexagram() -> dict[int, list[dict[str, Any]]]:
+    grouped: dict[int, list[dict[str, Any]]] = {}
+    for item in special_texts():
+        grouped.setdefault(int(item["hexagram_seq"]), []).append(item)
+    return grouped
 
 
 @lru_cache(maxsize=1)
@@ -45,6 +172,26 @@ def relations() -> list[dict[str, Any]]:
 @lru_cache(maxsize=1)
 def sources() -> list[dict[str, Any]]:
     return load_json("sources.json")
+
+
+@lru_cache(maxsize=1)
+def casting_rules() -> list[dict[str, Any]]:
+    return load_json("casting_rules.json")
+
+
+@lru_cache(maxsize=1)
+def interpret_rules() -> list[dict[str, Any]]:
+    return load_json("interpret_rules.json")
+
+
+@lru_cache(maxsize=1)
+def reserved_tables() -> dict[str, Any]:
+    return load_json("reserved_tables.json")
+
+
+@lru_cache(maxsize=1)
+def schema_manifest() -> dict[str, Any]:
+    return load_json("schemas/manifest.json")
 
 
 @lru_cache(maxsize=1)
@@ -69,8 +216,11 @@ def get_hexagram(seq: int) -> dict[str, Any]:
 def get_hexagram_text(seq: int) -> dict[str, Any]:
     return {
         "hexagram": get_hexagram(seq),
-        "guaci": guaci().get(seq, {"text": "卦辞待补录。"}),
-        "xiang": xiang().get(seq, {"daxiang": "象传待补录。"}),
+        "guaci": guaci().get(seq, {"text": "卦辞待补录。", "status": "placeholder"}),
+        "tuan": tuan().get(seq, {"text": "彖传待补录。", "status": "placeholder"}),
+        "xiang": xiang().get(seq, {"daxiang": "象传待补录。", "status": "placeholder"}),
+        "wenyan": wenyan().get(seq),
+        "special_texts": special_texts_by_hexagram().get(seq, []),
         "yaoci": [yaoci().get((seq, pos), {"text": "爻辞待补录。"}) for pos in range(1, 7)],
     }
 
