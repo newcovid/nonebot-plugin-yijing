@@ -30,7 +30,7 @@ __plugin_meta__ = PluginMetadata(
 易经设置
 """.strip(),
     type="application",
-    homepage="https://github.com/your-name/nonebot-plugin-yijing",
+    homepage="https://github.com/newcovid/nonebot-plugin-yijing",
     config=YijingConfig,
     supported_adapters={"~onebot.v11"},
 )
