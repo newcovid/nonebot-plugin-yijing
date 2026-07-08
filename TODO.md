@@ -1,33 +1,33 @@
-# TODO / Development Roadmap
+# TODO / 开发路线图
 
-> Last roadmap cleanup: 2026-07-08  
-> Current state: **Alpha / CI-green infrastructure baseline**  
-> Scope: `nonebot-plugin-yijing` repository, package reproducibility, server validation, data corpus, UX, and interpretation quality.
+> 最近一次路线图整理：2026-07-08  
+> 当前状态：**Alpha / 基础设施已稳定且 CI 通过**  
+> 范围：`nonebot-plugin-yijing` 仓库、包可复现性、服务器验收、资料库、用户体验与解读质量。
 
-This roadmap now keeps completed infrastructure work summarized instead of repeating every closed checkbox. Detailed history is available in merged PRs and `CHANGELOG.md`.
+本文档不再重复保留已经关闭的每一个基础设施勾选项，而是将已完成的基础设施工作汇总记录。详细历史可查看已合并的 PR 与 `CHANGELOG.md`。
 
 ---
 
-## 0. Current Overall Assessment
+## 0. 当前总体评估
 
-`nonebot_plugin_yijing` is now a **group-usable Alpha with reproducible package infrastructure**.
+`nonebot_plugin_yijing` 目前是一个**群内可用的 Alpha 版本，并且已经具备可复现的包工程基础设施**。
 
-The core runtime chain is implemented:
+核心运行链路已经实现：
 
 ```text
-Group message command
-→ nonebot-plugin-alconna parsing
-→ access-control service check
-→ ORM group config / quota / cooldown / history
-→ local / LLM preprocessing
-→ casting
-→ primary hexagram / changed hexagram / moving lines
-→ record persistence
-→ htmlrender long-image rendering
-→ OneBot V11 image reply
+群消息命令
+→ nonebot-plugin-alconna 解析
+→ access-control 服务检查
+→ ORM 群配置 / 限额 / 冷却 / 历史记录
+→ 本地 / LLM 预处理
+→ 起卦
+→ 本卦 / 变卦 / 动爻
+→ 记录持久化
+→ htmlrender 长图渲染
+→ OneBot V11 图片回复
 ```
 
-The repository infrastructure baseline is now CI-green:
+仓库基础设施基线已经在 CI 中通过：
 
 ```text
 ruff check .
@@ -37,103 +37,103 @@ python -m build --sdist --wheel .
 twine check dist/*
 ```
 
-The main remaining gaps are **server acceptance after package install, data completeness, LLM robustness, interpretation quality, settings UX, manual-casting UX, and visual polish**.
+主要剩余缺口是：**包安装后的服务器验收、资料内容完整性、LLM 鲁棒性、解读质量、设置体验、手动起卦体验和视觉打磨**。
 
 ---
 
-## 1. Completed Infrastructure Baseline
+## 1. 已完成的基础设施基线
 
-Completed through the merged v0.1.1 stabilization work:
+已通过 v0.1.1 稳定化工作完成：
 
-- [x] Package metadata updated to `0.1.1`.
-- [x] Placeholder repository URLs replaced with `newcovid/nonebot-plugin-yijing`.
-- [x] Project Issues URL added.
-- [x] `PluginMetadata.homepage` updated.
-- [x] Dependency baselines raised for `nonebot2`, `nonebot-plugin-htmlrender`, and Playwright.
-- [x] `nonebot-adapter-onebot` intentionally retained as a hard dependency for the current OneBot V11 alpha.
-- [x] `nonebot-plugin-access-control` and `nonebot-plugin-access-control-api` retained as hard dependencies.
-- [x] Package-data patterns made recursive for data, templates, CSS, and migrations.
-- [x] MIT license selected and full license text added.
-- [x] README and `.env.example` updated for ORM, htmlrender 0.7.1, Playwright, Docker `/ms-playwright`, and LLM privacy.
-- [x] `ALEMBIC_STARTUP_CHECK=false` removed from recommended default config.
-- [x] Initial ORM migration added for current runtime tables.
-- [x] Migration packaging and metadata tests added.
-- [x] CI runs blocking ruff, compile, pytest, build, and twine check on Python 3.10, 3.11, and 3.12.
-- [x] PyPI publish workflow includes `twine check` before upload.
-- [x] `CHANGELOG.md` added.
-- [x] `docs/server-smoke-test.md` added.
-- [x] `docs/data-collation.md` added.
-- [x] `docs/release.md` added.
+- [x] 包元数据更新到 `0.1.1`。
+- [x] 占位仓库地址替换为 `newcovid/nonebot-plugin-yijing`。
+- [x] 添加项目 Issues 地址。
+- [x] 更新 `PluginMetadata.homepage`。
+- [x] 提升 `nonebot2`、`nonebot-plugin-htmlrender` 和 Playwright 的依赖基线。
+- [x] 当前 OneBot V11 Alpha 阶段有意保留 `nonebot-adapter-onebot` 为硬依赖。
+- [x] 保留 `nonebot-plugin-access-control` 与 `nonebot-plugin-access-control-api` 为硬依赖。
+- [x] 包数据匹配规则改为递归匹配，支持 data、templates、CSS 和 migrations 的后续分层。
+- [x] 选择 MIT License，并补齐完整许可证文本。
+- [x] README 与 `.env.example` 已补充 ORM、htmlrender 0.7.1、Playwright、Docker `/ms-playwright`、LLM 隐私说明。
+- [x] 推荐默认配置中不再关闭 `ALEMBIC_STARTUP_CHECK`。
+- [x] 为当前运行时数据表添加初始 ORM migration。
+- [x] 添加 migration 打包与元数据测试。
+- [x] CI 在 Python 3.10、3.11、3.12 上执行阻断式 ruff、compile、pytest、build、twine check。
+- [x] PyPI 发布 workflow 在上传前执行 `twine check`。
+- [x] 添加 `CHANGELOG.md`。
+- [x] 添加 `docs/server-smoke-test.md`。
+- [x] 添加 `docs/data-collation.md`。
+- [x] 添加 `docs/release.md`。
 
 ---
 
-## 2. Current Progress Matrix
+## 2. 当前进度矩阵
 
-| Area | Current State | Completion |
+| 领域 | 当前状态 | 完成度 |
 |---|---|---:|
-| Repository structure | Metadata, package data, docs, CI, release workflow present | 95% |
-| Server integration | Runs in existing NoneBot Docker stack; package-install acceptance still needed | 90% |
-| ORM + SQLite | Models, repository layer, migration, and tests present | 95% |
-| Command parsing | `nonebot-plugin-alconna` implemented | 90% |
-| Image output | htmlrender implemented; visual design still basic | 85% |
-| Permission management | access-control service integrated | 80% |
-| Coin terminology | 正/反 input configurable and enforced | 95% |
-| Casting methods | Coin, yarrow, manual, random basic flows implemented | 75% |
-| Short-term repeated questions | Local similarity + time window exists | 65% |
-| LLM preprocessing | OpenAI-compatible interface and local fallback exist | 45% |
-| LLM interpretation | JSON prompt and local fallback exist | 50% |
-| Data structure | 16 major data tables + reserved expansion present | 85% |
-| Data content | Most classical text still seed/placeholders | 30% |
-| Settings UI | Basic image/settings view; missing several commands | 55% |
-| Tests | Core infrastructure/data/casting/model tests present | 55% |
-| Release quality | CI green; server package-install acceptance and PyPI decision pending | 70% |
+| 仓库结构 | 元数据、包数据、文档、CI、发布 workflow 均已具备 | 95% |
+| 服务器集成 | 已在现有 NoneBot Docker 栈中运行；仍需完成包安装验收 | 90% |
+| ORM + SQLite | 模型、仓储层、迁移和测试均已具备 | 95% |
+| 命令解析 | 已接入 `nonebot-plugin-alconna` | 90% |
+| 图片输出 | 已接入 htmlrender；视觉设计仍较基础 | 85% |
+| 权限管理 | 已集成 access-control 服务 | 80% |
+| 硬币术语 | 正/反输入已可配置并受约束 | 95% |
+| 起卦方式 | 铜钱、大衍、手动、随机基础流程已实现 | 75% |
+| 短期重复问题 | 已有本地相似度与时间窗口机制 | 65% |
+| LLM 预处理 | 已有 OpenAI 兼容接口和本地 fallback | 45% |
+| LLM 解读 | 已有 JSON prompt 与本地 fallback | 50% |
+| 数据结构 | 已有 16 类主要数据表和预留扩展 | 85% |
+| 数据内容 | 大部分经典文本仍是种子内容或占位内容 | 30% |
+| 设置界面 | 已有基础图片化设置页；仍缺部分设置命令 | 55% |
+| 测试 | 已有核心基础设施、数据、起卦、模型测试 | 55% |
+| 发布质量 | CI 已通过；仍待服务器包安装验收与 PyPI 策略决定 | 70% |
 
 ---
 
-## 3. Immediate Next Steps
+## 3. 近期下一步
 
-Do these before the first public PyPI release.
+这些事项应在首次公开 PyPI 发布前完成。
 
-### P0 — Server/package acceptance
+### P0 — 服务器 / 包安装验收
 
-- [ ] Install from GitHub commit or wheel on the test server instead of local `plugin_dirs`.
-- [ ] Run `nb orm upgrade` against a clean test SQLite database.
-- [ ] Run `nb orm check` and confirm no schema drift.
-- [ ] Run `docs/server-smoke-test.md` real group checklist.
-- [ ] Confirm shared htmlrender stack still works for other plugins.
-- [ ] Verify wheel contents manually once with the process in `docs/release.md`.
-- [ ] Decide release channel: TestPyPI first or direct PyPI alpha.
+- [ ] 在测试服务器上改用 GitHub commit 或 wheel 安装，而不是本地 `plugin_dirs`。
+- [ ] 在干净测试 SQLite 数据库上运行 `nb orm upgrade`。
+- [ ] 运行 `nb orm check`，确认没有 schema drift。
+- [ ] 按 `docs/server-smoke-test.md` 执行真实群聊验收清单。
+- [ ] 确认共享 htmlrender 栈的其他插件仍然正常。
+- [ ] 按 `docs/release.md` 流程手动检查一次 wheel 内容。
+- [ ] 决定发布通道：先 TestPyPI，还是直接发布 PyPI Alpha。
 
-### P1 — Remaining minimum tests
+### P1 — 剩余最小测试
 
 - [ ] `tests/test_payload.py`
-  - [ ] Record card payload contains all sections required by templates.
-  - [ ] History payload supports empty and non-empty records.
-  - [ ] Query payload handles found and not-found cases.
+  - [ ] 记录卡片 payload 包含模板需要的所有部分。
+  - [ ] 历史记录 payload 支持空记录和非空记录。
+  - [ ] 查卦 payload 支持找到和未找到两种情况。
 
-- [ ] Extend `tests/test_models.py`
-  - [ ] `record_to_dict()` works on non-expired records.
-  - [ ] Add a regression case for the previous `MissingGreenlet` pattern if feasible.
+- [ ] 扩展 `tests/test_models.py`
+  - [ ] `record_to_dict()` 可用于未过期记录。
+  - [ ] 如可行，增加一个针对旧 `MissingGreenlet` 模式的回归用例。
 
-- [ ] Extend `tests/test_llm_schema.py`
-  - [ ] LLM malformed JSON falls back safely.
-  - [ ] Missing fields are defaulted or rejected deterministically.
+- [ ] 扩展 `tests/test_llm_schema.py`
+  - [ ] LLM 返回畸形 JSON 时可以安全 fallback。
+  - [ ] 缺失字段可被确定性地默认填充或拒绝。
 
-### P1 — Documentation and release hygiene
+### P1 — 文档与发布卫生
 
-- [ ] Add wheel-content inspection to CI or a dedicated workflow artifact check.
-- [ ] Add a release checklist issue template if releases become frequent.
-- [ ] Document server package-install results after the first package-based server smoke test.
+- [ ] 将 wheel 内容检查加入 CI，或新增专用 workflow artifact 检查。
+- [ ] 如果后续频繁发布，添加 release checklist issue template。
+- [ ] 首次包安装服务器冒烟测试后，记录服务器包安装结果。
 
 ---
 
-## 4. v0.2.0 — Group-Usable Feature Version
+## 4. v0.2.0 — 群内可用功能版本
 
-Goal: improve group UX and administrator controls.
+目标：提升群内用户体验和管理员控制能力。
 
-### Settings Commands
+### 设置命令
 
-Current implemented basics:
+当前已实现的基础项：
 
 - [x] `易经设置`
 - [x] `易经设置 开启`
@@ -145,263 +145,263 @@ Current implemented basics:
 - [x] `易经设置 LLM 开启`
 - [x] `易经设置 LLM 关闭`
 
-Remaining settings work:
+剩余设置工作：
 
 - [ ] `易经设置 重复窗口 30`
 - [ ] `易经设置 历史窗口 120`
-- [ ] Validate invalid numeric setting input without traceback.
-- [ ] Show privacy warning when enabling group-level LLM.
+- [ ] 对非法数值设置输入进行校验，避免 traceback。
+- [ ] 群级 LLM 首次启用时展示隐私提示。
 
-### Manual Casting UX
+### 手动起卦体验
 
-- [ ] User can view examples during manual session.
-- [ ] Manual session timeout and cancellation.
-- [ ] Invalid manual input retries without exiting.
-- [ ] Manual coin input shows parsed line-by-line result before final render.
-- [ ] Manual yarrow evolves from “enter six final values” to a guided process.
+- [ ] 用户可在手动会话中查看示例。
+- [ ] 手动会话支持超时和取消。
+- [ ] 非法手动输入可重试，而不是直接退出。
+- [ ] 手动铜钱输入在最终渲染前展示逐爻解析结果。
+- [ ] 手动大衍从“直接输入六个最终爻值”演进为引导式流程。
 
-### Random Hexagram
+### 随机一卦
 
-Current implemented basics:
+当前已实现的基础项：
 
-- [x] Random mode avoids question preprocessing.
-- [x] Random mode selects a casting method and renders the standard card.
+- [x] 随机模式会跳过问题预处理。
+- [x] 随机模式会选择起卦方式并渲染标准卡片。
 
-Remaining random-mode work:
+剩余随机模式工作：
 
-- [ ] Support random static hexagram lookup.
-- [ ] Support random observation theme.
-- [ ] Decide whether random records are saved or optionally not saved.
+- [ ] 支持随机静卦查询。
+- [ ] 支持随机观察主题。
+- [ ] 决定随机记录是否保存，或允许配置为不保存。
 
-### Repeated Question Handling
+### 重复问题处理
 
-- [ ] Add `--force` or equivalent administrator override.
-- [ ] Return old record image when short-term duplicate is detected.
-- [ ] Improve normalization for same-person/same-group/same-topic questions.
-- [ ] Make duplicate threshold configurable.
+- [ ] 增加 `--force` 或等价的管理员覆盖机制。
+- [ ] 检测到短期重复问题时，直接返回旧记录图片。
+- [ ] 改进同人 / 同群 / 同主题问题的归一化。
+- [ ] 使重复问题阈值可配置。
 
-### Privacy and Safety
+### 隐私与安全
 
-Current implemented basics:
+当前已实现的基础项：
 
-- [x] Group-level LLM switch is visible in settings image.
-- [x] `YIJING_STORE_QUESTION=false` mode is documented.
-- [x] Sensitive topics add professional-advice notices.
+- [x] 群级 LLM 开关会在设置图片中显示。
+- [x] 已文档化 `YIJING_STORE_QUESTION=false` 模式。
+- [x] 敏感话题会追加专业建议提示。
 
-Remaining privacy/safety work:
+剩余隐私 / 安全工作：
 
-- [ ] First LLM enablement message explains third-party model data flow.
-- [ ] Add tests for `YIJING_STORE_QUESTION=false` mode.
-
----
-
-## 5. v0.3.0 — Data Corpus Enhancement
-
-Goal: make the data layer genuinely valuable as a structured Zhouyi corpus.
-
-### Data Schema and Validation
-
-- [ ] Define JSON schema for every data file.
-- [ ] Add `source_id` to every classical text item.
-- [ ] Add `version` / `edition` / `collation_status` metadata.
-- [ ] Add data validation tests to CI.
-- [ ] Add a data completeness report command or script.
-
-### Priority Classical Text Completion
-
-- [ ] Complete 384 爻辞.
-- [ ] Complete 64 卦 彖传.
-- [ ] Complete 64 卦 象传.
-- [ ] Complete 乾坤 文言传.
-- [ ] Complete 系辞上传.
-- [ ] Complete 系辞下传.
-- [ ] Complete 说卦传.
-- [ ] Complete 序卦传.
-- [ ] Complete 杂卦传.
-
-### Data Integrity Checks
-
-Current implemented basics:
-
-- [x] No missing sequence numbers 1-64 in `hexagrams.json`.
-- [x] Every hexagram has six structural line records.
-- [x] Required core JSON files exist and load from package resources.
-
-Remaining data integrity work:
-
-- [ ] Every relation target exists.
-- [ ] Every text has a valid source.
-- [ ] Core text placeholders are disallowed after v0.3.0.
-
-### Modern Explanation Data
-
-- [ ] Add modern plain-language explanation per hexagram.
-- [ ] Add modern plain-language explanation per line.
-- [ ] Add scene templates: study, internship, job, travel, project, relationship, health-sensitive, legal-sensitive, finance-sensitive.
-- [ ] Add risk warning templates.
+- [ ] 首次启用 LLM 时说明第三方模型数据流。
+- [ ] 为 `YIJING_STORE_QUESTION=false` 模式添加测试。
 
 ---
 
-## 6. v0.4.0 — LLM and Interpretation Quality
+## 5. v0.3.0 — 资料库增强
 
-Goal: make LLM output structured, auditable, and controllable.
+目标：让数据层真正成为有价值的结构化《周易》资料库。
+
+### 数据 Schema 与校验
+
+- [ ] 为每个数据文件定义 JSON Schema。
+- [ ] 为每一条经典文本添加 `source_id`。
+- [ ] 添加 `version` / `edition` / `collation_status` 元数据。
+- [ ] 将数据校验测试加入 CI。
+- [ ] 增加数据完整度报告命令或脚本。
+
+### 经典文本优先补全
+
+- [ ] 补全 384 条爻辞。
+- [ ] 补全 64 卦彖传。
+- [ ] 补全 64 卦象传。
+- [ ] 补全乾坤文言传。
+- [ ] 补全系辞上传。
+- [ ] 补全系辞下传。
+- [ ] 补全说卦传。
+- [ ] 补全序卦传。
+- [ ] 补全杂卦传。
+
+### 数据完整性检查
+
+当前已实现的基础项：
+
+- [x] `hexagrams.json` 中不存在缺失的 1-64 卦序。
+- [x] 每一卦都有六条结构化爻位记录。
+- [x] 核心 JSON 文件存在，并且可从包资源加载。
+
+剩余数据完整性工作：
+
+- [ ] 每一个卦关系目标都存在。
+- [ ] 每一条文本都有有效来源。
+- [ ] v0.3.0 之后禁止核心文本继续使用占位内容。
+
+### 现代解释数据
+
+- [ ] 为每一卦添加现代白话解释。
+- [ ] 为每一爻添加现代白话解释。
+- [ ] 添加场景模板：学习、实习、工作、出行、项目、关系、健康敏感、法律敏感、财务敏感。
+- [ ] 添加风险提示模板。
+
+---
+
+## 6. v0.4.0 — LLM 与解读质量
+
+目标：让 LLM 输出结构化、可审计、可控制。
 
 ### LLM Schema
 
-- [ ] Use Pydantic models for LLM preprocessing output.
-- [ ] Use Pydantic models for LLM interpretation output.
-- [ ] Missing fields are defaulted safely.
-- [ ] Invalid fields are rejected or downgraded.
-- [ ] LLM must never rewrite classical text.
+- [ ] 使用 Pydantic 模型约束 LLM 预处理输出。
+- [ ] 使用 Pydantic 模型约束 LLM 解读输出。
+- [ ] 缺失字段可被安全默认填充。
+- [ ] 非法字段会被拒绝或降级处理。
+- [ ] LLM 不得改写经典原文。
 
-### History Parameterization
+### 历史记录参数化
 
-- [ ] Casting preprocessing: recent 30-120 minutes.
-- [ ] History command: no LLM call.
-- [ ] Hexagram query: only query text and target hexagram.
-- [ ] Advanced review mode: summarized full history if explicitly requested.
-- [ ] Sensitive questions: send minimal necessary fields only.
+- [ ] 起卦预处理：读取最近 30-120 分钟历史。
+- [ ] 历史命令：不调用 LLM。
+- [ ] 查卦命令：只传递查询文本和目标卦象。
+- [ ] 高级复盘模式：仅在用户明确请求时汇总全部历史。
+- [ ] 敏感问题：只发送必要最小字段。
 
-### 三不占 Refinement
+### 三不占细化
 
-- [ ] 不诚: obvious trolling, empty questions, malicious spam.
-- [ ] 不义: cheating, harming others, illegal or policy-evading intent.
-- [ ] 不疑: no concrete uncertainty, pure deterministic prediction requests.
-- [ ] Make local rules and LLM rules consistent.
+- [ ] 不诚：明显玩梗、空问题、恶意刷屏。
+- [ ] 不义：作弊、伤害他人、违法或规避政策意图。
+- [ ] 不疑：没有具体疑问、纯确定性预测请求。
+- [ ] 使本地规则与 LLM 规则保持一致。
 
-### Interpretation Output Standard
+### 解读输出标准
 
-- [ ] Classical text.
-- [ ] Hexagram structure.
-- [ ] Moving-line emphasis.
-- [ ] Changed-hexagram trend.
-- [ ] Answer to user question.
-- [ ] Actionable suggestions.
-- [ ] Risks and uncertainty.
-- [ ] Disclaimer.
+- [ ] 经典文本。
+- [ ] 卦象结构。
+- [ ] 动爻重点。
+- [ ] 变卦趋势。
+- [ ] 对用户问题的回答。
+- [ ] 可执行建议。
+- [ ] 风险与不确定性。
+- [ ] 免责声明。
 
-### Multi-Rule Strategy Reservation
+### 多规则策略预留
 
-- [ ] 周易经传 default interpretation.
-- [ ] Classical-text-only mode.
-- [ ] 梅花易数 reserved mode.
-- [ ] 六爻纳甲 reserved mode.
-- [ ] 文王卦 reserved mode.
-
----
-
-## 7. v0.5.0+ — Advanced Divination Systems
-
-Do not start these before v0.3.0 data integrity and v0.4.0 interpretation schema are stable.
-
-- [ ] 梅花易数 rules.
-- [ ] 六爻纳甲 rules.
-- [ ] 干支历法.
-- [ ] 五行旺衰.
-- [ ] 六亲六神.
-- [ ] 世应.
-- [ ] 用神.
-- [ ] 神煞.
-- [ ] 日月建.
-- [ ] 旬空.
-- [ ] Advanced scene-specific reading templates.
+- [ ] 周易经传默认解读。
+- [ ] 仅经典文本模式。
+- [ ] 梅花易数预留模式。
+- [ ] 六爻纳甲预留模式。
+- [ ] 文王卦预留模式。
 
 ---
 
-## 8. Visual Rendering Roadmap
+## 7. v0.5.0+ — 高阶术数系统
 
-Current rendering is usable but basic. It should become product-grade before a public v1.0.
+在 v0.3.0 数据完整性和 v0.4.0 解读 schema 稳定之前，不要开始这些内容。
 
-- [ ] Unified visual design for all cards.
-- [ ] Better coin graphics instead of plain text/list representation.
-- [ ] Clearer six-line visualization with moving/static and yin/yang state.
-- [ ] Better primary/changed hexagram comparison.
-- [ ] Consistent notice/error/rejection/settings/history image style.
-- [ ] Long-text layout with better spacing and section hierarchy.
-- [ ] Add screenshot-based visual regression tests if feasible.
+- [ ] 梅花易数规则。
+- [ ] 六爻纳甲规则。
+- [ ] 干支历法。
+- [ ] 五行旺衰。
+- [ ] 六亲六神。
+- [ ] 世应。
+- [ ] 用神。
+- [ ] 神煞。
+- [ ] 日月建。
+- [ ] 旬空。
+- [ ] 高级场景化解读模板。
 
 ---
 
-## 9. Known Technical Debt
+## 8. 视觉渲染路线图
 
-### This Repository
+当前渲染已经可用，但仍然较基础；公开 v1.0 前应达到产品级视觉质量。
 
-- [ ] Avoid server-only assumptions in package code.
-- [ ] Make access-control optional only if public plugin usability becomes a priority.
-- [ ] Revisit whether `nonebot-adapter-onebot` should remain a hard dependency after non-OneBot adapters are explicitly supported.
+- [ ] 所有卡片采用统一视觉设计。
+- [ ] 用更好的铜钱图形替代纯文本 / 列表展示。
+- [ ] 六爻可视化更清晰地区分动静、阴阳状态。
+- [ ] 本卦 / 变卦对比更清楚。
+- [ ] 通知 / 错误 / 拒绝 / 设置 / 历史图片风格一致。
+- [ ] 长文本排版优化间距和章节层级。
+- [ ] 如可行，添加基于截图的视觉回归测试。
 
-### External / Server Stack Debt
+---
 
-- [ ] `nonebot_plugin_loladmin` table names likely need refactor.
-  - Current short-prefix examples:
+## 9. 已知技术债
+
+### 本仓库
+
+- [ ] 避免在包代码中隐含服务器专属假设。
+- [ ] 只有当公开插件易用性成为优先目标时，才考虑让 access-control 变成可选依赖。
+- [ ] 在明确支持非 OneBot 适配器后，重新评估 `nonebot-adapter-onebot` 是否仍应为硬依赖。
+
+### 外部 / 服务器栈技术债
+
+- [ ] `nonebot_plugin_loladmin` 的表名可能需要重构。
+  - 当前短前缀示例：
     - `loladmin_admin_auth`
     - `loladmin_banned_word`
     - `loladmin_group_settings`
     - `loladmin_ban_violation`
-  - Future recommended names:
+  - 未来推荐名称：
     - `nonebot_plugin_loladmin_admin_auth`
     - `nonebot_plugin_loladmin_banned_word`
     - `nonebot_plugin_loladmin_group_settings`
     - `nonebot_plugin_loladmin_ban_violation`
-  - Do **not** rename directly in production.
-  - Required process:
-    1. Backup SQLite.
-    2. Add Alembic migration with rename operations.
-    3. Rename indexes/constraints if needed.
-    4. Verify data counts before/after.
-    5. Run server acceptance tests.
-    6. Update server project documentation.
+  - **不要直接在生产环境重命名。**
+  - 必要流程：
+    1. 备份 SQLite。
+    2. 添加包含 rename 操作的 Alembic migration。
+    3. 如有需要，重命名索引 / 约束。
+    4. 校验迁移前后的数据数量。
+    5. 执行服务器验收测试。
+    6. 更新服务器项目文档。
 
 ---
 
-## 10. Release Checklist
+## 10. 发布检查清单
 
-### Before `v0.1.1`
+### `v0.1.1` 前
 
-- [x] P0-Infra complete.
-- [x] Wheel builds successfully in CI.
-- [x] `twine check` passes in CI.
-- [x] README accurately reflects current limitations.
-- [x] Data incompleteness is clearly disclosed.
-- [ ] Server package-install smoke passes.
-- [ ] Real server manual acceptance checklist passes.
+- [x] P0 基础设施完成。
+- [x] wheel 可在 CI 中成功构建。
+- [x] CI 中 `twine check` 通过。
+- [x] README 准确说明当前限制。
+- [x] 明确披露资料不完整状态。
+- [ ] 服务器包安装冒烟测试通过。
+- [ ] 真实服务器手动验收清单通过。
 
-### Before PyPI Release
+### PyPI 发布前
 
-- [ ] Decide release channel: TestPyPI first or real PyPI.
-- [ ] Create GitHub release tag.
-- [ ] Confirm PyPI project name is available: `nonebot-plugin-yijing`.
-- [ ] Confirm no secret files are included in sdist/wheel.
-- [ ] Confirm install command works:
+- [ ] 决定发布通道：先 TestPyPI，还是直接发布 PyPI。
+- [ ] 创建 GitHub release tag。
+- [ ] 确认 PyPI 项目名 `nonebot-plugin-yijing` 可用。
+- [ ] 确认 sdist / wheel 不包含秘密文件。
+- [ ] 确认安装命令可用：
   ```bash
   pip install nonebot-plugin-yijing==0.1.1
   ```
 
-### Before NoneBot Plugin Store Submission
+### NoneBot 插件商店提交前
 
-- [ ] Public README is polished.
-- [x] `PluginMetadata` is complete for current alpha scope.
-- [x] No required secret config for import/load.
-- [x] Optional LLM config is documented.
-- [x] CI is green.
-- [ ] Package is on PyPI.
-- [x] Data limitations are clearly disclosed.
-- [x] No obvious unsafe or deterministic-prediction claims.
-- [x] Privacy and disclaimer are explicit.
+- [ ] 公开 README 已打磨。
+- [x] 当前 Alpha 范围内的 `PluginMetadata` 已完整。
+- [x] import / load 不需要必填秘密配置。
+- [x] 可选 LLM 配置已文档化。
+- [x] CI 通过。
+- [ ] 包已发布到 PyPI。
+- [x] 数据限制已明确披露。
+- [x] 没有明显不安全或确定性预测宣称。
+- [x] 隐私说明和免责声明已明确。
 
 ---
 
-## 11. Recommended Next Steps
+## 11. 建议下一步
 
-Do these in order:
+按以下顺序推进：
 
-1. Install from GitHub commit or local wheel on the test server.
-2. Run `nb orm upgrade` and `nb orm check` against a clean test SQLite database.
-3. Execute `docs/server-smoke-test.md` in a real group.
-4. Add payload tests and model serialization regression tests.
-5. Add settings commands for duplicate/history windows.
-6. Add data relation-target validation.
-7. Decide TestPyPI vs PyPI direct alpha release.
-8. Tag and release `v0.1.1`.
+1. 在测试服务器上从 GitHub commit 或本地 wheel 安装。
+2. 在干净测试 SQLite 数据库上运行 `nb orm upgrade` 和 `nb orm check`。
+3. 在真实群内执行 `docs/server-smoke-test.md`。
+4. 添加 payload 测试和模型序列化回归测试。
+5. 添加重复窗口 / 历史窗口设置命令。
+6. 添加数据卦关系目标校验。
+7. 决定 TestPyPI 还是直接发布 PyPI Alpha。
+8. 打 tag 并发布 `v0.1.1`。
 
-Avoid starting advanced divination systems before server package-install acceptance, data integrity, and LLM schema are more stable.
+在服务器包安装验收、数据完整性和 LLM schema 更稳定前，避免启动高阶术数系统开发。
