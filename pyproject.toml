@@ -36,6 +36,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "build>=1.2.0",
+    "nonebot2[fastapi]>=2.5.0",
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.0",
     "ruff>=0.8.0",
@@ -70,11 +71,6 @@ plugins = ["nonebot_plugin_yijing"]
 [tool.ruff]
 line-length = 100
 target-version = "py310"
-
-[tool.ruff.lint]
-# Bootstrap lint baseline for the alpha repository. Keep ruff in CI now, then tighten these
-# ignores after the first packageable v0.1.1 release.
-ignore = ["E402", "F401"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
