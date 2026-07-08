@@ -4,7 +4,7 @@ from nonebot import require
 
 require("nonebot_plugin_access_control_api")
 
-from nonebot_plugin_access_control_api.service import create_plugin_service
+from nonebot_plugin_access_control_api.service import create_plugin_service  # noqa: E402
 
 plugin_service = create_plugin_service("nonebot_plugin_yijing")
 
