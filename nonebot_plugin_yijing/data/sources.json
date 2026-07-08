@@ -2,15 +2,23 @@
   {
     "id": "wikisource_zhouyi",
     "name": "维基文库《周易》",
+    "title": "周易",
+    "type": "classical_text",
     "url": "https://zh.wikisource.org/zh-hans/周易",
+    "edition": "Wikisource zh-hans page, manual collation reference",
     "license": "Public domain / CC BY-SA page metadata",
-    "usage": "经文、卦辞、爻辞、彖、象等文本校对来源之一。"
+    "usage": "经文、卦辞、爻辞、彖、象等文本校对来源之一。",
+    "notes": "插件不自动抓取；仅作为人工校勘来源登记。"
   },
   {
     "id": "ctext_zhouyi",
     "name": "中国哲学书电子化计划《周易》",
+    "title": "周易",
+    "type": "classical_text_reference",
     "url": "https://ctext.org/book-of-changes/zh",
+    "edition": "Chinese Text Project online text",
     "license": "用于人工校对参考，插件不自动抓取。",
-    "usage": "文本版本对读与校勘参考。"
+    "usage": "文本版本对读与校勘参考。",
+    "notes": "如后续采用具体段落，应在目标文本记录中补充 source_locator 或 collation_notes。"
   }
 ]
