@@ -47,6 +47,8 @@ class GroupConfig(Model):
     default_method: Mapped[str] = mapped_column(String(32), default="coin")
     cooldown_seconds: Mapped[int] = mapped_column(Integer, default=60)
     daily_limit: Mapped[int] = mapped_column(Integer, default=10)
+    duplicate_window_minutes: Mapped[int] = mapped_column(Integer, default=30)
+    history_minutes_for_llm: Mapped[int] = mapped_column(Integer, default=120)
     llm_enabled: Mapped[bool] = mapped_column(Boolean, default=False)
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
