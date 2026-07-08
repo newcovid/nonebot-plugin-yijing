@@ -71,5 +71,10 @@ plugins = ["nonebot_plugin_yijing"]
 line-length = 100
 target-version = "py310"
 
+[tool.ruff.lint]
+# Bootstrap lint baseline for the alpha repository. Keep ruff in CI now, then tighten these
+# ignores after the first packageable v0.1.1 release.
+ignore = ["E402", "F401"]
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
