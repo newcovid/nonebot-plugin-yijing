@@ -116,6 +116,18 @@ def _parse_cast_body(body: str) -> tuple[str, str]:
     return body, method
 
 
+def _parse_positive_int(text: str, *, minimum: int = 1, maximum: int | None = None) -> int:
+    try:
+        value = int(text)
+    except ValueError as exc:
+        raise ValueError("数值必须是整数。") from exc
+    if value < minimum:
+        raise ValueError(f"数值不能小于 {minimum}。")
+    if maximum is not None and value > maximum:
+        raise ValueError(f"数值不能大于 {maximum}。")
+    return value
+
+
 def _history_brief(records: list[Any]) -> list[dict[str, Any]]:
     items = []
     for r in records:
@@ -157,7 +169,7 @@ async def _run_cast(
             group_id=group_id,
             user_hash=user_hash,
             limit=20,
-            minutes=plugin_config.yijing_history_minutes_for_llm,
+            minutes=cfg.history_minutes_for_llm,
         )
         preprocess = await preprocess_question(question, _history_brief(history), use_llm=cfg.llm_enabled)
         if not preprocess.get("allowed", True):
@@ -172,14 +184,14 @@ async def _run_cast(
             group_id=group_id,
             user_hash=user_hash,
             question=question,
-            minutes=plugin_config.yijing_duplicate_window_minutes,
+            minutes=cfg.duplicate_window_minutes,
         )
         if similar:
             record, score = similar
             await _notice(
                 matcher,
                 "发现短期相似问题",
-                f"{plugin_config.yijing_duplicate_window_minutes} 分钟内你已问过相近问题。\n"
+                f"{cfg.duplicate_window_minutes} 分钟内你已问过相近问题。\n"
                 f"记录ID：{record.id}\n相似度：{score:.2f}\n建议使用：易经记录 {record.id}",
                 "如确实要重新起卦，可稍后再问，或由管理员调整冷却/重复窗口策略。",
             )
@@ -285,6 +297,8 @@ async def _help(matcher: Matcher) -> None:
         {"cmd": "易经记录 ID", "desc": "查看指定记录的完整长图。"},
         {"cmd": "随机一卦", "desc": "随机生成一个观察主题，不使用问题预处理和问题解读。"},
         {"cmd": "易经设置", "desc": "查看或修改本群配置。"},
+        {"cmd": "易经设置 重复窗口 30", "desc": "设置短期相似问题检测窗口，单位分钟。"},
+        {"cmd": "易经设置 历史窗口 120", "desc": "设置传给 LLM 预处理的近期历史窗口，单位分钟。"},
     ]
     await _finish_template(matcher, "help.html", {"commands": commands})
 
@@ -367,30 +381,39 @@ async def _settings(event: Event, matcher: Matcher, session: async_scoped_sessio
         if not event_is_group_admin(event):
             await _notice(matcher, "无权限", "设置类命令仅允许群主、管理员或 superuser 使用。")
         parts = body.split()
-        if body in {"开启", "启用", "on"}:
-            cfg.enabled = True
-            changed = True
-        elif body in {"关闭", "禁用", "off"}:
-            cfg.enabled = False
-            changed = True
-        elif len(parts) >= 2 and parts[0] == "冷却":
-            cfg.cooldown_seconds = max(0, int(parts[1]))
-            changed = True
-        elif len(parts) >= 2 and parts[0] == "日限额":
-            cfg.daily_limit = max(1, int(parts[1]))
-            changed = True
-        elif len(parts) >= 2 and parts[0] == "默认":
-            cfg.default_method = "yarrow" if parts[1] in {"大衍", "蓍草", "yarrow"} else "coin"
-            changed = True
-        elif len(parts) >= 2 and parts[0].upper() == "LLM":
-            cfg.llm_enabled = parts[1] in {"开启", "启用", "on", "true", "1"}
-            changed = True
-        else:
-            await _notice(
-                matcher,
-                "设置格式错误",
-                "支持：易经设置 开启｜关闭｜冷却 秒数｜日限额 次数｜默认 铜钱/大衍｜LLM 开启/关闭",
-            )
+        try:
+            if body in {"开启", "启用", "on"}:
+                cfg.enabled = True
+                changed = True
+            elif body in {"关闭", "禁用", "off"}:
+                cfg.enabled = False
+                changed = True
+            elif len(parts) >= 2 and parts[0] == "冷却":
+                cfg.cooldown_seconds = _parse_positive_int(parts[1], minimum=0, maximum=86400)
+                changed = True
+            elif len(parts) >= 2 and parts[0] == "日限额":
+                cfg.daily_limit = _parse_positive_int(parts[1], minimum=1, maximum=1000)
+                changed = True
+            elif len(parts) >= 2 and parts[0] == "重复窗口":
+                cfg.duplicate_window_minutes = _parse_positive_int(parts[1], minimum=1, maximum=10080)
+                changed = True
+            elif len(parts) >= 2 and parts[0] == "历史窗口":
+                cfg.history_minutes_for_llm = _parse_positive_int(parts[1], minimum=1, maximum=43200)
+                changed = True
+            elif len(parts) >= 2 and parts[0] == "默认":
+                cfg.default_method = "yarrow" if parts[1] in {"大衍", "蓍草", "yarrow"} else "coin"
+                changed = True
+            elif len(parts) >= 2 and parts[0].upper() == "LLM":
+                cfg.llm_enabled = parts[1] in {"开启", "启用", "on", "true", "1"}
+                changed = True
+            else:
+                await _notice(
+                    matcher,
+                    "设置格式错误",
+                    "支持：易经设置 开启｜关闭｜冷却 秒数｜日限额 次数｜重复窗口 分钟｜历史窗口 分钟｜默认 铜钱/大衍｜LLM 开启/关闭",
+                )
+        except ValueError as exc:
+            await _notice(matcher, "设置数值错误", str(exc), "请使用整数，例如：易经设置 重复窗口 30")
     if changed:
         cfg.updated_at = utcnow()
         await session.commit()
@@ -401,6 +424,8 @@ async def _settings(event: Event, matcher: Matcher, session: async_scoped_sessio
         {"name": "默认起卦方式", "value": "大衍" if cfg.default_method == "yarrow" else "铜钱"},
         {"name": "群冷却秒数", "value": cfg.cooldown_seconds},
         {"name": "用户24小时限额", "value": cfg.daily_limit},
+        {"name": "重复问题窗口", "value": f"{cfg.duplicate_window_minutes} 分钟"},
+        {"name": "LLM历史窗口", "value": f"{cfg.history_minutes_for_llm} 分钟"},
         {"name": "本群LLM解读", "value": "开启" if cfg.llm_enabled else "关闭"},
         {"name": "全局LLM配置", "value": "开启" if plugin_config.yijing_llm_enabled else "关闭"},
         {"name": "铜钱输入", "value": f"{plugin_config.yijing_positive_face}/{plugin_config.yijing_negative_face}"},
