@@ -1,0 +1,114 @@
+[
+  {
+    "name": "乾",
+    "symbol": "☰",
+    "bits": [
+      1,
+      1,
+      1
+    ],
+    "nature": "天",
+    "direction": "西北",
+    "element": "金",
+    "virtue": "健",
+    "image": "天行健，自强不息。"
+  },
+  {
+    "name": "兑",
+    "symbol": "☱",
+    "bits": [
+      1,
+      1,
+      0
+    ],
+    "nature": "泽",
+    "direction": "西",
+    "element": "金",
+    "virtue": "悦",
+    "image": "泽，悦也。"
+  },
+  {
+    "name": "离",
+    "symbol": "☲",
+    "bits": [
+      1,
+      0,
+      1
+    ],
+    "nature": "火",
+    "direction": "南",
+    "element": "火",
+    "virtue": "丽",
+    "image": "火，明也。"
+  },
+  {
+    "name": "震",
+    "symbol": "☳",
+    "bits": [
+      1,
+      0,
+      0
+    ],
+    "nature": "雷",
+    "direction": "东",
+    "element": "木",
+    "virtue": "动",
+    "image": "雷，动也。"
+  },
+  {
+    "name": "巽",
+    "symbol": "☴",
+    "bits": [
+      0,
+      1,
+      1
+    ],
+    "nature": "风",
+    "direction": "东南",
+    "element": "木",
+    "virtue": "入",
+    "image": "风，入也。"
+  },
+  {
+    "name": "坎",
+    "symbol": "☵",
+    "bits": [
+      0,
+      1,
+      0
+    ],
+    "nature": "水",
+    "direction": "北",
+    "element": "水",
+    "virtue": "陷",
+    "image": "水，险也。"
+  },
+  {
+    "name": "艮",
+    "symbol": "☶",
+    "bits": [
+      0,
+      0,
+      1
+    ],
+    "nature": "山",
+    "direction": "东北",
+    "element": "土",
+    "virtue": "止",
+    "image": "山，止也。"
+  },
+  {
+    "name": "坤",
+    "symbol": "☷",
+    "bits": [
+      0,
+      0,
+      0
+    ],
+    "nature": "地",
+    "direction": "西南",
+    "element": "土",
+    "virtue": "顺",
+    "image": "地势坤，厚德载物。"
+  }
+]

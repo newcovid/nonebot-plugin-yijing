@@ -1,0 +1,521 @@
+[
+  {
+    "hexagram_seq": 1,
+    "hexagram_name": "乾",
+    "daxiang": "象曰：天行健，君子以自强不息。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "seeded"
+  },
+  {
+    "hexagram_seq": 2,
+    "hexagram_name": "坤",
+    "daxiang": "象曰：地势坤，君子以厚德载物。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "seeded"
+  },
+  {
+    "hexagram_seq": 3,
+    "hexagram_name": "屯",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 4,
+    "hexagram_name": "蒙",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 5,
+    "hexagram_name": "需",
+    "daxiang": "云上于天，需；君子以饮食宴乐。",
+    "xiaoxiang": {
+      "1": "需于郊，不犯难行也。利用恒，无咎，未失常也。",
+      "2": "需于沙，衍在中也。虽小有言，以终吉也。",
+      "3": "需于泥，灾在外也。自我致寇，敬慎不败也。",
+      "4": "需于血，顺以听也。",
+      "5": "酒食贞吉，以中正也。",
+      "6": "不速之客来，敬之终吉。虽不当位，未大失也。"
+    },
+    "source_id": "wikisource_zhouyi",
+    "status": "seeded"
+  },
+  {
+    "hexagram_seq": 6,
+    "hexagram_name": "讼",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 7,
+    "hexagram_name": "师",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 8,
+    "hexagram_name": "比",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 9,
+    "hexagram_name": "小畜",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 10,
+    "hexagram_name": "履",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 11,
+    "hexagram_name": "泰",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 12,
+    "hexagram_name": "否",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 13,
+    "hexagram_name": "同人",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 14,
+    "hexagram_name": "大有",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 15,
+    "hexagram_name": "谦",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 16,
+    "hexagram_name": "豫",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 17,
+    "hexagram_name": "随",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 18,
+    "hexagram_name": "蛊",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 19,
+    "hexagram_name": "临",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 20,
+    "hexagram_name": "观",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 21,
+    "hexagram_name": "噬嗑",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 22,
+    "hexagram_name": "贲",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 23,
+    "hexagram_name": "剥",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 24,
+    "hexagram_name": "复",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 25,
+    "hexagram_name": "无妄",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 26,
+    "hexagram_name": "大畜",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 27,
+    "hexagram_name": "颐",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 28,
+    "hexagram_name": "大过",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 29,
+    "hexagram_name": "坎",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 30,
+    "hexagram_name": "离",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 31,
+    "hexagram_name": "咸",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 32,
+    "hexagram_name": "恒",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 33,
+    "hexagram_name": "遁",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 34,
+    "hexagram_name": "大壮",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 35,
+    "hexagram_name": "晋",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 36,
+    "hexagram_name": "明夷",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 37,
+    "hexagram_name": "家人",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 38,
+    "hexagram_name": "睽",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 39,
+    "hexagram_name": "蹇",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 40,
+    "hexagram_name": "解",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 41,
+    "hexagram_name": "损",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 42,
+    "hexagram_name": "益",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 43,
+    "hexagram_name": "夬",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 44,
+    "hexagram_name": "姤",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 45,
+    "hexagram_name": "萃",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 46,
+    "hexagram_name": "升",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 47,
+    "hexagram_name": "困",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 48,
+    "hexagram_name": "井",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 49,
+    "hexagram_name": "革",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 50,
+    "hexagram_name": "鼎",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 51,
+    "hexagram_name": "震",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 52,
+    "hexagram_name": "艮",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 53,
+    "hexagram_name": "渐",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 54,
+    "hexagram_name": "归妹",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 55,
+    "hexagram_name": "丰",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 56,
+    "hexagram_name": "旅",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 57,
+    "hexagram_name": "巽",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 58,
+    "hexagram_name": "兑",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 59,
+    "hexagram_name": "涣",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 60,
+    "hexagram_name": "节",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 61,
+    "hexagram_name": "中孚",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 62,
+    "hexagram_name": "小过",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 63,
+    "hexagram_name": "既济",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  },
+  {
+    "hexagram_seq": 64,
+    "hexagram_name": "未济",
+    "daxiang": "象传待补录。",
+    "xiaoxiang": [],
+    "source_id": "wikisource_zhouyi",
+    "status": "placeholder"
+  }
+]

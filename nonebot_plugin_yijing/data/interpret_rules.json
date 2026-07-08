@@ -1,0 +1,20 @@
+[
+  {
+    "id": "default_zhouyi_jingzhuan",
+    "name": "周易经传默认规则",
+    "priority": 100,
+    "description": "以本卦为体，动爻为变，变卦为趋势；经典文本优先，现代解释谨慎。"
+  },
+  {
+    "id": "sensitive_warning",
+    "name": "敏感问题提示",
+    "priority": 200,
+    "description": "涉及疾病、法律、投资、人身安全等问题时提示咨询专业人士。"
+  },
+  {
+    "id": "three_not_divination",
+    "name": "三不占预处理",
+    "priority": 300,
+    "description": "不诚不占、不义不占、不疑不占；通过本地规则与可选LLM预处理执行。"
+  }
+]

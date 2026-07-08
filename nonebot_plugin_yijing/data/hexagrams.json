@@ -1,0 +1,1218 @@
+[
+  {
+    "seq": 1,
+    "name": "乾",
+    "symbol": "䷀",
+    "lower_trigram": "乾",
+    "upper_trigram": "乾",
+    "palace_name": "乾为天",
+    "bits_bottom_up": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "binary_bottom_up": "111111",
+    "unicode_codepoint": "U+4DC0",
+    "tags": []
+  },
+  {
+    "seq": 2,
+    "name": "坤",
+    "symbol": "䷁",
+    "lower_trigram": "坤",
+    "upper_trigram": "坤",
+    "palace_name": "坤为地",
+    "bits_bottom_up": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "binary_bottom_up": "000000",
+    "unicode_codepoint": "U+4DC1",
+    "tags": []
+  },
+  {
+    "seq": 3,
+    "name": "屯",
+    "symbol": "䷂",
+    "lower_trigram": "震",
+    "upper_trigram": "坎",
+    "palace_name": "水雷屯",
+    "bits_bottom_up": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "binary_bottom_up": "100010",
+    "unicode_codepoint": "U+4DC2",
+    "tags": []
+  },
+  {
+    "seq": 4,
+    "name": "蒙",
+    "symbol": "䷃",
+    "lower_trigram": "坎",
+    "upper_trigram": "艮",
+    "palace_name": "山水蒙",
+    "bits_bottom_up": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    "binary_bottom_up": "010001",
+    "unicode_codepoint": "U+4DC3",
+    "tags": []
+  },
+  {
+    "seq": 5,
+    "name": "需",
+    "symbol": "䷄",
+    "lower_trigram": "乾",
+    "upper_trigram": "坎",
+    "palace_name": "水天需",
+    "bits_bottom_up": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      0
+    ],
+    "binary_bottom_up": "111010",
+    "unicode_codepoint": "U+4DC4",
+    "tags": []
+  },
+  {
+    "seq": 6,
+    "name": "讼",
+    "symbol": "䷅",
+    "lower_trigram": "坎",
+    "upper_trigram": "乾",
+    "palace_name": "天水讼",
+    "bits_bottom_up": [
+      0,
+      1,
+      0,
+      1,
+      1,
+      1
+    ],
+    "binary_bottom_up": "010111",
+    "unicode_codepoint": "U+4DC5",
+    "tags": []
+  },
+  {
+    "seq": 7,
+    "name": "师",
+    "symbol": "䷆",
+    "lower_trigram": "坎",
+    "upper_trigram": "坤",
+    "palace_name": "地水师",
+    "bits_bottom_up": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "binary_bottom_up": "010000",
+    "unicode_codepoint": "U+4DC6",
+    "tags": []
+  },
+  {
+    "seq": 8,
+    "name": "比",
+    "symbol": "䷇",
+    "lower_trigram": "坤",
+    "upper_trigram": "坎",
+    "palace_name": "水地比",
+    "bits_bottom_up": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "binary_bottom_up": "000010",
+    "unicode_codepoint": "U+4DC7",
+    "tags": []
+  },
+  {
+    "seq": 9,
+    "name": "小畜",
+    "symbol": "䷈",
+    "lower_trigram": "乾",
+    "upper_trigram": "巽",
+    "palace_name": "风天小畜",
+    "bits_bottom_up": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      1
+    ],
+    "binary_bottom_up": "111011",
+    "unicode_codepoint": "U+4DC8",
+    "tags": []
+  },
+  {
+    "seq": 10,
+    "name": "履",
+    "symbol": "䷉",
+    "lower_trigram": "兑",
+    "upper_trigram": "乾",
+    "palace_name": "天泽履",
+    "bits_bottom_up": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1
+    ],
+    "binary_bottom_up": "110111",
+    "unicode_codepoint": "U+4DC9",
+    "tags": []
+  },
+  {
+    "seq": 11,
+    "name": "泰",
+    "symbol": "䷊",
+    "lower_trigram": "乾",
+    "upper_trigram": "坤",
+    "palace_name": "地天泰",
+    "bits_bottom_up": [
+      1,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "binary_bottom_up": "111000",
+    "unicode_codepoint": "U+4DCA",
+    "tags": []
+  },
+  {
+    "seq": 12,
+    "name": "否",
+    "symbol": "䷋",
+    "lower_trigram": "坤",
+    "upper_trigram": "乾",
+    "palace_name": "天地否",
+    "bits_bottom_up": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1
+    ],
+    "binary_bottom_up": "000111",
+    "unicode_codepoint": "U+4DCB",
+    "tags": []
+  },
+  {
+    "seq": 13,
+    "name": "同人",
+    "symbol": "䷌",
+    "lower_trigram": "离",
+    "upper_trigram": "乾",
+    "palace_name": "天火同人",
+    "bits_bottom_up": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "binary_bottom_up": "101111",
+    "unicode_codepoint": "U+4DCC",
+    "tags": []
+  },
+  {
+    "seq": 14,
+    "name": "大有",
+    "symbol": "䷍",
+    "lower_trigram": "乾",
+    "upper_trigram": "离",
+    "palace_name": "火天大有",
+    "bits_bottom_up": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      1
+    ],
+    "binary_bottom_up": "111101",
+    "unicode_codepoint": "U+4DCD",
+    "tags": []
+  },
+  {
+    "seq": 15,
+    "name": "谦",
+    "symbol": "䷎",
+    "lower_trigram": "艮",
+    "upper_trigram": "坤",
+    "palace_name": "地山谦",
+    "bits_bottom_up": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "binary_bottom_up": "001000",
+    "unicode_codepoint": "U+4DCE",
+    "tags": []
+  },
+  {
+    "seq": 16,
+    "name": "豫",
+    "symbol": "䷏",
+    "lower_trigram": "坤",
+    "upper_trigram": "震",
+    "palace_name": "雷地豫",
+    "bits_bottom_up": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "binary_bottom_up": "000100",
+    "unicode_codepoint": "U+4DCF",
+    "tags": []
+  },
+  {
+    "seq": 17,
+    "name": "随",
+    "symbol": "䷐",
+    "lower_trigram": "震",
+    "upper_trigram": "兑",
+    "palace_name": "泽雷随",
+    "bits_bottom_up": [
+      1,
+      0,
+      0,
+      1,
+      1,
+      0
+    ],
+    "binary_bottom_up": "100110",
+    "unicode_codepoint": "U+4DD0",
+    "tags": []
+  },
+  {
+    "seq": 18,
+    "name": "蛊",
+    "symbol": "䷑",
+    "lower_trigram": "巽",
+    "upper_trigram": "艮",
+    "palace_name": "山风蛊",
+    "bits_bottom_up": [
+      0,
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    "binary_bottom_up": "011001",
+    "unicode_codepoint": "U+4DD1",
+    "tags": []
+  },
+  {
+    "seq": 19,
+    "name": "临",
+    "symbol": "䷒",
+    "lower_trigram": "兑",
+    "upper_trigram": "坤",
+    "palace_name": "地泽临",
+    "bits_bottom_up": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "binary_bottom_up": "110000",
+    "unicode_codepoint": "U+4DD2",
+    "tags": []
+  },
+  {
+    "seq": 20,
+    "name": "观",
+    "symbol": "䷓",
+    "lower_trigram": "坤",
+    "upper_trigram": "巽",
+    "palace_name": "风地观",
+    "bits_bottom_up": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    "binary_bottom_up": "000011",
+    "unicode_codepoint": "U+4DD3",
+    "tags": []
+  },
+  {
+    "seq": 21,
+    "name": "噬嗑",
+    "symbol": "䷔",
+    "lower_trigram": "震",
+    "upper_trigram": "离",
+    "palace_name": "火雷噬嗑",
+    "bits_bottom_up": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    "binary_bottom_up": "100101",
+    "unicode_codepoint": "U+4DD4",
+    "tags": []
+  },
+  {
+    "seq": 22,
+    "name": "贲",
+    "symbol": "䷕",
+    "lower_trigram": "离",
+    "upper_trigram": "艮",
+    "palace_name": "山火贲",
+    "bits_bottom_up": [
+      1,
+      0,
+      1,
+      0,
+      0,
+      1
+    ],
+    "binary_bottom_up": "101001",
+    "unicode_codepoint": "U+4DD5",
+    "tags": []
+  },
+  {
+    "seq": 23,
+    "name": "剥",
+    "symbol": "䷖",
+    "lower_trigram": "坤",
+    "upper_trigram": "艮",
+    "palace_name": "山地剥",
+    "bits_bottom_up": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "binary_bottom_up": "000001",
+    "unicode_codepoint": "U+4DD6",
+    "tags": []
+  },
+  {
+    "seq": 24,
+    "name": "复",
+    "symbol": "䷗",
+    "lower_trigram": "震",
+    "upper_trigram": "坤",
+    "palace_name": "地雷复",
+    "bits_bottom_up": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "binary_bottom_up": "100000",
+    "unicode_codepoint": "U+4DD7",
+    "tags": []
+  },
+  {
+    "seq": 25,
+    "name": "无妄",
+    "symbol": "䷘",
+    "lower_trigram": "震",
+    "upper_trigram": "乾",
+    "palace_name": "天雷无妄",
+    "bits_bottom_up": [
+      1,
+      0,
+      0,
+      1,
+      1,
+      1
+    ],
+    "binary_bottom_up": "100111",
+    "unicode_codepoint": "U+4DD8",
+    "tags": []
+  },
+  {
+    "seq": 26,
+    "name": "大畜",
+    "symbol": "䷙",
+    "lower_trigram": "乾",
+    "upper_trigram": "艮",
+    "palace_name": "山天大畜",
+    "bits_bottom_up": [
+      1,
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    "binary_bottom_up": "111001",
+    "unicode_codepoint": "U+4DD9",
+    "tags": []
+  },
+  {
+    "seq": 27,
+    "name": "颐",
+    "symbol": "䷚",
+    "lower_trigram": "震",
+    "upper_trigram": "艮",
+    "palace_name": "山雷颐",
+    "bits_bottom_up": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "binary_bottom_up": "100001",
+    "unicode_codepoint": "U+4DDA",
+    "tags": []
+  },
+  {
+    "seq": 28,
+    "name": "大过",
+    "symbol": "䷛",
+    "lower_trigram": "巽",
+    "upper_trigram": "兑",
+    "palace_name": "泽风大过",
+    "bits_bottom_up": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    "binary_bottom_up": "011110",
+    "unicode_codepoint": "U+4DDB",
+    "tags": []
+  },
+  {
+    "seq": 29,
+    "name": "坎",
+    "symbol": "䷜",
+    "lower_trigram": "坎",
+    "upper_trigram": "坎",
+    "palace_name": "坎为水",
+    "bits_bottom_up": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0
+    ],
+    "binary_bottom_up": "010010",
+    "unicode_codepoint": "U+4DDC",
+    "tags": []
+  },
+  {
+    "seq": 30,
+    "name": "离",
+    "symbol": "䷝",
+    "lower_trigram": "离",
+    "upper_trigram": "离",
+    "palace_name": "离为火",
+    "bits_bottom_up": [
+      1,
+      0,
+      1,
+      1,
+      0,
+      1
+    ],
+    "binary_bottom_up": "101101",
+    "unicode_codepoint": "U+4DDD",
+    "tags": []
+  },
+  {
+    "seq": 31,
+    "name": "咸",
+    "symbol": "䷞",
+    "lower_trigram": "艮",
+    "upper_trigram": "兑",
+    "palace_name": "泽山咸",
+    "bits_bottom_up": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      0
+    ],
+    "binary_bottom_up": "001110",
+    "unicode_codepoint": "U+4DDE",
+    "tags": []
+  },
+  {
+    "seq": 32,
+    "name": "恒",
+    "symbol": "䷟",
+    "lower_trigram": "巽",
+    "upper_trigram": "震",
+    "palace_name": "雷风恒",
+    "bits_bottom_up": [
+      0,
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "binary_bottom_up": "011100",
+    "unicode_codepoint": "U+4DDF",
+    "tags": []
+  },
+  {
+    "seq": 33,
+    "name": "遁",
+    "symbol": "䷠",
+    "lower_trigram": "艮",
+    "upper_trigram": "乾",
+    "palace_name": "天山遁",
+    "bits_bottom_up": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "binary_bottom_up": "001111",
+    "unicode_codepoint": "U+4DE0",
+    "tags": []
+  },
+  {
+    "seq": 34,
+    "name": "大壮",
+    "symbol": "䷡",
+    "lower_trigram": "乾",
+    "upper_trigram": "震",
+    "palace_name": "雷天大壮",
+    "bits_bottom_up": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "binary_bottom_up": "111100",
+    "unicode_codepoint": "U+4DE1",
+    "tags": []
+  },
+  {
+    "seq": 35,
+    "name": "晋",
+    "symbol": "䷢",
+    "lower_trigram": "坤",
+    "upper_trigram": "离",
+    "palace_name": "火地晋",
+    "bits_bottom_up": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    "binary_bottom_up": "000101",
+    "unicode_codepoint": "U+4DE2",
+    "tags": []
+  },
+  {
+    "seq": 36,
+    "name": "明夷",
+    "symbol": "䷣",
+    "lower_trigram": "离",
+    "upper_trigram": "坤",
+    "palace_name": "地火明夷",
+    "bits_bottom_up": [
+      1,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "binary_bottom_up": "101000",
+    "unicode_codepoint": "U+4DE3",
+    "tags": []
+  },
+  {
+    "seq": 37,
+    "name": "家人",
+    "symbol": "䷤",
+    "lower_trigram": "离",
+    "upper_trigram": "巽",
+    "palace_name": "风火家人",
+    "bits_bottom_up": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      1
+    ],
+    "binary_bottom_up": "101011",
+    "unicode_codepoint": "U+4DE4",
+    "tags": []
+  },
+  {
+    "seq": 38,
+    "name": "睽",
+    "symbol": "䷥",
+    "lower_trigram": "兑",
+    "upper_trigram": "离",
+    "palace_name": "火泽睽",
+    "bits_bottom_up": [
+      1,
+      1,
+      0,
+      1,
+      0,
+      1
+    ],
+    "binary_bottom_up": "110101",
+    "unicode_codepoint": "U+4DE5",
+    "tags": []
+  },
+  {
+    "seq": 39,
+    "name": "蹇",
+    "symbol": "䷦",
+    "lower_trigram": "艮",
+    "upper_trigram": "坎",
+    "palace_name": "水山蹇",
+    "bits_bottom_up": [
+      0,
+      0,
+      1,
+      0,
+      1,
+      0
+    ],
+    "binary_bottom_up": "001010",
+    "unicode_codepoint": "U+4DE6",
+    "tags": []
+  },
+  {
+    "seq": 40,
+    "name": "解",
+    "symbol": "䷧",
+    "lower_trigram": "坎",
+    "upper_trigram": "震",
+    "palace_name": "雷水解",
+    "bits_bottom_up": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      0
+    ],
+    "binary_bottom_up": "010100",
+    "unicode_codepoint": "U+4DE7",
+    "tags": []
+  },
+  {
+    "seq": 41,
+    "name": "损",
+    "symbol": "䷨",
+    "lower_trigram": "兑",
+    "upper_trigram": "艮",
+    "palace_name": "山泽损",
+    "bits_bottom_up": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    "binary_bottom_up": "110001",
+    "unicode_codepoint": "U+4DE8",
+    "tags": []
+  },
+  {
+    "seq": 42,
+    "name": "益",
+    "symbol": "䷩",
+    "lower_trigram": "震",
+    "upper_trigram": "巽",
+    "palace_name": "风雷益",
+    "bits_bottom_up": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    "binary_bottom_up": "100011",
+    "unicode_codepoint": "U+4DE9",
+    "tags": []
+  },
+  {
+    "seq": 43,
+    "name": "夬",
+    "symbol": "䷪",
+    "lower_trigram": "乾",
+    "upper_trigram": "兑",
+    "palace_name": "泽天夬",
+    "bits_bottom_up": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    "binary_bottom_up": "111110",
+    "unicode_codepoint": "U+4DEA",
+    "tags": []
+  },
+  {
+    "seq": 44,
+    "name": "姤",
+    "symbol": "䷫",
+    "lower_trigram": "巽",
+    "upper_trigram": "乾",
+    "palace_name": "天风姤",
+    "bits_bottom_up": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "binary_bottom_up": "011111",
+    "unicode_codepoint": "U+4DEB",
+    "tags": []
+  },
+  {
+    "seq": 45,
+    "name": "萃",
+    "symbol": "䷬",
+    "lower_trigram": "坤",
+    "upper_trigram": "兑",
+    "palace_name": "泽地萃",
+    "bits_bottom_up": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      0
+    ],
+    "binary_bottom_up": "000110",
+    "unicode_codepoint": "U+4DEC",
+    "tags": []
+  },
+  {
+    "seq": 46,
+    "name": "升",
+    "symbol": "䷭",
+    "lower_trigram": "巽",
+    "upper_trigram": "坤",
+    "palace_name": "地风升",
+    "bits_bottom_up": [
+      0,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "binary_bottom_up": "011000",
+    "unicode_codepoint": "U+4DED",
+    "tags": []
+  },
+  {
+    "seq": 47,
+    "name": "困",
+    "symbol": "䷮",
+    "lower_trigram": "坎",
+    "upper_trigram": "兑",
+    "palace_name": "泽水困",
+    "bits_bottom_up": [
+      0,
+      1,
+      0,
+      1,
+      1,
+      0
+    ],
+    "binary_bottom_up": "010110",
+    "unicode_codepoint": "U+4DEE",
+    "tags": []
+  },
+  {
+    "seq": 48,
+    "name": "井",
+    "symbol": "䷯",
+    "lower_trigram": "巽",
+    "upper_trigram": "坎",
+    "palace_name": "水风井",
+    "bits_bottom_up": [
+      0,
+      1,
+      1,
+      0,
+      1,
+      0
+    ],
+    "binary_bottom_up": "011010",
+    "unicode_codepoint": "U+4DEF",
+    "tags": []
+  },
+  {
+    "seq": 49,
+    "name": "革",
+    "symbol": "䷰",
+    "lower_trigram": "离",
+    "upper_trigram": "兑",
+    "palace_name": "泽火革",
+    "bits_bottom_up": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      0
+    ],
+    "binary_bottom_up": "101110",
+    "unicode_codepoint": "U+4DF0",
+    "tags": []
+  },
+  {
+    "seq": 50,
+    "name": "鼎",
+    "symbol": "䷱",
+    "lower_trigram": "巽",
+    "upper_trigram": "离",
+    "palace_name": "火风鼎",
+    "bits_bottom_up": [
+      0,
+      1,
+      1,
+      1,
+      0,
+      1
+    ],
+    "binary_bottom_up": "011101",
+    "unicode_codepoint": "U+4DF1",
+    "tags": []
+  },
+  {
+    "seq": 51,
+    "name": "震",
+    "symbol": "䷲",
+    "lower_trigram": "震",
+    "upper_trigram": "震",
+    "palace_name": "震为雷",
+    "bits_bottom_up": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "binary_bottom_up": "100100",
+    "unicode_codepoint": "U+4DF2",
+    "tags": []
+  },
+  {
+    "seq": 52,
+    "name": "艮",
+    "symbol": "䷳",
+    "lower_trigram": "艮",
+    "upper_trigram": "艮",
+    "palace_name": "艮为山",
+    "bits_bottom_up": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      1
+    ],
+    "binary_bottom_up": "001001",
+    "unicode_codepoint": "U+4DF3",
+    "tags": []
+  },
+  {
+    "seq": 53,
+    "name": "渐",
+    "symbol": "䷴",
+    "lower_trigram": "艮",
+    "upper_trigram": "巽",
+    "palace_name": "风山渐",
+    "bits_bottom_up": [
+      0,
+      0,
+      1,
+      0,
+      1,
+      1
+    ],
+    "binary_bottom_up": "001011",
+    "unicode_codepoint": "U+4DF4",
+    "tags": []
+  },
+  {
+    "seq": 54,
+    "name": "归妹",
+    "symbol": "䷵",
+    "lower_trigram": "兑",
+    "upper_trigram": "震",
+    "palace_name": "雷泽归妹",
+    "bits_bottom_up": [
+      1,
+      1,
+      0,
+      1,
+      0,
+      0
+    ],
+    "binary_bottom_up": "110100",
+    "unicode_codepoint": "U+4DF5",
+    "tags": []
+  },
+  {
+    "seq": 55,
+    "name": "丰",
+    "symbol": "䷶",
+    "lower_trigram": "离",
+    "upper_trigram": "震",
+    "palace_name": "雷火丰",
+    "bits_bottom_up": [
+      1,
+      0,
+      1,
+      1,
+      0,
+      0
+    ],
+    "binary_bottom_up": "101100",
+    "unicode_codepoint": "U+4DF6",
+    "tags": []
+  },
+  {
+    "seq": 56,
+    "name": "旅",
+    "symbol": "䷷",
+    "lower_trigram": "艮",
+    "upper_trigram": "离",
+    "palace_name": "火山旅",
+    "bits_bottom_up": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      1
+    ],
+    "binary_bottom_up": "001101",
+    "unicode_codepoint": "U+4DF7",
+    "tags": []
+  },
+  {
+    "seq": 57,
+    "name": "巽",
+    "symbol": "䷸",
+    "lower_trigram": "巽",
+    "upper_trigram": "巽",
+    "palace_name": "巽为风",
+    "bits_bottom_up": [
+      0,
+      1,
+      1,
+      0,
+      1,
+      1
+    ],
+    "binary_bottom_up": "011011",
+    "unicode_codepoint": "U+4DF8",
+    "tags": []
+  },
+  {
+    "seq": 58,
+    "name": "兑",
+    "symbol": "䷹",
+    "lower_trigram": "兑",
+    "upper_trigram": "兑",
+    "palace_name": "兑为泽",
+    "bits_bottom_up": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0
+    ],
+    "binary_bottom_up": "110110",
+    "unicode_codepoint": "U+4DF9",
+    "tags": []
+  },
+  {
+    "seq": 59,
+    "name": "涣",
+    "symbol": "䷺",
+    "lower_trigram": "坎",
+    "upper_trigram": "巽",
+    "palace_name": "风水涣",
+    "bits_bottom_up": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      1
+    ],
+    "binary_bottom_up": "010011",
+    "unicode_codepoint": "U+4DFA",
+    "tags": []
+  },
+  {
+    "seq": 60,
+    "name": "节",
+    "symbol": "䷻",
+    "lower_trigram": "兑",
+    "upper_trigram": "坎",
+    "palace_name": "水泽节",
+    "bits_bottom_up": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+    ],
+    "binary_bottom_up": "110010",
+    "unicode_codepoint": "U+4DFB",
+    "tags": []
+  },
+  {
+    "seq": 61,
+    "name": "中孚",
+    "symbol": "䷼",
+    "lower_trigram": "兑",
+    "upper_trigram": "巽",
+    "palace_name": "风泽中孚",
+    "bits_bottom_up": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      1
+    ],
+    "binary_bottom_up": "110011",
+    "unicode_codepoint": "U+4DFC",
+    "tags": []
+  },
+  {
+    "seq": 62,
+    "name": "小过",
+    "symbol": "䷽",
+    "lower_trigram": "艮",
+    "upper_trigram": "震",
+    "palace_name": "雷山小过",
+    "bits_bottom_up": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0
+    ],
+    "binary_bottom_up": "001100",
+    "unicode_codepoint": "U+4DFD",
+    "tags": []
+  },
+  {
+    "seq": 63,
+    "name": "既济",
+    "symbol": "䷾",
+    "lower_trigram": "离",
+    "upper_trigram": "坎",
+    "palace_name": "水火既济",
+    "bits_bottom_up": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      0
+    ],
+    "binary_bottom_up": "101010",
+    "unicode_codepoint": "U+4DFE",
+    "tags": []
+  },
+  {
+    "seq": 64,
+    "name": "未济",
+    "symbol": "䷿",
+    "lower_trigram": "坎",
+    "upper_trigram": "离",
+    "palace_name": "火水未济",
+    "bits_bottom_up": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+    ],
+    "binary_bottom_up": "010101",
+    "unicode_codepoint": "U+4DFF",
+    "tags": []
+  }
+]

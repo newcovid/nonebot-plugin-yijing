@@ -1,0 +1,2690 @@
+[
+  {
+    "hexagram_seq": 1,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 1,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 1,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 1,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 1,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 1,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 2,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 2,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 2,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 2,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 2,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 2,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 3,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 3,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 3,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 3,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 3,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 3,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 4,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 4,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 4,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 4,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 4,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 4,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 5,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 5,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 5,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 5,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 5,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 5,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 6,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 6,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 6,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 6,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 6,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 6,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 7,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 7,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 7,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 7,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 7,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 7,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 8,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 8,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 8,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 8,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 8,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 8,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 9,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 9,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 9,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 9,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 9,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 9,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 10,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 10,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 10,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 10,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 10,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 10,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 11,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 11,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 11,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 11,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 11,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 11,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 12,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 12,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 12,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 12,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 12,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 12,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 13,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 13,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 13,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 13,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 13,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 13,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 14,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 14,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 14,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 14,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 14,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 14,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 15,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 15,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 15,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 15,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 15,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 15,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 16,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 16,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 16,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 16,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 16,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 16,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 17,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 17,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 17,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 17,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 17,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 17,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 18,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 18,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 18,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 18,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 18,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 18,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 19,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 19,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 19,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 19,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 19,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 19,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 20,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 20,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 20,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 20,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 20,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 20,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 21,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 21,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 21,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 21,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 21,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 21,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 22,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 22,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 22,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 22,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 22,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 22,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 23,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 23,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 23,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 23,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 23,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 23,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 24,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 24,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 24,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 24,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 24,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 24,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 25,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 25,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 25,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 25,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 25,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 25,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 26,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 26,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 26,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 26,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 26,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 26,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 27,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 27,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 27,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 27,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 27,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 27,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 28,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 28,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 28,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 28,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 28,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 28,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 29,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 29,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 29,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 29,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 29,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 29,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 30,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 30,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 30,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 30,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 30,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 30,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 31,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 31,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 31,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 31,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 31,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 31,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 32,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 32,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 32,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 32,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 32,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 32,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 33,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 33,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 33,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 33,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 33,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 33,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 34,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 34,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 34,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 34,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 34,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 34,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 35,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 35,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 35,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 35,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 35,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 35,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 36,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 36,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 36,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 36,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 36,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 36,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 37,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 37,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 37,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 37,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 37,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 37,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 38,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 38,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 38,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 38,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 38,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 38,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 39,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 39,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 39,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 39,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 39,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 39,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 40,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 40,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 40,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 40,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 40,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 40,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 41,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 41,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 41,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 41,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 41,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 41,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 42,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 42,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 42,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 42,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 42,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 42,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 43,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 43,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 43,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 43,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 43,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 43,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 44,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 44,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 44,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 44,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 44,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 44,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 45,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 45,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 45,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 45,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 45,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 45,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 46,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 46,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 46,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 46,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 46,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 46,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 47,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 47,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 47,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 47,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 47,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 47,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 48,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 48,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 48,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 48,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 48,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 48,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 49,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 49,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 49,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 49,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 49,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 49,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 50,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 50,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 50,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 50,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 50,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 50,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 51,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 51,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 51,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 51,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 51,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 51,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 52,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 52,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 52,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 52,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 52,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 52,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 53,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 53,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 53,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 53,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 53,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 53,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 54,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 54,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 54,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 54,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 54,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 54,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 55,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 55,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 55,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 55,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 55,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 55,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 56,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 56,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 56,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 56,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 56,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 56,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 57,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 57,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 57,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 57,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 57,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 57,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 58,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 58,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 58,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 58,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 58,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 58,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 59,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 59,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 59,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 59,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 59,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 59,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 60,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 60,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 60,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 60,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 60,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 60,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 61,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 61,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 61,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 61,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 61,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 61,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  },
+  {
+    "hexagram_seq": 62,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 62,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 62,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 62,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 62,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 62,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 63,
+    "position": 1,
+    "yin_yang": "yang",
+    "label": "初九",
+    "line_label": "初九"
+  },
+  {
+    "hexagram_seq": 63,
+    "position": 2,
+    "yin_yang": "yin",
+    "label": "二六",
+    "line_label": "六二"
+  },
+  {
+    "hexagram_seq": 63,
+    "position": 3,
+    "yin_yang": "yang",
+    "label": "三九",
+    "line_label": "九三"
+  },
+  {
+    "hexagram_seq": 63,
+    "position": 4,
+    "yin_yang": "yin",
+    "label": "四六",
+    "line_label": "六四"
+  },
+  {
+    "hexagram_seq": 63,
+    "position": 5,
+    "yin_yang": "yang",
+    "label": "五九",
+    "line_label": "九五"
+  },
+  {
+    "hexagram_seq": 63,
+    "position": 6,
+    "yin_yang": "yin",
+    "label": "上六",
+    "line_label": "上六"
+  },
+  {
+    "hexagram_seq": 64,
+    "position": 1,
+    "yin_yang": "yin",
+    "label": "初六",
+    "line_label": "初六"
+  },
+  {
+    "hexagram_seq": 64,
+    "position": 2,
+    "yin_yang": "yang",
+    "label": "二九",
+    "line_label": "九二"
+  },
+  {
+    "hexagram_seq": 64,
+    "position": 3,
+    "yin_yang": "yin",
+    "label": "三六",
+    "line_label": "六三"
+  },
+  {
+    "hexagram_seq": 64,
+    "position": 4,
+    "yin_yang": "yang",
+    "label": "四九",
+    "line_label": "九四"
+  },
+  {
+    "hexagram_seq": 64,
+    "position": 5,
+    "yin_yang": "yin",
+    "label": "五六",
+    "line_label": "六五"
+  },
+  {
+    "hexagram_seq": 64,
+    "position": 6,
+    "yin_yang": "yang",
+    "label": "上九",
+    "line_label": "上九"
+  }
+]

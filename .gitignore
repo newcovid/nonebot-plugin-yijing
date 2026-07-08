@@ -1,0 +1,72 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.Python
+
+# Build / package artifacts
+*.egg-info/
+.eggs/
+build/
+dist/
+wheels/
+pip-wheel-metadata/
+MANIFEST
+
+# Test / type / lint cache
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.pyright/
+.ruff_cache/
+.tox/
+.nox/
+
+# Virtual env
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Real env / secrets
+.env
+.env.*
+*.env
+*.env.*
+
+# But keep example env files
+!.env.example
+!.env.*.example
+!*.env.example
+
+# Local runtime only at repository root
+/data/
+/localstore/
+/logs/
+/tmp/
+/temp/
+/cache/
+
+# Local databases / runtime dumps
+*.sqlite
+*.sqlite3
+*.db
+*.log
+
+# Keep plugin packaged resources
+!nonebot_plugin_yijing/data/
+!nonebot_plugin_yijing/data/**
+!nonebot_plugin_yijing/templates/
+!nonebot_plugin_yijing/templates/**
+!nonebot_plugin_yijing/migrations/
+!nonebot_plugin_yijing/migrations/**

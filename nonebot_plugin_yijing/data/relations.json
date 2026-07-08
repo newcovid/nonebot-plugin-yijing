@@ -1,0 +1,1154 @@
+[
+  {
+    "hexagram_seq": 1,
+    "relation": "opposite",
+    "target_seq": 2,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 1,
+    "relation": "inverse",
+    "target_seq": 1,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 1,
+    "relation": "nuclear",
+    "target_seq": 1,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 2,
+    "relation": "opposite",
+    "target_seq": 1,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 2,
+    "relation": "inverse",
+    "target_seq": 2,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 2,
+    "relation": "nuclear",
+    "target_seq": 2,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 3,
+    "relation": "opposite",
+    "target_seq": 50,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 3,
+    "relation": "inverse",
+    "target_seq": 4,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 3,
+    "relation": "nuclear",
+    "target_seq": 23,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 4,
+    "relation": "opposite",
+    "target_seq": 49,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 4,
+    "relation": "inverse",
+    "target_seq": 3,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 4,
+    "relation": "nuclear",
+    "target_seq": 24,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 5,
+    "relation": "opposite",
+    "target_seq": 35,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 5,
+    "relation": "inverse",
+    "target_seq": 6,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 5,
+    "relation": "nuclear",
+    "target_seq": 38,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 6,
+    "relation": "opposite",
+    "target_seq": 36,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 6,
+    "relation": "inverse",
+    "target_seq": 5,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 6,
+    "relation": "nuclear",
+    "target_seq": 37,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 7,
+    "relation": "opposite",
+    "target_seq": 13,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 7,
+    "relation": "inverse",
+    "target_seq": 8,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 7,
+    "relation": "nuclear",
+    "target_seq": 24,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 8,
+    "relation": "opposite",
+    "target_seq": 14,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 8,
+    "relation": "inverse",
+    "target_seq": 7,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 8,
+    "relation": "nuclear",
+    "target_seq": 23,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 9,
+    "relation": "opposite",
+    "target_seq": 16,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 9,
+    "relation": "inverse",
+    "target_seq": 10,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 9,
+    "relation": "nuclear",
+    "target_seq": 38,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 10,
+    "relation": "opposite",
+    "target_seq": 15,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 10,
+    "relation": "inverse",
+    "target_seq": 9,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 10,
+    "relation": "nuclear",
+    "target_seq": 37,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 11,
+    "relation": "opposite",
+    "target_seq": 12,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 11,
+    "relation": "inverse",
+    "target_seq": 12,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 11,
+    "relation": "nuclear",
+    "target_seq": 54,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 12,
+    "relation": "opposite",
+    "target_seq": 11,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 12,
+    "relation": "inverse",
+    "target_seq": 11,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 12,
+    "relation": "nuclear",
+    "target_seq": 53,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 13,
+    "relation": "opposite",
+    "target_seq": 7,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 13,
+    "relation": "inverse",
+    "target_seq": 14,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 13,
+    "relation": "nuclear",
+    "target_seq": 44,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 14,
+    "relation": "opposite",
+    "target_seq": 8,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 14,
+    "relation": "inverse",
+    "target_seq": 13,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 14,
+    "relation": "nuclear",
+    "target_seq": 43,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 15,
+    "relation": "opposite",
+    "target_seq": 10,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 15,
+    "relation": "inverse",
+    "target_seq": 16,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 15,
+    "relation": "nuclear",
+    "target_seq": 40,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 16,
+    "relation": "opposite",
+    "target_seq": 9,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 16,
+    "relation": "inverse",
+    "target_seq": 15,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 16,
+    "relation": "nuclear",
+    "target_seq": 39,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 17,
+    "relation": "opposite",
+    "target_seq": 18,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 17,
+    "relation": "inverse",
+    "target_seq": 18,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 17,
+    "relation": "nuclear",
+    "target_seq": 53,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 18,
+    "relation": "opposite",
+    "target_seq": 17,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 18,
+    "relation": "inverse",
+    "target_seq": 17,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 18,
+    "relation": "nuclear",
+    "target_seq": 54,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 19,
+    "relation": "opposite",
+    "target_seq": 33,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 19,
+    "relation": "inverse",
+    "target_seq": 20,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 19,
+    "relation": "nuclear",
+    "target_seq": 24,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 20,
+    "relation": "opposite",
+    "target_seq": 34,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 20,
+    "relation": "inverse",
+    "target_seq": 19,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 20,
+    "relation": "nuclear",
+    "target_seq": 23,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 21,
+    "relation": "opposite",
+    "target_seq": 48,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 21,
+    "relation": "inverse",
+    "target_seq": 22,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 21,
+    "relation": "nuclear",
+    "target_seq": 39,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 22,
+    "relation": "opposite",
+    "target_seq": 47,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 22,
+    "relation": "inverse",
+    "target_seq": 21,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 22,
+    "relation": "nuclear",
+    "target_seq": 40,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 23,
+    "relation": "opposite",
+    "target_seq": 43,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 23,
+    "relation": "inverse",
+    "target_seq": 24,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 23,
+    "relation": "nuclear",
+    "target_seq": 2,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 24,
+    "relation": "opposite",
+    "target_seq": 44,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 24,
+    "relation": "inverse",
+    "target_seq": 23,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 24,
+    "relation": "nuclear",
+    "target_seq": 2,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 25,
+    "relation": "opposite",
+    "target_seq": 46,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 25,
+    "relation": "inverse",
+    "target_seq": 26,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 25,
+    "relation": "nuclear",
+    "target_seq": 53,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 26,
+    "relation": "opposite",
+    "target_seq": 45,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 26,
+    "relation": "inverse",
+    "target_seq": 25,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 26,
+    "relation": "nuclear",
+    "target_seq": 54,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 27,
+    "relation": "opposite",
+    "target_seq": 28,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 27,
+    "relation": "inverse",
+    "target_seq": 27,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 27,
+    "relation": "nuclear",
+    "target_seq": 2,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 28,
+    "relation": "opposite",
+    "target_seq": 27,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 28,
+    "relation": "inverse",
+    "target_seq": 28,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 28,
+    "relation": "nuclear",
+    "target_seq": 1,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 29,
+    "relation": "opposite",
+    "target_seq": 30,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 29,
+    "relation": "inverse",
+    "target_seq": 29,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 29,
+    "relation": "nuclear",
+    "target_seq": 27,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 30,
+    "relation": "opposite",
+    "target_seq": 29,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 30,
+    "relation": "inverse",
+    "target_seq": 30,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 30,
+    "relation": "nuclear",
+    "target_seq": 28,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 31,
+    "relation": "opposite",
+    "target_seq": 41,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 31,
+    "relation": "inverse",
+    "target_seq": 32,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 31,
+    "relation": "nuclear",
+    "target_seq": 44,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 32,
+    "relation": "opposite",
+    "target_seq": 42,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 32,
+    "relation": "inverse",
+    "target_seq": 31,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 32,
+    "relation": "nuclear",
+    "target_seq": 43,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 33,
+    "relation": "opposite",
+    "target_seq": 19,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 33,
+    "relation": "inverse",
+    "target_seq": 34,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 33,
+    "relation": "nuclear",
+    "target_seq": 44,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 34,
+    "relation": "opposite",
+    "target_seq": 20,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 34,
+    "relation": "inverse",
+    "target_seq": 33,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 34,
+    "relation": "nuclear",
+    "target_seq": 43,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 35,
+    "relation": "opposite",
+    "target_seq": 5,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 35,
+    "relation": "inverse",
+    "target_seq": 36,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 35,
+    "relation": "nuclear",
+    "target_seq": 39,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 36,
+    "relation": "opposite",
+    "target_seq": 6,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 36,
+    "relation": "inverse",
+    "target_seq": 35,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 36,
+    "relation": "nuclear",
+    "target_seq": 40,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 37,
+    "relation": "opposite",
+    "target_seq": 40,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 37,
+    "relation": "inverse",
+    "target_seq": 38,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 37,
+    "relation": "nuclear",
+    "target_seq": 64,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 38,
+    "relation": "opposite",
+    "target_seq": 39,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 38,
+    "relation": "inverse",
+    "target_seq": 37,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 38,
+    "relation": "nuclear",
+    "target_seq": 63,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 39,
+    "relation": "opposite",
+    "target_seq": 38,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 39,
+    "relation": "inverse",
+    "target_seq": 40,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 39,
+    "relation": "nuclear",
+    "target_seq": 64,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 40,
+    "relation": "opposite",
+    "target_seq": 37,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 40,
+    "relation": "inverse",
+    "target_seq": 39,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 40,
+    "relation": "nuclear",
+    "target_seq": 63,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 41,
+    "relation": "opposite",
+    "target_seq": 31,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 41,
+    "relation": "inverse",
+    "target_seq": 42,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 41,
+    "relation": "nuclear",
+    "target_seq": 24,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 42,
+    "relation": "opposite",
+    "target_seq": 32,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 42,
+    "relation": "inverse",
+    "target_seq": 41,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 42,
+    "relation": "nuclear",
+    "target_seq": 23,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 43,
+    "relation": "opposite",
+    "target_seq": 23,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 43,
+    "relation": "inverse",
+    "target_seq": 44,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 43,
+    "relation": "nuclear",
+    "target_seq": 1,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 44,
+    "relation": "opposite",
+    "target_seq": 24,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 44,
+    "relation": "inverse",
+    "target_seq": 43,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 44,
+    "relation": "nuclear",
+    "target_seq": 1,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 45,
+    "relation": "opposite",
+    "target_seq": 26,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 45,
+    "relation": "inverse",
+    "target_seq": 46,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 45,
+    "relation": "nuclear",
+    "target_seq": 53,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 46,
+    "relation": "opposite",
+    "target_seq": 25,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 46,
+    "relation": "inverse",
+    "target_seq": 45,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 46,
+    "relation": "nuclear",
+    "target_seq": 54,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 47,
+    "relation": "opposite",
+    "target_seq": 22,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 47,
+    "relation": "inverse",
+    "target_seq": 48,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 47,
+    "relation": "nuclear",
+    "target_seq": 37,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 48,
+    "relation": "opposite",
+    "target_seq": 21,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 48,
+    "relation": "inverse",
+    "target_seq": 47,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 48,
+    "relation": "nuclear",
+    "target_seq": 38,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 49,
+    "relation": "opposite",
+    "target_seq": 4,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 49,
+    "relation": "inverse",
+    "target_seq": 50,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 49,
+    "relation": "nuclear",
+    "target_seq": 44,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 50,
+    "relation": "opposite",
+    "target_seq": 3,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 50,
+    "relation": "inverse",
+    "target_seq": 49,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 50,
+    "relation": "nuclear",
+    "target_seq": 43,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 51,
+    "relation": "opposite",
+    "target_seq": 57,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 51,
+    "relation": "inverse",
+    "target_seq": 52,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 51,
+    "relation": "nuclear",
+    "target_seq": 39,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 52,
+    "relation": "opposite",
+    "target_seq": 58,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 52,
+    "relation": "inverse",
+    "target_seq": 51,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 52,
+    "relation": "nuclear",
+    "target_seq": 40,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 53,
+    "relation": "opposite",
+    "target_seq": 54,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 53,
+    "relation": "inverse",
+    "target_seq": 54,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 53,
+    "relation": "nuclear",
+    "target_seq": 64,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 54,
+    "relation": "opposite",
+    "target_seq": 53,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 54,
+    "relation": "inverse",
+    "target_seq": 53,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 54,
+    "relation": "nuclear",
+    "target_seq": 63,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 55,
+    "relation": "opposite",
+    "target_seq": 59,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 55,
+    "relation": "inverse",
+    "target_seq": 56,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 55,
+    "relation": "nuclear",
+    "target_seq": 28,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 56,
+    "relation": "opposite",
+    "target_seq": 60,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 56,
+    "relation": "inverse",
+    "target_seq": 55,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 56,
+    "relation": "nuclear",
+    "target_seq": 28,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 57,
+    "relation": "opposite",
+    "target_seq": 51,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 57,
+    "relation": "inverse",
+    "target_seq": 58,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 57,
+    "relation": "nuclear",
+    "target_seq": 38,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 58,
+    "relation": "opposite",
+    "target_seq": 52,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 58,
+    "relation": "inverse",
+    "target_seq": 57,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 58,
+    "relation": "nuclear",
+    "target_seq": 37,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 59,
+    "relation": "opposite",
+    "target_seq": 55,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 59,
+    "relation": "inverse",
+    "target_seq": 60,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 59,
+    "relation": "nuclear",
+    "target_seq": 27,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 60,
+    "relation": "opposite",
+    "target_seq": 56,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 60,
+    "relation": "inverse",
+    "target_seq": 59,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 60,
+    "relation": "nuclear",
+    "target_seq": 27,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 61,
+    "relation": "opposite",
+    "target_seq": 62,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 61,
+    "relation": "inverse",
+    "target_seq": 61,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 61,
+    "relation": "nuclear",
+    "target_seq": 27,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 62,
+    "relation": "opposite",
+    "target_seq": 61,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 62,
+    "relation": "inverse",
+    "target_seq": 62,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 62,
+    "relation": "nuclear",
+    "target_seq": 28,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 63,
+    "relation": "opposite",
+    "target_seq": 64,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 63,
+    "relation": "inverse",
+    "target_seq": 64,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 63,
+    "relation": "nuclear",
+    "target_seq": 64,
+    "note": "互卦：二三四、三四五成卦。"
+  },
+  {
+    "hexagram_seq": 64,
+    "relation": "opposite",
+    "target_seq": 63,
+    "note": "错卦：六爻阴阳全反。"
+  },
+  {
+    "hexagram_seq": 64,
+    "relation": "inverse",
+    "target_seq": 63,
+    "note": "综卦：六爻上下反观。"
+  },
+  {
+    "hexagram_seq": 64,
+    "relation": "nuclear",
+    "target_seq": 63,
+    "note": "互卦：二三四、三四五成卦。"
+  }
+]

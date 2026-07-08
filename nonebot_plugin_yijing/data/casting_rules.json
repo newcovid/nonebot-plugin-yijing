@@ -1,0 +1,38 @@
+[
+  {
+    "id": "coin",
+    "name": "三枚铜钱法",
+    "enabled": true,
+    "probability": {
+      "6": 1,
+      "7": 3,
+      "8": 3,
+      "9": 1
+    },
+    "description": "每爻三枚铜钱，正=3、反=2；六次自下而上成卦。老阴6、老阳9为动爻。"
+  },
+  {
+    "id": "yarrow",
+    "name": "大衍筮法模拟",
+    "enabled": true,
+    "probability": {
+      "6": 1,
+      "7": 5,
+      "8": 7,
+      "9": 3
+    },
+    "description": "以传统蓍草法的结果概率模拟，暂不逐步展示真实揲蓍过程。"
+  },
+  {
+    "id": "manual_coin",
+    "name": "手动铜钱",
+    "enabled": true,
+    "description": "用户按正反输入六组，每组三枚。"
+  },
+  {
+    "id": "manual_yarrow",
+    "name": "手动大衍",
+    "enabled": true,
+    "description": "用户输入六个爻值6/7/8/9，或按后续版本逐步拆分。"
+  }
+]

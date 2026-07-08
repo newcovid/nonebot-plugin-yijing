@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 32px; background: #efe7d3; font-family: "Noto Serif CJK SC", "Source Han Serif SC", "Microsoft YaHei", serif; color: #2b2118; }
+    .page { width: 840px; margin: 0 auto; background: #fffaf0; border: 2px solid #d8c29a; border-radius: 28px; padding: 34px; box-shadow: 0 18px 60px rgba(79,55,26,.24); }
+    .header { display: flex; justify-content: space-between; gap: 20px; border-bottom: 3px double #b9975b; padding-bottom: 18px; margin-bottom: 22px; }
+    h1 { font-size: 36px; margin: 0 0 8px; letter-spacing: .08em; }
+    .muted { color: #7c6951; font-size: 18px; }
+    .id { text-align: right; font-family: ui-monospace, Consolas, monospace; font-size: 17px; color: #8b5e25; }
+    .section { margin: 24px 0; padding: 22px; background: rgba(247,237,213,.72); border: 1px solid #e3d0aa; border-radius: 20px; }
+    .section h2 { margin: 0 0 14px; font-size: 24px; color: #5b3b15; }
+    .question { font-size: 23px; line-height: 1.65; }
+    .coins { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+    .coin-line { background: #fff8e6; border: 1px solid #dec891; border-radius: 14px; padding: 10px; text-align: center; }
+    .coin-title { color: #7c6951; font-size: 14px; margin-bottom: 8px; }
+    .coin { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin: 2px; border-radius: 50%; border: 2px solid #b58733; background: linear-gradient(135deg,#fff0a3,#d8a235); font-weight: 700; font-size: 16px; }
+    .hex-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .hex-card { background: #fffdf5; border: 1px solid #d8c29a; border-radius: 18px; padding: 18px; }
+    .symbol { font-size: 68px; line-height: 1; }
+    .hex-name { font-size: 28px; font-weight: 800; margin-top: 8px; }
+    .palace { font-size: 18px; color: #6d563a; margin-top: 4px; }
+    .lines { display: flex; flex-direction: column; gap: 10px; }
+    .line-row { display: grid; grid-template-columns: 58px 132px 80px 1fr; gap: 10px; align-items: center; padding: 12px; border-radius: 14px; background: #fffdf5; border: 1px solid #e1d1af; }
+    .line-row.moving { border-color: #b66a27; background: #fff1d8; }
+    .line-label { font-weight: 800; font-size: 18px; }
+    .line-shape { font-family: ui-monospace, Consolas, monospace; font-size: 18px; white-space: nowrap; }
+    .line-value { font-weight: 700; color: #8b5e25; }
+    .line-text { line-height: 1.58; font-size: 17px; }
+    p { line-height: 1.72; font-size: 18px; margin: 8px 0; }
+    .classic { font-size: 19px; line-height: 1.75; }
+    .tag { display: inline-block; padding: 3px 9px; background: #7b4d18; color: white; border-radius: 999px; font-size: 14px; margin-right: 6px; }
+    ul { margin: 6px 0 0 26px; padding: 0; font-size: 18px; line-height: 1.75; }
+    .warning { border-color: #d49a52; background: #fff0d9; }
+    .footer { margin-top: 20px; color: #86745a; font-size: 14px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div>
+        <h1>{{ title }}</h1>
+        <div class="muted">{{ method }} · {{ created_at }}</div>
+      </div>
+      <div class="id">{{ record_id }}</div>
+    </div>
+
+    <div class="section">
+      <h2>所问</h2>
+      <div class="question">{{ question }}</div>
+    </div>
+
+    {% if has_coins %}
+    <div class="section">
+      <h2>原始铜钱状态（自下而上）</h2>
+      <div class="coins">
+      {% for group in coins %}
+        <div class="coin-line">
+          <div class="coin-title">第 {{ loop.index }} 爻</div>
+          {% for face in group %}<span class="coin">{{ face }}</span>{% endfor %}
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="section">
+      <h2>本卦与变卦</h2>
+      <div class="hex-pair">
+        <div class="hex-card">
+          <div class="symbol">{{ primary.symbol }}</div>
+          <div class="hex-name">本卦：{{ primary.name }}</div>
+          <div class="palace">{{ primary.palace_name }} · {{ primary.lower_trigram }}下{{ primary.upper_trigram }}上</div>
+        </div>
+        <div class="hex-card">
+          {% if changed %}
+          <div class="symbol">{{ changed.symbol }}</div>
+          <div class="hex-name">变卦：{{ changed.name }}</div>
+          <div class="palace">{{ changed.palace_name }} · {{ changed.lower_trigram }}下{{ changed.upper_trigram }}上</div>
+          {% else %}
+          <div class="symbol">—</div>
+          <div class="hex-name">无变卦</div>
+          <div class="palace">本次无动爻，重在本卦。</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>六爻结果（上爻在上，初爻在下）</h2>
+      <div class="lines">
+      {% for row in line_rows %}
+        <div class="line-row {% if row.is_moving %}moving{% endif %}">
+          <div class="line-label">{{ row.label }}</div>
+          <div class="line-shape">{{ row.shape }}</div>
+          <div class="line-value">{{ row.value }} · {{ row.name }}</div>
+          <div class="line-text">{{ row.change }}；{{ row.yaoci }}</div>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>原始经传资料</h2>
+      <p class="classic"><span class="tag">卦辞</span>{{ primary_text.guaci.text }}</p>
+      <p class="classic"><span class="tag">大象</span>{{ primary_text.xiang.daxiang }}</p>
+      <p class="classic"><span class="tag">六爻</span></p>
+      <ul>
+        {% for row in line_rows|reverse %}
+        <li>{{ row.label }}：{{ row.yaoci }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>综合分析</h2>
+      <p>{{ interpretation.summary }}</p>
+      <p><strong>当前处境：</strong>{{ interpretation.current_situation }}</p>
+      <p><strong>变化趋势：</strong>{{ interpretation.change_trend }}</p>
+      {% if interpretation.advice %}
+      <p><strong>建议：</strong></p>
+      <ul>{% for item in interpretation.advice %}<li>{{ item }}</li>{% endfor %}</ul>
+      {% endif %}
+    </div>
+
+    {% if preprocess.warnings or interpretation.risks %}
+    <div class="section warning">
+      <h2>风险提示</h2>
+      <ul>
+        {% for item in preprocess.warnings %}<li>{{ item }}</li>{% endfor %}
+        {% for item in interpretation.risks %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <div class="footer">
+      {{ interpretation.disclaimer }}<br />
+      资料库来源标注：Wikisource 公有领域文本与本地整理数据；部分经传字段为预留占位，需要后续校勘补录。
+    </div>
+  </div>
+</body>
+</html>

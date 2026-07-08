@@ -1,0 +1,16 @@
+[
+  {
+    "id": "wikisource_zhouyi",
+    "name": "维基文库《周易》",
+    "url": "https://zh.wikisource.org/zh-hans/周易",
+    "license": "Public domain / CC BY-SA page metadata",
+    "usage": "经文、卦辞、爻辞、彖、象等文本校对来源之一。"
+  },
+  {
+    "id": "ctext_zhouyi",
+    "name": "中国哲学书电子化计划《周易》",
+    "url": "https://ctext.org/book-of-changes/zh",
+    "license": "用于人工校对参考，插件不自动抓取。",
+    "usage": "文本版本对读与校勘参考。"
+  }
+]
