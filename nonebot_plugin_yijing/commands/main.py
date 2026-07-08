@@ -1,20 +1,33 @@
 from __future__ import annotations
 
-import json
 from typing import Any
 
 from arclet.alconna import Alconna, AllParam, Args
+from nonebot import on_message
 from nonebot.adapters import Bot, Event
 from nonebot.matcher import Matcher
+from nonebot.rule import Rule
 from nonebot_plugin_alconna import on_alconna
 from nonebot_plugin_orm import async_scoped_session
 
 from ..config import plugin_config
-from ..core.caster import CastResult, cast_coin, cast_random_hexagram, cast_yarrow, parse_manual_coin, parse_manual_yarrow
-from ..core.data import get_hexagram_text
+from ..core.caster import (
+    cast_coin,
+    cast_random_hexagram,
+    cast_yarrow,
+    parse_manual_coin,
+    parse_manual_yarrow,
+)
 from ..core.hexagram import resolve_by_lines
 from ..core.interpret import local_preprocess
-from ..permissions import cast_service, history_service, manual_service, query_service, random_service, settings_service
+from ..permissions import (
+    cast_service,
+    history_service,
+    manual_service,
+    query_service,
+    random_service,
+    settings_service,
+)
 from ..render.html import render_image
 from ..render.message import image_message
 from ..services.llm import interpret_with_llm, parse_hexagram_query, preprocess_question
@@ -46,6 +59,7 @@ from ..utils import (
     hash_user_id,
     normalize_question,
     parse_command_body,
+    utcnow,
 )
 
 
@@ -85,7 +99,14 @@ async def _notice(matcher: Matcher, title: str, content: str, hint: str = "") ->
 def _parse_cast_body(body: str) -> tuple[str, str]:
     body = body.strip()
     method = "coin"
-    for suffix, value in [("大衍", "yarrow"), ("蓍草", "yarrow"), ("铜钱", "coin"), ("硬币", "coin"), ("手动", "manual")]:
+    suffix_map = [
+        ("大衍", "yarrow"),
+        ("蓍草", "yarrow"),
+        ("铜钱", "coin"),
+        ("硬币", "coin"),
+        ("手动", "manual"),
+    ]
+    for suffix, value in suffix_map:
         if body.endswith(suffix):
             method = value
             body = body[: -len(suffix)].strip()
@@ -158,7 +179,8 @@ async def _run_cast(
             await _notice(
                 matcher,
                 "发现短期相似问题",
-                f"{plugin_config.yijing_duplicate_window_minutes} 分钟内你已问过相近问题。\n记录ID：{record.id}\n相似度：{score:.2f}\n建议使用：易经记录 {record.id}",
+                f"{plugin_config.yijing_duplicate_window_minutes} 分钟内你已问过相近问题。\n"
+                f"记录ID：{record.id}\n相似度：{score:.2f}\n建议使用：易经记录 {record.id}",
                 "如确实要重新起卦，可稍后再问，或由管理员调整冷却/重复窗口策略。",
             )
     else:
@@ -166,7 +188,11 @@ async def _run_cast(
 
     quota = await daily_quota_count(session, group_id, user_hash)
     if quota >= cfg.daily_limit:
-        await _notice(matcher, "今日次数已达上限", f"你在本群 24 小时内已起卦 {quota} 次，上限为 {cfg.daily_limit} 次。")
+        await _notice(
+            matcher,
+            "今日次数已达上限",
+            f"你在本群 24 小时内已起卦 {quota} 次，上限为 {cfg.daily_limit} 次。",
+        )
 
     remain = await cooldown_remaining(session, group_id, cfg.cooldown_seconds)
     if remain > 0:
@@ -276,7 +302,9 @@ async def _cast(bot: Bot, event: Event, matcher: Matcher, session: async_scoped_
         await _notice(
             matcher,
             "手动起卦引导",
-            "请选择手动方式：\n1. 发送：铜钱\n2. 发送：大衍\n\n铜钱法随后请自下而上输入 6 组，每组 3 个正/反。\n大衍法可直接自下而上输入 6 个爻值：6 7 8 9。",
+            "请选择手动方式：\n1. 发送：铜钱\n2. 发送：大衍\n\n"
+            "铜钱法随后请自下而上输入 6 组，每组 3 个正/反。\n"
+            "大衍法可直接自下而上输入 6 个爻值：6 7 8 9。",
         )
     if not question:
         await _notice(matcher, "缺少问题", "请使用：起卦 你的问题\n例如：起卦 此行去山西实习一程怎么样")
@@ -340,22 +368,30 @@ async def _settings(event: Event, matcher: Matcher, session: async_scoped_sessio
             await _notice(matcher, "无权限", "设置类命令仅允许群主、管理员或 superuser 使用。")
         parts = body.split()
         if body in {"开启", "启用", "on"}:
-            cfg.enabled = True; changed = True
+            cfg.enabled = True
+            changed = True
         elif body in {"关闭", "禁用", "off"}:
-            cfg.enabled = False; changed = True
+            cfg.enabled = False
+            changed = True
         elif len(parts) >= 2 and parts[0] == "冷却":
-            cfg.cooldown_seconds = max(0, int(parts[1])); changed = True
+            cfg.cooldown_seconds = max(0, int(parts[1]))
+            changed = True
         elif len(parts) >= 2 and parts[0] == "日限额":
-            cfg.daily_limit = max(1, int(parts[1])); changed = True
+            cfg.daily_limit = max(1, int(parts[1]))
+            changed = True
         elif len(parts) >= 2 and parts[0] == "默认":
-            cfg.default_method = "yarrow" if parts[1] in {"大衍", "蓍草", "yarrow"} else "coin"; changed = True
+            cfg.default_method = "yarrow" if parts[1] in {"大衍", "蓍草", "yarrow"} else "coin"
+            changed = True
         elif len(parts) >= 2 and parts[0].upper() == "LLM":
-            cfg.llm_enabled = parts[1] in {"开启", "启用", "on", "true", "1"}; changed = True
+            cfg.llm_enabled = parts[1] in {"开启", "启用", "on", "true", "1"}
+            changed = True
         else:
-            await _notice(matcher, "设置格式错误", "支持：易经设置 开启｜关闭｜冷却 秒数｜日限额 次数｜默认 铜钱/大衍｜LLM 开启/关闭")
+            await _notice(
+                matcher,
+                "设置格式错误",
+                "支持：易经设置 开启｜关闭｜冷却 秒数｜日限额 次数｜默认 铜钱/大衍｜LLM 开启/关闭",
+            )
     if changed:
-        from ..utils import utcnow
-
         cfg.updated_at = utcnow()
         await session.commit()
         await session.refresh(cfg)
@@ -373,9 +409,6 @@ async def _settings(event: Event, matcher: Matcher, session: async_scoped_sessio
 
 
 _MANUAL_SESSIONS: dict[tuple[str, str], dict[str, Any]] = {}
-
-from nonebot import on_message
-from nonebot.rule import Rule
 
 
 async def _has_manual_session(event: Event) -> bool:
@@ -403,7 +436,9 @@ async def _manual_input(bot: Bot, event: Event, matcher: Matcher, session: async
             await _notice(
                 matcher,
                 "请输入铜钱结果",
-                f"请自下而上输入 6 组，每组 3 个{plugin_config.yijing_positive_face}/{plugin_config.yijing_negative_face}。\n示例：正反正 反反正 正正反 正反反 反正正 反反反",
+                f"请自下而上输入 6 组，每组 3 个"
+                f"{plugin_config.yijing_positive_face}/{plugin_config.yijing_negative_face}。\n"
+                "示例：正反正 反反正 正正反 正反反 反正正 反反反",
             )
         if text in {"大衍", "蓍草", "yarrow"}:
             state["stage"] = "values"

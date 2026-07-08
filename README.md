@@ -28,6 +28,12 @@ pip install nonebot-plugin-yijing
 pip install -e .
 ```
 
+从 GitHub 指定提交安装，适合 Alpha 服务器验证：
+
+```bash
+pip install "nonebot-plugin-yijing @ git+ssh://git@github.com/newcovid/nonebot-plugin-yijing.git@<commit-sha>"
+```
+
 在 NoneBot 项目中加载：
 
 ```python
@@ -48,24 +54,29 @@ pip install "nonebot-plugin-orm[sqlite]" nonebot-plugin-alconna nonebot-plugin-h
 pip install nonebot-plugin-access-control nonebot-plugin-access-control-api
 ```
 
-首次使用 ORM 时执行：
+本插件当前保留 `nonebot-adapter-onebot` 作为硬依赖，因为当前发布目标主要是 OneBot V11 群聊环境。
+
+## ORM 初始化
+
+首次使用或升级后执行：
 
 ```bash
 nb orm upgrade
 nb orm check
 ```
 
-开发阶段也可以在 `.env` 中设置：
+不建议在常规配置中默认关闭 ORM 启动检查。只有在本地临时排查迁移问题时，才可短暂加入：
 
 ```env
 ALEMBIC_STARTUP_CHECK=false
 ```
 
-## 配置
+排查结束后应移除该配置，并重新执行 `nb orm upgrade` 与 `nb orm check`。
+
+## 基础配置
 
 ```env
 SQLALCHEMY_DATABASE_URL=sqlite+aiosqlite:///./data/yijing.sqlite3
-ALEMBIC_STARTUP_CHECK=false
 
 ACCESS_CONTROL_AUTO_PATCH_ENABLED=true
 ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED=true
@@ -87,6 +98,27 @@ YIJING_LLM_ENABLED=false
 # YIJING_LLM_API_KEY=sk-xxx
 # YIJING_LLM_MODEL=gpt-4o-mini
 ```
+
+## htmlrender / Playwright 配置
+
+本插件以 `nonebot-plugin-htmlrender>=0.7.1` 为基线。推荐本地开发配置：
+
+```env
+RENDER_BACKEND=playwright
+RENDER_STARTUP_MODE=probe
+RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":false,"close_on_exit":true,"launch_args":"--no-sandbox --disable-dev-shm-usage --disable-gpu"}
+```
+
+生产 Docker 环境如果在镜像构建阶段把 Playwright Chromium 安装到 `/ms-playwright`，推荐：
+
+```env
+RENDER_BACKEND=playwright
+RENDER_STARTUP_MODE=probe
+RENDER_STORAGE_PATH=/ms-playwright
+RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":true,"close_on_exit":true,"cleanup_legacy_cache":true,"launch_args":"--no-sandbox --disable-dev-shm-usage --disable-gpu"}
+```
+
+这种部署方式要求 Dockerfile 或镜像构建脚本确实把 Chromium 安装到了 `/ms-playwright`。如果没有预装浏览器，不要设置 `skip_browser_install=true`。
 
 ## 命令
 
@@ -173,7 +205,7 @@ nonebot_plugin_yijing.manual
 
 当前种子经文：乾、坤、需的爻辞/象传较完整；其余卦的爻辞、彖传、文言、系辞等字段先以结构化占位保留，等待后续校勘补录。
 
-## LLM 预处理与解读
+## LLM 预处理、解读与隐私
 
 启用 LLM 后，`起卦 问题` 会在真正起卦前执行预处理：
 
@@ -183,6 +215,33 @@ nonebot_plugin_yijing.manual
 - 标注医疗、法律、投资、人身安全等敏感领域。
 
 LLM 接口为 OpenAI 兼容 `/chat/completions`，失败会自动降级到本地规则，不阻塞起卦核心流程。
+
+隐私注意事项：
+
+- `YIJING_LLM_ENABLED=false` 时，LLM 不会被调用。
+- 开启 LLM 后，用户问题、卦象资料、预处理字段，以及按配置选取的近期历史记录，可能会发送给你配置的第三方模型服务商。
+- `YIJING_STORE_QUESTION=true` 会在数据库中保存原始问题文本，便于历史回看和相似问题判断。
+- 若希望降低存储敏感内容的风险，可设置 `YIJING_STORE_QUESTION=false`。此时历史记录会保留卦象和结构化结果，但原始问题文本不会保存。
+- 本插件只提供本地降级逻辑，不代理或改变第三方模型服务商的数据处理规则。请按实际接入的模型服务商补充群公告或隐私说明。
+
+## 开发质量检查
+
+```bash
+python -m pip install -e ".[dev]"
+ruff check .
+python -m compileall nonebot_plugin_yijing
+pytest -q
+python -m build --sdist --wheel .
+twine check dist/*
+```
+
+## 服务器冒烟测试
+
+服务器升级、换镜像、换 htmlrender/Playwright 基线后，建议按照 `docs/server-smoke-test.md` 执行真实群聊冒烟测试。
+
+## 许可证
+
+本项目使用 MIT License。详见 `LICENSE`。
 
 ## 免责声明
 

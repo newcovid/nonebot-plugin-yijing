@@ -7,7 +7,7 @@ from nonebot import require
 
 require("nonebot_plugin_htmlrender")
 
-from nonebot_plugin_htmlrender import render_template
+from nonebot_plugin_htmlrender import render_template  # noqa: E402
 
 TEMPLATE_DIR = Path(__file__).resolve().parent.parent / "templates"
 
