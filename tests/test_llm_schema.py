@@ -62,7 +62,9 @@ def test_local_interpretation_schema_is_stable() -> None:
 
 
 @pytest.mark.asyncio
-async def test_preprocess_llm_malformed_json_falls_back_safely(monkeypatch: pytest.MonkeyPatch) -> None:
+async def test_preprocess_llm_malformed_json_falls_back_safely(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     async def _broken_chat_json(system: str, user_payload: dict[str, Any]) -> dict[str, Any]:
         raise ValueError(f"malformed json: {system}:{user_payload}")
 
