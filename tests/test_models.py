@@ -10,6 +10,15 @@ def test_model_table_names_use_plugin_prefix() -> None:
     assert GroupCooldown.__tablename__ == "nonebot_plugin_yijing_group_cooldown"
 
 
+def test_group_config_has_window_settings() -> None:
+    columns = GroupConfig.__table__.columns
+
+    assert "duplicate_window_minutes" in columns
+    assert "history_minutes_for_llm" in columns
+    assert columns["duplicate_window_minutes"].default is not None
+    assert columns["history_minutes_for_llm"].default is not None
+
+
 def test_cast_record_index_names_are_stable() -> None:
     index_names = {index.name for index in CastRecord.__table__.indexes}
 
