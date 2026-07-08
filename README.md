@@ -241,7 +241,7 @@ twine check dist/*
 
 ## 许可证
 
-本项目使用 `GPL-3.0-or-later`。详见 `LICENSE`。
+本项目使用 MIT License。详见 `LICENSE`。
 
 ## 免责声明
 
