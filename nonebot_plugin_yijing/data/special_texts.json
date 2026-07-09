@@ -8,8 +8,15 @@
     "applies_when": "乾卦六爻皆为老阳或解读乾卦特殊辞时参考。",
     "text": "用九：见群龙无首，吉。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded",
-    "notes": "乾卦特殊辞，不属于普通六爻位置之一。"
+    "status": "checked",
+    "notes": "乾卦特殊辞，不属于普通六爻位置之一。",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/乾/易经/用九",
+    "xiang_text": "用九，天德不可为首也。",
+    "xiang_source_id": "wikisource_zhouyi",
+    "xiang_status": "checked",
+    "xiang_edition": "Wikisource zh-hans HTML page scrape",
+    "xiang_source_locator": "周易/乾/象/用九"
   },
   {
     "id": "kun_yongliu",
@@ -20,7 +27,14 @@
     "applies_when": "坤卦六爻皆为老阴或解读坤卦特殊辞时参考。",
     "text": "用六：利永贞。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded",
-    "notes": "坤卦特殊辞，不属于普通六爻位置之一。"
+    "status": "checked",
+    "notes": "坤卦特殊辞，不属于普通六爻位置之一。",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/坤/易经/用六",
+    "xiang_text": "用六永贞，以大终也。",
+    "xiang_source_id": "wikisource_zhouyi",
+    "xiang_status": "checked",
+    "xiang_edition": "Wikisource zh-hans HTML page scrape",
+    "xiang_source_locator": "周易/坤/象/用六"
   }
 ]

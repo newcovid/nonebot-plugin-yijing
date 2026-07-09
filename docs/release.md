@@ -8,7 +8,7 @@ The project is still alpha. Treat every release as reproducibility work first an
 
 Recommended progression:
 
-1. GitHub commit install for server alpha validation.
+1. GitHub commit install for alpha deployment validation.
 2. Local wheel install for package validation.
 3. TestPyPI for first public package rehearsal, if needed.
 4. PyPI for tagged alpha release.
@@ -32,7 +32,7 @@ Also confirm:
 - `CHANGELOG.md` has a release entry.
 - `README.md` describes current limitations accurately.
 - `LICENSE` and `pyproject.toml` license metadata match.
-- No private `.env`, SQLite database, logs, cache, or server-only path is included.
+- No private `.env`, SQLite database, logs, cache, or deployment-only path is included.
 - `nonebot_plugin_yijing/data/`, `templates/`, and `migrations/` are included in the wheel.
 
 ## 3. Wheel content inspection
@@ -89,9 +89,9 @@ deactivate
 
 Avoid using a full plugin import as the only smoke test because plugin import can require a properly initialized NoneBot driver and adapter context.
 
-## 5. Server validation from GitHub commit
+## 5. Deployment validation from GitHub commit
 
-Before PyPI, validate a specific commit on the real test server:
+Before PyPI, validate a specific commit in an external deployment or staging project:
 
 ```text
 nonebot-plugin-yijing @ git+ssh://git@github.com/newcovid/nonebot-plugin-yijing.git@<commit-sha>
@@ -104,15 +104,15 @@ nb orm upgrade
 nb orm check
 ```
 
-Follow `docs/server-smoke-test.md` for group command testing.
+Follow `docs/deployment-smoke-test.md` for package, ORM, rendering, and chat-command checks.
 
 ## 6. Tagging
 
 Use a `v` prefix for release tags:
 
 ```bash
-git tag v0.1.1
-git push origin v0.1.1
+git tag v0.1.2
+git push origin v0.1.2
 ```
 
 The publish workflow is configured to run on tags matching `v*` and can also be dispatched manually.
@@ -143,7 +143,7 @@ After publishing:
 python -m venv .venv-release-test
 . .venv-release-test/bin/activate
 python -m pip install --upgrade pip
-python -m pip install nonebot-plugin-yijing==0.1.1
+python -m pip install nonebot-plugin-yijing==0.1.2
 python - <<'PY'
 import importlib.resources as resources
 root = resources.files('nonebot_plugin_yijing')
@@ -152,7 +152,7 @@ PY
 deactivate
 ```
 
-Then update the server to the exact version and repeat the server smoke test.
+Then update the target deployment to the exact version and repeat the deployment smoke test.
 
 ## 9. Do not release when
 

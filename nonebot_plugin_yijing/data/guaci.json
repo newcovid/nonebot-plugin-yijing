@@ -4,447 +4,575 @@
     "hexagram_name": "乾",
     "text": "乾：元亨。利贞。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/乾/易经/卦辞"
   },
   {
     "hexagram_seq": 2,
     "hexagram_name": "坤",
-    "text": "坤：元亨。利牝马之贞。君子有攸往，先迷后得主。利西南得朋，东北丧朋。安贞，吉。",
+    "text": "坤：元亨。利牝马之贞。\n君子有攸往，先迷后得主。\n利西南得朋，东北丧朋。安贞，吉。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/坤/易经/卦辞"
   },
   {
     "hexagram_seq": 3,
     "hexagram_name": "屯",
-    "text": "屯：元亨利贞。勿用有攸往，利建侯。",
+    "text": "屯：元亨，利贞。勿用有攸往，利建侯。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/屯/易经/卦辞"
   },
   {
     "hexagram_seq": 4,
     "hexagram_name": "蒙",
     "text": "蒙：亨。匪我求童蒙，童蒙求我。初筮告，再三渎，渎则不告。利贞。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/蒙/易经/卦辞"
   },
   {
     "hexagram_seq": 5,
     "hexagram_name": "需",
-    "text": "需：有孚，光亨，贞吉。利涉大川。",
+    "text": "需：有孚，光亨。贞吉，利涉大川。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/需/易经/卦辞"
   },
   {
     "hexagram_seq": 6,
     "hexagram_name": "讼",
-    "text": "讼：有孚窒惕，中吉，终凶。利见大人，不利涉大川。",
+    "text": "讼：有孚，窒，惕，中吉，终凶。利见大人，不利涉大川。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/讼/易经/卦辞"
   },
   {
     "hexagram_seq": 7,
     "hexagram_name": "师",
-    "text": "师：贞，丈人吉，无咎。",
+    "text": "师：贞丈人吉，无咎。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/师/易经/卦辞"
   },
   {
     "hexagram_seq": 8,
     "hexagram_name": "比",
-    "text": "比：吉。原筮，元永贞，无咎。不宁方来，后夫凶。",
+    "text": "比：吉。原筮元永贞，无咎。不宁方来，后夫凶。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/比/易经/卦辞"
   },
   {
     "hexagram_seq": 9,
     "hexagram_name": "小畜",
     "text": "小畜：亨。密云不雨，自我西郊。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/小畜/易经/卦辞"
   },
   {
     "hexagram_seq": 10,
     "hexagram_name": "履",
-    "text": "履：履虎尾，不咥人，亨。",
+    "text": "履虎尾，不咥人，亨。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/履/易经/卦辞"
   },
   {
     "hexagram_seq": 11,
     "hexagram_name": "泰",
     "text": "泰：小往大来，吉亨。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/泰/易经/卦辞"
   },
   {
     "hexagram_seq": 12,
     "hexagram_name": "否",
-    "text": "否：否之匪人，不利君子贞，大往小来。",
+    "text": "否之匪人，不利君子贞，大往小来。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/否/易经/卦辞"
   },
   {
     "hexagram_seq": 13,
     "hexagram_name": "同人",
-    "text": "同人：同人于野，亨。利涉大川，利君子贞。",
+    "text": "同人于野，亨。 利涉大川，利君子贞。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/同人/易经/卦辞"
   },
   {
     "hexagram_seq": 14,
     "hexagram_name": "大有",
     "text": "大有：元亨。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/大有/易经/卦辞"
   },
   {
     "hexagram_seq": 15,
     "hexagram_name": "谦",
     "text": "谦：亨，君子有终。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/谦/易经/卦辞"
   },
   {
     "hexagram_seq": 16,
     "hexagram_name": "豫",
-    "text": "豫：利建侯，行师。",
+    "text": "豫：利建侯行师。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/豫/易经/卦辞"
   },
   {
     "hexagram_seq": 17,
     "hexagram_name": "随",
-    "text": "随：元亨利贞，无咎。",
+    "text": "随：元亨。利贞。无咎。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/随/易经/卦辞"
   },
   {
     "hexagram_seq": 18,
     "hexagram_name": "蛊",
-    "text": "蛊：元亨，利涉大川。先甲三日，后甲三日。",
+    "text": "蛊：元亨。利涉大川。先甲三日，后甲三日。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/蛊/易经/卦辞"
   },
   {
     "hexagram_seq": 19,
     "hexagram_name": "临",
-    "text": "临：元亨利贞。至于八月有凶。",
+    "text": "临：元亨。利贞。至于八月有凶。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/临/易经/卦辞"
   },
   {
     "hexagram_seq": 20,
     "hexagram_name": "观",
     "text": "观：盥而不荐，有孚颙若。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/观/易经/卦辞"
   },
   {
     "hexagram_seq": 21,
     "hexagram_name": "噬嗑",
     "text": "噬嗑：亨。利用狱。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/噬嗑/易经/卦辞"
   },
   {
     "hexagram_seq": 22,
     "hexagram_name": "贲",
     "text": "贲：亨。小利有攸往。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/贲/易经/卦辞"
   },
   {
     "hexagram_seq": 23,
     "hexagram_name": "剥",
-    "text": "剥：不利有攸往。",
+    "text": "剥：不利。有攸往。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/剥/易经/卦辞"
   },
   {
     "hexagram_seq": 24,
     "hexagram_name": "复",
     "text": "复：亨。出入无疾，朋来无咎。反复其道，七日来复，利有攸往。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/复/易经/卦辞"
   },
   {
     "hexagram_seq": 25,
     "hexagram_name": "无妄",
-    "text": "无妄：元亨利贞。其匪正有眚，不利有攸往。",
+    "text": "无妄：元亨。利贞。其匪正有眚，不利有攸往。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/无妄/易经/卦辞"
   },
   {
     "hexagram_seq": 26,
     "hexagram_name": "大畜",
-    "text": "大畜：利贞。不家食吉，利涉大川。",
+    "text": "大畜：利贞，不家食吉，利涉大川。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/大畜/易经/卦辞"
   },
   {
     "hexagram_seq": 27,
     "hexagram_name": "颐",
     "text": "颐：贞吉。观颐，自求口实。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/颐/易经/卦辞"
   },
   {
     "hexagram_seq": 28,
     "hexagram_name": "大过",
-    "text": "大过：栋桡。利有攸往，亨。",
+    "text": "大过：栋桡，利有攸往，亨。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/大过/易经/卦辞"
   },
   {
     "hexagram_seq": 29,
     "hexagram_name": "坎",
-    "text": "坎：习坎，有孚，维心亨，行有尚。",
+    "text": "习坎：有孚，维心亨。行有尚。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/坎/易经/卦辞"
   },
   {
     "hexagram_seq": 30,
     "hexagram_name": "离",
-    "text": "离：利贞，亨。畜牝牛，吉。",
+    "text": "离：利贞。亨。畜牝牛，吉。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/离/易经/卦辞"
   },
   {
     "hexagram_seq": 31,
     "hexagram_name": "咸",
-    "text": "咸：亨。利贞，取女吉。",
+    "text": "咸：亨。利贞。取女吉。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/咸/易经/卦辞"
   },
   {
     "hexagram_seq": 32,
     "hexagram_name": "恒",
-    "text": "恒：亨，无咎，利贞，利有攸往。",
+    "text": "恒：亨，无咎。利贞，利有攸往。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/恒/易经/卦辞"
   },
   {
     "hexagram_seq": 33,
     "hexagram_name": "遁",
     "text": "遁：亨。小利贞。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/遁/易经/卦辞"
   },
   {
     "hexagram_seq": 34,
     "hexagram_name": "大壮",
     "text": "大壮：利贞。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/大壮/易经/卦辞"
   },
   {
     "hexagram_seq": 35,
     "hexagram_name": "晋",
     "text": "晋：康侯用锡马蕃庶，昼日三接。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/晋/易经/卦辞"
   },
   {
     "hexagram_seq": 36,
     "hexagram_name": "明夷",
     "text": "明夷：利艰贞。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/明夷/易经/卦辞"
   },
   {
     "hexagram_seq": 37,
     "hexagram_name": "家人",
     "text": "家人：利女贞。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/家人/易经/卦辞"
   },
   {
     "hexagram_seq": 38,
     "hexagram_name": "睽",
     "text": "睽：小事吉。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/睽/易经/卦辞"
   },
   {
     "hexagram_seq": 39,
     "hexagram_name": "蹇",
-    "text": "蹇：利西南，不利东北。利见大人，贞吉。",
+    "text": "蹇：利西南，不利东北；利见大人，贞吉。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/蹇/易经/卦辞"
   },
   {
     "hexagram_seq": 40,
     "hexagram_name": "解",
-    "text": "解：利西南。无所往，其来复吉。有攸往，夙吉。",
+    "text": "解：利西南，无所往，其来复吉。有攸往，夙吉。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/解/易经/卦辞"
   },
   {
     "hexagram_seq": 41,
     "hexagram_name": "损",
-    "text": "损：有孚，元吉，无咎，可贞，利有攸往。曷之用？二簋可用享。",
+    "text": "损：有孚，元吉。无咎，可贞，利有攸往。曷之用？二簋可用享。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/损/易经/卦辞"
   },
   {
     "hexagram_seq": 42,
     "hexagram_name": "益",
-    "text": "益：利有攸往，利涉大川。",
+    "text": "益：利有攸往。利涉大川。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/益/易经/卦辞"
   },
   {
     "hexagram_seq": 43,
     "hexagram_name": "夬",
-    "text": "夬：扬于王庭，孚号有厉。告自邑，不利即戎，利有攸往。",
+    "text": "夬：扬于王庭，孚号，有厉，告自邑，不利即戎，利有攸往。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/夬/易经/卦辞"
   },
   {
     "hexagram_seq": 44,
     "hexagram_name": "姤",
     "text": "姤：女壮，勿用取女。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/姤/易经/卦辞"
   },
   {
     "hexagram_seq": 45,
     "hexagram_name": "萃",
-    "text": "萃：亨。王假有庙。利见大人，亨，利贞。用大牲吉，利有攸往。",
+    "text": "萃：亨。王假有庙，利见大人，亨。利贞。用大牲吉，利有攸往。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/萃/易经/卦辞"
   },
   {
     "hexagram_seq": 46,
     "hexagram_name": "升",
-    "text": "升：元亨。用见大人，勿恤，南征吉。",
+    "text": "升：元亨，用见大人，勿恤，南征吉。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/升/易经/卦辞"
   },
   {
     "hexagram_seq": 47,
     "hexagram_name": "困",
-    "text": "困：亨，贞，大人吉，无咎。有言不信。",
+    "text": "困：亨，贞大人吉，无咎，有言不信。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/困/易经/卦辞"
   },
   {
     "hexagram_seq": 48,
     "hexagram_name": "井",
-    "text": "井：改邑不改井，无丧无得。往来井井。汔至，亦未繘井，羸其瓶，凶。",
+    "text": "井：改邑不改井，无丧无得，往来井井。汔至亦未繘井。羸其瓶，凶。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/井/易经/卦辞"
   },
   {
     "hexagram_seq": 49,
     "hexagram_name": "革",
-    "text": "革：己日乃孚。元亨利贞，悔亡。",
+    "text": "革：巳日乃孚，元亨。利贞。悔亡。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/革/易经/卦辞"
   },
   {
     "hexagram_seq": 50,
     "hexagram_name": "鼎",
     "text": "鼎：元吉，亨。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/鼎/易经/卦辞"
   },
   {
     "hexagram_seq": 51,
     "hexagram_name": "震",
     "text": "震：亨。震来虩虩，笑言哑哑。震惊百里，不丧匕鬯。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/震/易经/卦辞"
   },
   {
     "hexagram_seq": 52,
     "hexagram_name": "艮",
-    "text": "艮：艮其背，不获其身。行其庭，不见其人，无咎。",
+    "text": "艮：艮其背，不获其身，行其庭，不见其人，无咎。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/艮/易经/卦辞"
   },
   {
     "hexagram_seq": 53,
     "hexagram_name": "渐",
     "text": "渐：女归吉，利贞。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/渐/易经/卦辞"
   },
   {
     "hexagram_seq": 54,
     "hexagram_name": "归妹",
     "text": "归妹：征凶，无攸利。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/归妹/易经/卦辞"
   },
   {
     "hexagram_seq": 55,
     "hexagram_name": "丰",
     "text": "丰：亨。王假之，勿忧，宜日中。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/丰/易经/卦辞"
   },
   {
     "hexagram_seq": 56,
     "hexagram_name": "旅",
     "text": "旅：小亨，旅贞吉。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/旅/易经/卦辞"
   },
   {
     "hexagram_seq": 57,
     "hexagram_name": "巽",
-    "text": "巽：小亨，利有攸往，利见大人。",
+    "text": "巽：小亨。利有攸往。利见大人。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/巽/易经/卦辞"
   },
   {
     "hexagram_seq": 58,
     "hexagram_name": "兑",
-    "text": "兑：亨，利贞。",
+    "text": "兑：亨。利贞。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/兑/易经/卦辞"
   },
   {
     "hexagram_seq": 59,
     "hexagram_name": "涣",
     "text": "涣：亨。王假有庙，利涉大川，利贞。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/涣/易经/卦辞"
   },
   {
     "hexagram_seq": 60,
     "hexagram_name": "节",
-    "text": "节：亨。苦节，不可贞。",
+    "text": "节：亨。苦节不可贞。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/节/易经/卦辞"
   },
   {
     "hexagram_seq": 61,
     "hexagram_name": "中孚",
     "text": "中孚：豚鱼吉，利涉大川，利贞。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/中孚/易经/卦辞"
   },
   {
     "hexagram_seq": 62,
     "hexagram_name": "小过",
-    "text": "小过：亨，利贞。可小事，不可大事。飞鸟遗之音，不宜上，宜下，大吉。",
+    "text": "小过：亨。利贞。可小事，不可大事。飞鸟遗之音，不宜上宜下，大吉。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/小过/易经/卦辞"
   },
   {
     "hexagram_seq": 63,
     "hexagram_name": "既济",
-    "text": "既济：亨，小利贞。初吉，终乱。",
+    "text": "既济：亨小。利贞。初吉终乱。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/既济/易经/卦辞"
   },
   {
     "hexagram_seq": 64,
     "hexagram_name": "未济",
     "text": "未济：亨。小狐汔济，濡其尾，无攸利。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/未济/易经/卦辞"
   }
 ]

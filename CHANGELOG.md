@@ -24,7 +24,7 @@
 - Document ORM setup without defaulting to `ALEMBIC_STARTUP_CHECK=false`.
 - Document htmlrender 0.7.1 / Playwright local and Docker production baselines.
 - Add LLM privacy notes for third-party model data flow and `YIJING_STORE_QUESTION`.
-- Add server smoke-test checklist.
+- Add deployment smoke-test checklist.
 
 ### CI / Tests
 

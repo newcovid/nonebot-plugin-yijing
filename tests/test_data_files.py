@@ -2,6 +2,19 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1] / "nonebot_plugin_yijing" / "data"
+SCRAPED_CLASSICAL_FILES = [
+    "guaci.json",
+    "yaoci.json",
+    "tuan.json",
+    "xiang.json",
+    "wenyan.json",
+    "xici_shang.json",
+    "xici_xia.json",
+    "shuogua.json",
+    "xugua.json",
+    "zagua.json",
+    "special_texts.json",
+]
 
 
 def load(name: str):
@@ -26,3 +39,48 @@ def test_seeded_need():
     assert len(need) == 6
     assert need[0]["text"].startswith("初九：需于郊")
     assert need[-1]["text"].startswith("上六：入于穴")
+
+
+def test_scraped_classical_layers_have_no_placeholders():
+    for filename in SCRAPED_CLASSICAL_FILES:
+        raw = (ROOT / filename).read_text(encoding="utf-8")
+
+        assert "待补录" not in raw, filename
+        assert '"status": "placeholder"' not in raw, filename
+
+
+def test_scraped_records_are_source_located():
+    source_ids = {item["id"] for item in load("sources.json")}
+
+    for filename in ["guaci.json", "yaoci.json", "tuan.json"]:
+        for item in load(filename):
+            assert item["source_id"] in source_ids
+            assert item["status"] == "checked"
+            assert item.get("source_locator")
+
+    for filename in [
+        "wenyan.json",
+        "xici_shang.json",
+        "xici_xia.json",
+        "shuogua.json",
+        "xugua.json",
+        "zagua.json",
+        "special_texts.json",
+    ]:
+        for item in load(filename):
+            assert item["source_id"] in source_ids
+            assert item["status"] == "checked"
+            assert item.get("source_locator")
+
+    for item in load("xiang.json"):
+        assert item["source_id"] in source_ids
+        assert item["status"] == "checked"
+        assert item.get("source_locator")
+        assert item["daxiang_source_id"] in source_ids
+        assert item["daxiang_status"] == "checked"
+        assert item.get("daxiang_source_locator")
+        assert len(item["xiaoxiang"]) == 6
+        for xiaoxiang in item["xiaoxiang"]:
+            assert xiaoxiang["source_id"] in source_ids
+            assert xiaoxiang["status"] == "checked"
+            assert xiaoxiang.get("source_locator")

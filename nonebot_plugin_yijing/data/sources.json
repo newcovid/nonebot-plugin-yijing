@@ -5,10 +5,10 @@
     "title": "周易",
     "type": "classical_text",
     "url": "https://zh.wikisource.org/zh-hans/周易",
-    "edition": "Wikisource zh-hans page, manual collation reference",
-    "license": "Public domain / CC BY-SA page metadata",
-    "usage": "经文、卦辞、爻辞、彖、象等文本校对来源之一。",
-    "notes": "插件不自动抓取；仅作为人工校勘来源登记。"
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "license": "Public domain source text; Wikisource page text under CC BY-SA 4.0.",
+    "usage": "Scripted extraction of canonical Zhouyi and Yi Zhuan text.",
+    "notes": "Corpus text is extracted by scripts/fetch_wikisource_corpus.py from public Wikisource pages and normalized structurally; no AI generation is used for corpus text."
   },
   {
     "id": "ctext_zhouyi",

@@ -23,17 +23,17 @@ The current corpus is stored under `nonebot_plugin_yijing/data/`.
 | `trigrams.json` | Eight trigram metadata | Complete seed data |
 | `hexagrams.json` | 64 hexagram metadata and binary structure | Complete seed data |
 | `lines.json` | 384 structural line slots | Complete structural skeleton |
-| `guaci.json` | Hexagram judgments | Seed text, gradually verified |
-| `yaoci.json` | 384 ordinary line texts | Placeholder allowed during alpha |
+| `guaci.json` | Hexagram judgments | Script-fetched from public source, ready for later multi-source proofreading |
+| `yaoci.json` | 384 ordinary line texts | Script-fetched from public source, ready for later multi-source proofreading |
 | `special_texts.json` | Special texts outside ordinary six-line slots, such as 用九 / 用六 | Small canonical seed file |
-| `tuan.json` | Tuan Zhuan | Placeholder allowed during alpha |
-| `xiang.json` | Xiang Zhuan; `daxiang` plus structured `xiaoxiang` line records | Seed text, gradually verified |
-| `wenyan.json` | Canonical Wenyan Zhuan | Limited to Qian and Kun |
-| `xici_shang.json` | Xici Zhuan, upper | Placeholder allowed during alpha |
-| `xici_xia.json` | Xici Zhuan, lower | Placeholder allowed during alpha |
-| `shuogua.json` | Shuogua Zhuan | Placeholder allowed during alpha |
-| `xugua.json` | Xugua Zhuan | Placeholder allowed during alpha |
-| `zagua.json` | Zagua Zhuan | Placeholder allowed during alpha |
+| `tuan.json` | Tuan Zhuan | Script-fetched from public source, 64 records |
+| `xiang.json` | Xiang Zhuan; `daxiang` plus structured `xiaoxiang` line records | Script-fetched from public source, with six structured `xiaoxiang` records per hexagram |
+| `wenyan.json` | Canonical Wenyan Zhuan | Script-fetched and limited to Qian and Kun |
+| `xici_shang.json` | Xici Zhuan, upper | Script-fetched and split by chapter |
+| `xici_xia.json` | Xici Zhuan, lower | Script-fetched and split by chapter |
+| `shuogua.json` | Shuogua Zhuan | Script-fetched and split by chapter |
+| `xugua.json` | Xugua Zhuan | Script-fetched and split by section |
+| `zagua.json` | Zagua Zhuan | Script-fetched as one section |
 | `relations.json` | Hexagram relations | Must reference valid hexagram sequences |
 | `sources.json` | Source registry | Required for traceability |
 | `casting_rules.json` | Casting method metadata | Stable seed data |
@@ -142,10 +142,11 @@ A safe text-completion PR should follow this order:
 
 1. Choose one narrow file or one narrow hexagram range.
 2. Add or correct source metadata first if needed.
-3. Edit the target JSON records.
-4. Preserve sequence numbers and positions exactly.
-5. Run data tests.
-6. Update the changelog or a corpus progress note if the completion is substantial.
+3. Prefer updating and rerunning `scripts/fetch_wikisource_corpus.py` for canonical text changes.
+4. Edit the target JSON records only for reviewed metadata or fields that are not public-source text.
+5. Preserve sequence numbers and positions exactly.
+6. Run data tests.
+7. Update the changelog or a corpus progress note if the completion is substantial.
 
 Recommended local checks:
 

@@ -1,1 +1,124 @@
-{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://github.com/newcovid/nonebot-plugin-yijing/data/schemas/xiang.schema.json","title":"xiang","description":"Xiang Zhuan records, with small images normalized as structured line records.","type":"array","items":{"type":"object","additionalProperties":true,"required":["hexagram_seq","hexagram_name","daxiang","daxiang_source_id","daxiang_status","xiaoxiang","source_id","status"],"properties":{"hexagram_seq":{"type":"integer","minimum":1,"maximum":64},"hexagram_name":{"type":"string"},"daxiang":{"type":"string"},"daxiang_source_id":{"type":"string","minLength":1},"daxiang_status":{"type":"string","enum":["placeholder","draft","seeded","checked","verified"]},"xiaoxiang":{"type":"array","items":{"type":"object","additionalProperties":true,"required":["position","line_label","text","source_id","status"],"properties":{"position":{"type":"integer","minimum":1,"maximum":6},"line_label":{"type":"string"},"text":{"type":"string"},"source_id":{"type":"string","minLength":1},"status":{"type":"string","enum":["placeholder","draft","seeded","checked","verified"]}}}},"source_id":{"type":"string","minLength":1},"status":{"type":"string","enum":["placeholder","draft","seeded","checked","verified"]}}}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/newcovid/nonebot-plugin-yijing/data/schemas/xiang.schema.json",
+  "title": "xiang",
+  "description": "Xiang Zhuan records, with small images normalized as structured line records.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": true,
+    "required": [
+      "hexagram_seq",
+      "hexagram_name",
+      "daxiang",
+      "daxiang_source_id",
+      "daxiang_status",
+      "xiaoxiang",
+      "source_id",
+      "status"
+    ],
+    "properties": {
+      "hexagram_seq": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 64
+      },
+      "hexagram_name": {
+        "type": "string"
+      },
+      "daxiang": {
+        "type": "string"
+      },
+      "daxiang_source_id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "daxiang_status": {
+        "type": "string",
+        "enum": [
+          "placeholder",
+          "draft",
+          "seeded",
+          "checked",
+          "verified"
+        ]
+      },
+      "daxiang_edition": {
+        "type": "string"
+      },
+      "daxiang_source_locator": {
+        "type": "string"
+      },
+      "xiaoxiang": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": true,
+          "required": [
+            "position",
+            "line_label",
+            "text",
+            "source_id",
+            "status"
+          ],
+          "properties": {
+            "position": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6
+            },
+            "line_label": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "source_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "placeholder",
+                "draft",
+                "seeded",
+                "checked",
+                "verified"
+              ]
+            },
+            "edition": {
+              "type": "string"
+            },
+            "source_locator": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "source_id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "placeholder",
+          "draft",
+          "seeded",
+          "checked",
+          "verified"
+        ]
+      },
+      "edition": {
+        "type": "string"
+      },
+      "source_locator": {
+        "type": "string"
+      },
+      "collation_notes": {
+        "type": "string"
+      }
+    }
+  }
+}

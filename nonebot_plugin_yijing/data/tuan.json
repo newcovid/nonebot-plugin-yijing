@@ -2,449 +2,577 @@
   {
     "hexagram_seq": 1,
     "hexagram_name": "乾",
-    "text": "彖传待补录。",
+    "text": "大哉乾元，万物资始，乃统天。云行雨施，品物流形，大明终始，六位时成。\n时乘六龙以御天，乾道变化，各正性命，保合大和〈一作太和〉，乃利贞。\n首出庶物，万国咸宁。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/乾/彖"
   },
   {
     "hexagram_seq": 2,
     "hexagram_name": "坤",
-    "text": "彖传待补录。",
+    "text": "至哉坤元，万物资生，乃顺承天。坤厚载物，德合无疆；含弘光大，品物咸亨。牝马地类，行地无疆，柔顺利贞。\n君子攸行，先迷失道，后顺得常。\n西南得朋，乃与类行，东北丧朋，乃终有庆。安贞之吉，应地无疆。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/坤/彖"
   },
   {
     "hexagram_seq": 3,
     "hexagram_name": "屯",
-    "text": "彖传待补录。",
+    "text": "屯，刚柔始交而难生，动乎险中，大亨贞。雷雨之动满盈，天造草昧，宜建侯而不宁。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/屯/彖"
   },
   {
     "hexagram_seq": 4,
     "hexagram_name": "蒙",
-    "text": "彖传待补录。",
+    "text": "蒙，山下有险，险而止，蒙。蒙亨，以亨行，时中也。匪我求童蒙，童蒙求我，志应也。初筮告，以刚中也。再三渎，渎则不告，渎蒙也。蒙以养正，圣功也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/蒙/彖"
   },
   {
     "hexagram_seq": 5,
     "hexagram_name": "需",
     "text": "需，须也，险在前也；刚健而不陷，其义不困穷矣。需，有孚，光亨，贞吉，位乎天位，以正中也。利涉大川，往有功也。",
     "source_id": "wikisource_zhouyi",
-    "status": "seeded"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/需/彖"
   },
   {
     "hexagram_seq": 6,
     "hexagram_name": "讼",
-    "text": "彖传待补录。",
+    "text": "讼，上刚下险，险而健，讼。讼，有孚，窒，惕，中吉，刚来而得中也。终凶，讼不可成也。利见大人，尚中正也。不利涉大川，入于渊也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/讼/彖"
   },
   {
     "hexagram_seq": 7,
     "hexagram_name": "师",
-    "text": "彖传待补录。",
+    "text": "师，众也。贞，正也。能以众正，可以王矣。刚中而应，行险而顺，以此毒天下，而民从之，吉又何咎矣。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/师/彖"
   },
   {
     "hexagram_seq": 8,
     "hexagram_name": "比",
-    "text": "彖传待补录。",
+    "text": "比，吉也。比，辅也，下顺从也。原筮，元永贞，无咎，以刚中也。不宁方来，上下应也。后夫凶，其道穷也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/比/彖"
   },
   {
     "hexagram_seq": 9,
     "hexagram_name": "小畜",
-    "text": "彖传待补录。",
+    "text": "小畜，柔得位而上下应之，曰小畜。健而巽，刚中而志行，乃亨。密云不雨，尚往也。自我西郊，施未行也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/小畜/彖"
   },
   {
     "hexagram_seq": 10,
     "hexagram_name": "履",
-    "text": "彖传待补录。",
+    "text": "履，柔履刚也。说而应乎乾，是以履虎尾，不咥人，亨。刚中正，履帝位而不疚，光明也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/履/彖"
   },
   {
     "hexagram_seq": 11,
     "hexagram_name": "泰",
-    "text": "彖传待补录。",
+    "text": "泰，小往大来，吉亨。则是天地交而万物通也，上下交而其志同也。内阳而外阴，内健而外顺，内君子而外小人，君子道长，小人道消也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/泰/彖"
   },
   {
     "hexagram_seq": 12,
     "hexagram_name": "否",
-    "text": "彖传待补录。",
+    "text": "否之匪人，不利君子贞，大往小来。则是天地不交而万物不通也，上下不交而天下无邦也。内阴而外阳，内柔而外刚，内小人而外君子，小人道长，君子道消也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/否/彖"
   },
   {
     "hexagram_seq": 13,
     "hexagram_name": "同人",
-    "text": "彖传待补录。",
+    "text": "同人，柔得位得中，而应乎乾，曰同人。同人曰，同人于野，亨。利涉大川，乾行也。文明以健，中正而应，君子正也。唯君子为能通天下之志。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/同人/彖"
   },
   {
     "hexagram_seq": 14,
     "hexagram_name": "大有",
-    "text": "彖传待补录。",
+    "text": "大有，柔得尊位，大中而上下应之，曰大有。其德刚健而文明，应乎天而时行，是以元亨。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/大有/彖"
   },
   {
     "hexagram_seq": 15,
     "hexagram_name": "谦",
-    "text": "彖传待补录。",
+    "text": "谦，亨，天道下济而光明，地道卑而上行。天道亏盈而益谦，地道变盈而流谦，鬼神害盈而福谦，人道恶盈而好谦。谦尊而光，卑而不可逾，君子之终也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/谦/彖"
   },
   {
     "hexagram_seq": 16,
     "hexagram_name": "豫",
-    "text": "彖传待补录。",
+    "text": "豫，刚应而志行，顺以动，豫。豫，顺以动，故天地如之，而况建侯行师乎？天地以顺动，故日月不过，而四时不忒；圣人以顺动，则刑罚清而民服。豫之时义大矣哉！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/豫/彖"
   },
   {
     "hexagram_seq": 17,
     "hexagram_name": "随",
-    "text": "彖传待补录。",
+    "text": "随，刚来而下柔，动而说，随。大亨贞，无咎，而天下随时，随之时义大矣哉！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/随/彖"
   },
   {
     "hexagram_seq": 18,
     "hexagram_name": "蛊",
-    "text": "彖传待补录。",
+    "text": "蛊，刚上而柔下，巽而止，蛊。蛊，元亨，而天下治也。利涉大川，往有事也。先甲三日，后甲三日，终则有始，天行也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/蛊/彖"
   },
   {
     "hexagram_seq": 19,
     "hexagram_name": "临",
-    "text": "彖传待补录。",
+    "text": "临，刚浸而长。说而顺，刚中而应，大亨以正，天之道也。至于八月有凶，消不久也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/临/彖"
   },
   {
     "hexagram_seq": 20,
     "hexagram_name": "观",
-    "text": "彖传待补录。",
+    "text": "大观在上，顺而巽，中正以观天下。观，盥而不荐，有孚颙若，下观而化也。观天之神道，而四时不忒，圣人以神道设教，而天下服矣。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/观/彖"
   },
   {
     "hexagram_seq": 21,
     "hexagram_name": "噬嗑",
-    "text": "彖传待补录。",
+    "text": "颐中有物，曰噬嗑，噬嗑而亨。刚柔分，动而明，雷电合而章。柔得中而上行，虽不当位，利用狱也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/噬嗑/彖"
   },
   {
     "hexagram_seq": 22,
     "hexagram_name": "贲",
-    "text": "彖传待补录。",
+    "text": "贲，亨；柔来而文刚，故亨。分刚上而文柔，故小利有攸往。刚柔交错，天文也；文明以止，人文也。观乎天文，以察时变；观乎人文，以化成天下。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/贲/彖"
   },
   {
     "hexagram_seq": 23,
     "hexagram_name": "剥",
-    "text": "彖传待补录。",
+    "text": "剥，剥也，柔变刚也。不利有攸往，小人长也。顺而止之，观象也。君子尚消息盈虚，天行也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/剥/彖"
   },
   {
     "hexagram_seq": 24,
     "hexagram_name": "复",
-    "text": "彖传待补录。",
+    "text": "复亨；刚反，动而以顺行，是以出入无疾，朋来无咎。反复其道，七日来复，天行也。利有攸往，刚长也。复其见天地之心乎？",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/复/彖"
   },
   {
     "hexagram_seq": 25,
     "hexagram_name": "无妄",
-    "text": "彖传待补录。",
+    "text": "无妄，刚自外来，而为主于内。动而健，刚中而应，大亨以正，天之命也。其匪正有眚，不利有攸往。无妄之往，何之矣？ 天命不佑，行矣哉？",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/无妄/彖"
   },
   {
     "hexagram_seq": 26,
     "hexagram_name": "大畜",
-    "text": "彖传待补录。",
+    "text": "大畜，刚健笃实辉光，日新其德，刚上而尚贤。能止健，大正也。不家食吉，养贤也。利涉大川，应乎天也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/大畜/彖"
   },
   {
     "hexagram_seq": 27,
     "hexagram_name": "颐",
-    "text": "彖传待补录。",
+    "text": "颐贞吉，养正则吉也。观颐，观其所养也；自求口实，观其自养也。天地养万物，圣人养贤，以及万民；颐之时义大矣哉！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/颐/彖"
   },
   {
     "hexagram_seq": 28,
     "hexagram_name": "大过",
-    "text": "彖传待补录。",
+    "text": "大过，大者过也。栋桡，本末弱也。刚过而中，巽而说行，利有攸往，乃亨。大过之时义大矣哉！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/大过/彖"
   },
   {
     "hexagram_seq": 29,
     "hexagram_name": "坎",
-    "text": "彖传待补录。",
+    "text": "习坎，重险也。水流而不盈，行险而不失其信。维心亨，乃以刚中也。行有尚，往有功也。天险不可升也，地险山川丘陵也，王公设险以守其国，坎之时用大矣哉！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/坎/彖"
   },
   {
     "hexagram_seq": 30,
     "hexagram_name": "离",
-    "text": "彖传待补录。",
+    "text": "离，丽也；日月丽乎天，百谷草木丽乎土，重明以丽乎正，乃化成天下。柔丽乎中正，故亨；是以畜牝牛吉也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/离/彖"
   },
   {
     "hexagram_seq": 31,
     "hexagram_name": "咸",
-    "text": "彖传待补录。",
+    "text": "咸，感也。柔上而刚下，二气感应以相与，止而说，男下女，是以亨利贞，取女吉也。天地感而万物化生，圣人感人心而天下和平；观其所感，而天地万物之情可见矣！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/咸/彖"
   },
   {
     "hexagram_seq": 32,
     "hexagram_name": "恒",
-    "text": "彖传待补录。",
+    "text": "恒，久也。刚上而柔下，雷风相与，巽而动，刚柔皆应，恒。恒亨无咎，利贞；久于其道也，天地之道，恒久而不已也。利有攸往，终则有始也。日月得天，而能久照，四时变化，而能久成，圣人久于其道，而天下化成；观其所恒，而天地万物之情可见矣！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/恒/彖"
   },
   {
     "hexagram_seq": 33,
     "hexagram_name": "遁",
-    "text": "彖传待补录。",
+    "text": "遁亨，遁而亨也。刚当位而应，与时行也。小利贞，浸而长也。遁之时义大矣哉！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/遁/彖"
   },
   {
     "hexagram_seq": 34,
     "hexagram_name": "大壮",
-    "text": "彖传待补录。",
+    "text": "大壮，大者壮也。刚以动，故壮。大壮利贞；大者正也。正大而天地之情可见矣！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/大壮/彖"
   },
   {
     "hexagram_seq": 35,
     "hexagram_name": "晋",
-    "text": "彖传待补录。",
+    "text": "晋，进也。明出地上，顺而丽乎大明，柔进而上行。是以康侯用锡马蕃庶，昼日三接也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/晋/彖"
   },
   {
     "hexagram_seq": 36,
     "hexagram_name": "明夷",
-    "text": "彖传待补录。",
+    "text": "明入地中，明夷。内文明而外柔顺，以蒙大难，文王以之。利艰贞，晦其明也，内难而能正其志，箕子以之。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/明夷/彖"
   },
   {
     "hexagram_seq": 37,
     "hexagram_name": "家人",
-    "text": "彖传待补录。",
+    "text": "家人，女正位乎内，男正位乎外，男女正，天地之大义也。家人有严君焉，父母之谓也。父父，子子，兄兄，弟弟，夫夫，妇妇，而家道正；正家而天下定矣。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/家人/彖"
   },
   {
     "hexagram_seq": 38,
     "hexagram_name": "睽",
-    "text": "彖传待补录。",
+    "text": "睽，火动而上，泽动而下；二女同居，其志不同行；说而丽乎明，柔进而上行，得中而应乎刚；是以小事吉。天地睽，而其事同也；男女睽，而其志通也；万物睽，而其事类也；睽之时用大矣哉！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/睽/彖"
   },
   {
     "hexagram_seq": 39,
     "hexagram_name": "蹇",
-    "text": "彖传待补录。",
+    "text": "蹇，难也，险在前也。见险而能止，知矣哉！蹇利西南，往得中也；不利东北，其道穷也。利见大人，往有功也。当位贞吉，以正邦也。蹇之时用大矣哉！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/蹇/彖"
   },
   {
     "hexagram_seq": 40,
     "hexagram_name": "解",
-    "text": "彖传待补录。",
+    "text": "解，险以动，动而免乎险，解。解利西南，往得众也。其来复吉，乃得中也。有攸往夙吉，往有功也。天地解，而雷雨作，雷雨作，而百果草木皆甲坼，解之时义大矣哉！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/解/彖"
   },
   {
     "hexagram_seq": 41,
     "hexagram_name": "损",
-    "text": "彖传待补录。",
+    "text": "损，损下益上，其道上行。损而有孚，元吉，无咎，可贞，利有攸往。曷之用？二簋可用享；二簋应有时。损刚益柔有时，损益盈虚，与时偕行。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/损/彖"
   },
   {
     "hexagram_seq": 42,
     "hexagram_name": "益",
-    "text": "彖传待补录。",
+    "text": "益，损上益下，民说无疆，自上下下，其道大光。利有攸往，中正有庆。利涉大川，木道乃行。益动而巽，日进无疆。天施地生，其益无方。凡益之道，与时偕行。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/益/彖"
   },
   {
     "hexagram_seq": 43,
     "hexagram_name": "夬",
-    "text": "彖传待补录。",
+    "text": "夬，决也，刚决柔也。健而说，决而和，扬于王庭，柔乘五刚也。孚号有厉，其危乃光也。告自邑，不利即戎，所尚乃穷也。利有攸往，刚长乃终也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/夬/彖"
   },
   {
     "hexagram_seq": 44,
     "hexagram_name": "姤",
-    "text": "彖传待补录。",
+    "text": "姤，遇也，柔遇刚也。勿用取女，不可与长也。天地相遇，品物咸章也。刚遇中正，天下大行也。姤之时义大矣哉！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/姤/彖"
   },
   {
     "hexagram_seq": 45,
     "hexagram_name": "萃",
-    "text": "彖传待补录。",
+    "text": "萃，聚也；顺以说，刚中而应，故聚也。王假有庙，致孝享也。利见大人亨，聚以正也。用大牲吉，利有攸往，顺天命也。观其所聚，而天地万物之情可见矣。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/萃/彖"
   },
   {
     "hexagram_seq": 46,
     "hexagram_name": "升",
-    "text": "彖传待补录。",
+    "text": "柔以时升，巽而顺，刚中而应，是以大亨。用见大人，勿恤；有庆也。南征吉，志行也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/升/彖"
   },
   {
     "hexagram_seq": 47,
     "hexagram_name": "困",
-    "text": "彖传待补录。",
+    "text": "困，刚掩也。险以说，困而不失其所，亨；其唯君子乎？ 贞大人吉，以刚中也。有言不信，尚口乃穷也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/困/彖"
   },
   {
     "hexagram_seq": 48,
     "hexagram_name": "井",
-    "text": "彖传待补录。",
+    "text": "巽乎水而上水，井；井养而不穷也。改邑不改井，乃以刚中也。汔至亦未繘井，未有功也。羸其瓶，是以凶也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/井/彖"
   },
   {
     "hexagram_seq": 49,
     "hexagram_name": "革",
-    "text": "彖传待补录。",
+    "text": "革，水火相息，二女同居，其志不相得，曰革。巳日乃孚；革而信也。文明以说，大亨以正，革而当，其悔乃亡。天地革而四时成，汤武革命，顺乎天而应乎人，革之时义大矣哉！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/革/彖"
   },
   {
     "hexagram_seq": 50,
     "hexagram_name": "鼎",
-    "text": "彖传待补录。",
+    "text": "鼎，象也。以木巽火，亨饪也。圣人亨以享上帝，而大亨以养圣贤。巽而耳目聪明，柔进而上行，得中而应乎刚，是以元亨。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/鼎/彖"
   },
   {
     "hexagram_seq": 51,
     "hexagram_name": "震",
-    "text": "彖传待补录。",
+    "text": "震，亨。震来虩虩，恐致福也。笑言哑哑，后有则也。震惊百里，惊远而惧迩也。出可以守宗庙社稷，以为祭主也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/震/彖"
   },
   {
     "hexagram_seq": 52,
     "hexagram_name": "艮",
-    "text": "彖传待补录。",
+    "text": "艮，止也。时止则止，时行则行，动静不失其时，其道光明。艮其止，止其所也。上下敌应，不相与也。是以不获其身，行其庭不见其人，无咎也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/艮/彖"
   },
   {
     "hexagram_seq": 53,
     "hexagram_name": "渐",
-    "text": "彖传待补录。",
+    "text": "渐之进也，女归吉也。进得位，往有功也。进以正，可以正邦也。其位刚，得中也。止而巽，动不穷也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/渐/彖"
   },
   {
     "hexagram_seq": 54,
     "hexagram_name": "归妹",
-    "text": "彖传待补录。",
+    "text": "归妹，天地之大义也。天地不交，而万物不兴，归妹人之终始也。说以动，所归妹也。征凶，位不当也。无攸利，柔乘刚也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/归妹/彖"
   },
   {
     "hexagram_seq": 55,
     "hexagram_name": "丰",
-    "text": "彖传待补录。",
+    "text": "丰，大也。明以动，故丰。王假之，尚大也。勿忧宜日中，宜照天下也。日中则昃，月盈则食，天地盈虚，与时消息，而况于人乎？况于鬼神乎？",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/丰/彖"
   },
   {
     "hexagram_seq": 56,
     "hexagram_name": "旅",
-    "text": "彖传待补录。",
+    "text": "旅，小亨，柔得中乎外，而顺乎刚，止而丽乎明，是以小亨，旅贞吉也。旅之时义大矣哉！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/旅/彖"
   },
   {
     "hexagram_seq": 57,
     "hexagram_name": "巽",
-    "text": "彖传待补录。",
+    "text": "重巽以申命，刚巽乎中正而志行。柔皆顺乎刚，是以小亨，利有攸往，利见大人。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/巽/彖"
   },
   {
     "hexagram_seq": 58,
     "hexagram_name": "兑",
-    "text": "彖传待补录。",
+    "text": "兑，说也。刚中而柔外，说以利贞，是以顺乎天，而应乎人。说以先民，民忘其劳；说以犯难，民忘其死；说之大，民劝矣哉！",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/兑/彖"
   },
   {
     "hexagram_seq": 59,
     "hexagram_name": "涣",
-    "text": "彖传待补录。",
+    "text": "涣，亨。刚来而不穷，柔得位乎外而上同。王假有庙，王乃在中也。利涉大川，乘木有功也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/涣/彖"
   },
   {
     "hexagram_seq": 60,
     "hexagram_name": "节",
-    "text": "彖传待补录。",
+    "text": "节，亨，刚柔分，而刚得中。苦节不可贞，其道穷也。说以行险，当位以节，中正以通。天地节而四时成，节以制度，不伤财，不害民。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/节/彖"
   },
   {
     "hexagram_seq": 61,
     "hexagram_name": "中孚",
-    "text": "彖传待补录。",
+    "text": "中孚，柔在内而刚得中。说而巽，孚，乃化邦也。豚鱼吉，信及豚鱼也。利涉大川，乘木舟虚也。中孚以利贞，乃应乎天也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/中孚/彖"
   },
   {
     "hexagram_seq": 62,
     "hexagram_name": "小过",
-    "text": "彖传待补录。",
+    "text": "小过，小者过而亨也。过以利贞，与时行也。柔得中，是以小事吉也。刚失位而不中，是以不可大事也。有飞鸟之象焉，有飞鸟遗之音，不宜上宜下，大吉；上逆而下顺也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/小过/彖"
   },
   {
     "hexagram_seq": 63,
     "hexagram_name": "既济",
-    "text": "彖传待补录。",
+    "text": "既济，亨，小者亨也。利贞，刚柔正而位当也。初吉，柔得中也。终止则乱，其道穷也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/既济/彖"
   },
   {
     "hexagram_seq": 64,
     "hexagram_name": "未济",
-    "text": "彖传待补录。",
+    "text": "未济，亨；柔得中也。小狐汔济，未出中也。濡其尾，无攸利；不续终也。虽不当位，刚柔应也。",
     "source_id": "wikisource_zhouyi",
-    "status": "placeholder"
+    "status": "checked",
+    "edition": "Wikisource zh-hans HTML page scrape",
+    "source_locator": "周易/未济/彖"
   }
 ]

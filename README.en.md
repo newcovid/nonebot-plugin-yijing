@@ -42,7 +42,7 @@ Editable development install:
 pip install -e .
 ```
 
-Install a specific GitHub commit for Alpha server validation:
+Install a specific GitHub commit for Alpha deployment validation:
 
 ```bash
 pip install "nonebot-plugin-yijing @ git+ssh://git@github.com/newcovid/nonebot-plugin-yijing.git@<commit-sha>"
@@ -239,9 +239,9 @@ twine check dist/*
 
 ## More Documentation
 
-- [`docs/server-smoke-test.md`](docs/server-smoke-test.md): server upgrade, package install, and real group-chat command acceptance checklist.
+- [`docs/deployment-smoke-test.md`](docs/deployment-smoke-test.md): package install, ORM, rendering, and chat-command acceptance checklist.
 - [`docs/data-collation.md`](docs/data-collation.md): corpus collation, sources, status, and proofreading workflow.
-- [`docs/release.md`](docs/release.md): build, package check, release, server validation, and PyPI publishing workflow.
+- [`docs/release.md`](docs/release.md): build, package check, release, deployment validation, and PyPI publishing workflow.
 
 ## License
 

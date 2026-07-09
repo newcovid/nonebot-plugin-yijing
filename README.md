@@ -42,7 +42,7 @@ pip install nonebot-plugin-yijing
 pip install -e .
 ```
 
-从 GitHub 指定提交安装，适合 Alpha 服务器验证：
+从 GitHub 指定提交安装，适合 Alpha 部署验证：
 
 ```bash
 pip install "nonebot-plugin-yijing @ git+ssh://git@github.com/newcovid/nonebot-plugin-yijing.git@<commit-sha>"
@@ -239,9 +239,9 @@ twine check dist/*
 
 ## 更多文档
 
-- [`docs/server-smoke-test.md`](docs/server-smoke-test.md)：服务器升级、包安装、真实群聊命令验收清单。
+- [`docs/deployment-smoke-test.md`](docs/deployment-smoke-test.md)：包安装、ORM、渲染与聊天命令验收清单。
 - [`docs/data-collation.md`](docs/data-collation.md)：经传资料库补录、来源、状态与校勘流程。
-- [`docs/release.md`](docs/release.md)：构建、验包、发布、服务器验证与 PyPI 发布流程。
+- [`docs/release.md`](docs/release.md)：构建、验包、发布、部署验证与 PyPI 发布流程。
 
 ## 许可证
 

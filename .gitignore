@@ -70,3 +70,8 @@ Thumbs.db
 !nonebot_plugin_yijing/templates/**
 !nonebot_plugin_yijing/migrations/
 !nonebot_plugin_yijing/migrations/**
+
+# Re-apply cache ignores after packaged-resource negation rules.
+__pycache__/
+**/__pycache__/
+*.py[cod]
