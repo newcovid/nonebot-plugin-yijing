@@ -24,7 +24,25 @@ REQUIRED_JSON_FILES = [
     "casting_rules.json",
     "interpret_rules.json",
     "reserved_tables.json",
+    "dynasty_commentaries.json",
+    "meihua_rules.json",
+    "najia_rules.json",
+    "ganzhi_calendar.json",
+    "wuxing_strength.json",
+    "liuqin_liushen.json",
+    "modern_explanations.json",
+    "scenario_templates.json",
 ]
+RESERVED_EXTENSION_FILES = {
+    "dynasty_commentaries.json",
+    "meihua_rules.json",
+    "najia_rules.json",
+    "ganzhi_calendar.json",
+    "wuxing_strength.json",
+    "liuqin_liushen.json",
+    "modern_explanations.json",
+    "scenario_templates.json",
+}
 
 
 def test_required_json_files_exist_in_package_resources() -> None:
@@ -34,8 +52,9 @@ def test_required_json_files_exist_in_package_resources() -> None:
         assert (data_root / filename).is_file(), filename
 
 
-def test_required_json_files_are_loadable_and_non_empty() -> None:
+def test_required_json_files_are_loadable() -> None:
     for filename in REQUIRED_JSON_FILES:
         payload = load_json(filename)
         assert payload is not None, filename
-        assert len(payload) > 0, filename
+        if filename not in RESERVED_EXTENSION_FILES:
+            assert len(payload) > 0, filename

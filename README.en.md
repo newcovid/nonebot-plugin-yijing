@@ -145,38 +145,33 @@ Only set `skip_browser_install=true` if the image really includes the browser at
 | Command | Description |
 | --- | --- |
 | `易经帮助` | Show the help image |
-| `起卦 问题` | Cast and interpret with the default three-coin method |
+| `起卦 问题` | Cast and interpret with the group's default method |
 | `起卦 问题 铜钱` | Use the three-coin method explicitly |
 | `起卦 问题 大衍` | Use probabilistic yarrow-stalk simulation |
 | `起卦 问题 手动` | Start guided manual casting |
 | `解卦 卦象` | Query or interpret a specified hexagram |
 | `易经历史` | View your own history |
 | `易经记录 ID` | View a specific record |
-| `随机一卦` | Generate a random observation topic |
+| `随机一卦` | Generate a random observation topic, save it, but do not consume quota or cooldown |
 | `易经设置` | View or modify group settings |
 
 ### Manual coin input
 
-Coin casting requires 6 groups from bottom to top, with 3 faces per group:
+After `起卦 问题 手动`, choose `铜钱`, then enter one line at a time from bottom to top. Each line has 3 faces:
 
 ```text
-正反正 反反正 正正反 正反反 反正正 反反反
+正反正
 ```
 
 ### Manual yarrow-stalk input
 
-Yarrow-stalk input accepts 6 line values from bottom to top:
+After `起卦 问题 手动`, choose `大衍`. The plugin guides all 18 changes of the yarrow-stalk method. For each change, split the current stalks into left and right piles and enter both counts:
 
 ```text
-7 8 9 6 7 8
+24 25
 ```
 
-Values:
-
-- `6`: old yin, changing line, yin changes to yang.
-- `7`: young yang, stable line.
-- `8`: young yin, stable line.
-- `9`: old yang, changing line, yang changes to yin.
+The plugin validates the held stalk, counting by fours, remainders, and remaining stalk count, then computes the `6/7/8/9` line value.
 
 ## Permission Control
 
@@ -203,9 +198,9 @@ Example: disable casting in one group while keeping lookup enabled:
 
 The data corpus lives in `nonebot_plugin_yijing/data/`. See [`nonebot_plugin_yijing/data/README.en.md`](nonebot_plugin_yijing/data/README.en.md) for its structure.
 
-Currently complete built-in data: trigrams, hexagrams, line skeletons, hexagram statements, hexagram relations, casting rules, and interpretation rules.
+The core classical layer is filled: trigrams, 64 hexagrams, 384 line slots, hexagram statements, 384 line statements, Tuan, Xiang, canonical Qian/Kun Wenyan, Xici, Shuogua, Xugua, Zagua, relations, sources, casting rules, and interpretation rules.
 
-Current seed classical text: line texts and image-commentary data are relatively complete for Qian, Kun, and Xu. Other hexagram line texts, Tuan commentary, Wenyan commentary, Xici, and related fields are kept as structured placeholders for later proofreading and replacement.
+Future extension layers now have empty JSON files and schemas: historical commentary, Meihua rules, Najia rules, Ganzhi calendar data, wuxing strength, liuqin/liushen, modern explanations, and scenario templates. Extension text must come from scripted fetching or human collation, not AI generation.
 
 ## LLM Preprocessing, Interpretation, and Privacy
 

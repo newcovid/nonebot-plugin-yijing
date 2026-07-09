@@ -30,6 +30,7 @@ class CastRecord(Model):
     coins_json: Mapped[str] = mapped_column(Text, default="[]")
     line_values_json: Mapped[str] = mapped_column(Text)
     moving_positions_json: Mapped[str] = mapped_column(Text, default="[]")
+    cast_trace_json: Mapped[str] = mapped_column(Text, default="{}")
     primary_seq: Mapped[int] = mapped_column(Integer)
     changed_seq: Mapped[int | None] = mapped_column(Integer, nullable=True)
     preprocess_json: Mapped[str] = mapped_column(Text, default="{}")

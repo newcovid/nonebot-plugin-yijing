@@ -15,6 +15,16 @@ SCRAPED_CLASSICAL_FILES = [
     "zagua.json",
     "special_texts.json",
 ]
+RESERVED_EXTENSION_FILES = [
+    "dynasty_commentaries.json",
+    "meihua_rules.json",
+    "najia_rules.json",
+    "ganzhi_calendar.json",
+    "wuxing_strength.json",
+    "liuqin_liushen.json",
+    "modern_explanations.json",
+    "scenario_templates.json",
+]
 
 
 def load(name: str):
@@ -84,3 +94,22 @@ def test_scraped_records_are_source_located():
             assert xiaoxiang["source_id"] in source_ids
             assert xiaoxiang["status"] == "checked"
             assert xiaoxiang.get("source_locator")
+
+
+def test_reserved_extension_layers_start_empty_and_schema_managed():
+    manifest = load("schemas/manifest.json")
+
+    for filename in RESERVED_EXTENSION_FILES:
+        assert load(filename) == []
+        assert manifest["files"][filename] == "reserved_extension.schema.json"
+
+
+def test_qian_terms_are_normalized_without_rewriting_legal_gan_terms():
+    xici_shang_raw = (ROOT / "xici_shang.json").read_text(encoding="utf-8")
+    yaoci_raw = (ROOT / "yaoci.json").read_text(encoding="utf-8")
+    wenyan_raw = (ROOT / "wenyan.json").read_text(encoding="utf-8")
+
+    assert "乾之策" in xici_shang_raw
+    assert "干之策" not in xici_shang_raw
+    assert "干父之蛊" in yaoci_raw
+    assert "事之干也" in wenyan_raw

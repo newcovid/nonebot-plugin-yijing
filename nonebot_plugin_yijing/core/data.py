@@ -190,6 +190,46 @@ def reserved_tables() -> dict[str, Any]:
 
 
 @lru_cache(maxsize=1)
+def dynasty_commentaries() -> list[dict[str, Any]]:
+    return load_json("dynasty_commentaries.json")
+
+
+@lru_cache(maxsize=1)
+def meihua_rules() -> list[dict[str, Any]]:
+    return load_json("meihua_rules.json")
+
+
+@lru_cache(maxsize=1)
+def najia_rules() -> list[dict[str, Any]]:
+    return load_json("najia_rules.json")
+
+
+@lru_cache(maxsize=1)
+def ganzhi_calendar() -> list[dict[str, Any]]:
+    return load_json("ganzhi_calendar.json")
+
+
+@lru_cache(maxsize=1)
+def wuxing_strength() -> list[dict[str, Any]]:
+    return load_json("wuxing_strength.json")
+
+
+@lru_cache(maxsize=1)
+def liuqin_liushen() -> list[dict[str, Any]]:
+    return load_json("liuqin_liushen.json")
+
+
+@lru_cache(maxsize=1)
+def modern_explanations() -> list[dict[str, Any]]:
+    return load_json("modern_explanations.json")
+
+
+@lru_cache(maxsize=1)
+def scenario_templates() -> list[dict[str, Any]]:
+    return load_json("scenario_templates.json")
+
+
+@lru_cache(maxsize=1)
 def schema_manifest() -> dict[str, Any]:
     return load_json("schemas/manifest.json")
 

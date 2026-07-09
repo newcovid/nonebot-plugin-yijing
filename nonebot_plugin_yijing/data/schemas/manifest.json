@@ -1,1 +1,33 @@
-{"version":1,"description":"Map every built-in data file to the JSON Schema used for corpus review and CI checks.","files":{"trigrams.json":"trigrams.schema.json","hexagrams.json":"hexagrams.schema.json","lines.json":"lines.schema.json","guaci.json":"guaci.schema.json","yaoci.json":"yaoci.schema.json","tuan.json":"tuan.schema.json","xiang.json":"xiang.schema.json","wenyan.json":"wenyan.schema.json","xici_shang.json":"chapter_text.schema.json","xici_xia.json":"chapter_text.schema.json","shuogua.json":"chapter_text.schema.json","xugua.json":"chapter_text.schema.json","zagua.json":"chapter_text.schema.json","relations.json":"relations.schema.json","sources.json":"sources.schema.json","casting_rules.json":"casting_rules.schema.json","interpret_rules.json":"interpret_rules.schema.json","special_texts.json":"special_texts.schema.json"}}
+{
+  "version": 1,
+  "description": "Map every built-in data file to the JSON Schema used for corpus review and CI checks.",
+  "files": {
+    "trigrams.json": "trigrams.schema.json",
+    "hexagrams.json": "hexagrams.schema.json",
+    "lines.json": "lines.schema.json",
+    "guaci.json": "guaci.schema.json",
+    "yaoci.json": "yaoci.schema.json",
+    "tuan.json": "tuan.schema.json",
+    "xiang.json": "xiang.schema.json",
+    "wenyan.json": "wenyan.schema.json",
+    "xici_shang.json": "chapter_text.schema.json",
+    "xici_xia.json": "chapter_text.schema.json",
+    "shuogua.json": "chapter_text.schema.json",
+    "xugua.json": "chapter_text.schema.json",
+    "zagua.json": "chapter_text.schema.json",
+    "relations.json": "relations.schema.json",
+    "sources.json": "sources.schema.json",
+    "casting_rules.json": "casting_rules.schema.json",
+    "interpret_rules.json": "interpret_rules.schema.json",
+    "special_texts.json": "special_texts.schema.json",
+    "reserved_tables.json": "reserved_tables.schema.json",
+    "dynasty_commentaries.json": "reserved_extension.schema.json",
+    "meihua_rules.json": "reserved_extension.schema.json",
+    "najia_rules.json": "reserved_extension.schema.json",
+    "ganzhi_calendar.json": "reserved_extension.schema.json",
+    "wuxing_strength.json": "reserved_extension.schema.json",
+    "liuqin_liushen.json": "reserved_extension.schema.json",
+    "modern_explanations.json": "reserved_extension.schema.json",
+    "scenario_templates.json": "reserved_extension.schema.json"
+  }
+}

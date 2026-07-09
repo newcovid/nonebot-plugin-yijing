@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import time
 from typing import Any
 
 from arclet.alconna import Alconna, AllParam, Args
@@ -12,11 +13,12 @@ from nonebot_plugin_orm import async_scoped_session
 
 from ..config import plugin_config
 from ..core.caster import (
+    calculate_yarrow_change,
     cast_coin,
     cast_random_hexagram,
     cast_yarrow,
-    parse_manual_coin,
-    parse_manual_yarrow,
+    parse_manual_coin_line,
+    yarrow_line_value,
 )
 from ..core.hexagram import resolve_by_lines
 from ..core.interpret import local_preprocess
@@ -30,7 +32,12 @@ from ..permissions import (
 )
 from ..render.html import render_image
 from ..render.message import image_message
-from ..services.llm import interpret_with_llm, parse_hexagram_query, preprocess_question
+from ..services.llm import (
+    interpret_hexagram_query,
+    interpret_with_llm,
+    parse_hexagram_query,
+    preprocess_question,
+)
 from ..services.payload import (
     build_hexagram_query_payload,
     build_history_payload,
@@ -45,7 +52,7 @@ from ..services.repository import (
     daily_quota_count,
     find_similar_recent,
     get_or_create_group_config,
-    get_record,
+    get_record_for_view,
     recent_records,
     record_to_dict,
     save_record,
@@ -98,7 +105,7 @@ async def _notice(matcher: Matcher, title: str, content: str, hint: str = "") ->
 
 def _parse_cast_body(body: str) -> tuple[str, str]:
     body = body.strip()
-    method = "coin"
+    method = "default"
     suffix_map = [
         ("大衍", "yarrow"),
         ("蓍草", "yarrow"),
@@ -114,6 +121,56 @@ def _parse_cast_body(body: str) -> tuple[str, str]:
     if not body and method != "manual":
         return "", method
     return body, method
+
+
+def _manual_key(bot: Bot, event: Event) -> tuple[str, str, str, str]:
+    return (
+        str(getattr(bot, "type", "")),
+        str(getattr(bot, "self_id", "")),
+        get_group_id(event),
+        get_user_id(event),
+    )
+
+
+def _manual_expired(state: dict[str, Any]) -> bool:
+    started_at = float(state.get("updated_at", state.get("started_at", 0)))
+    return time.time() - started_at > plugin_config.yijing_manual_session_timeout_seconds
+
+
+def _touch_manual(state: dict[str, Any]) -> None:
+    state["updated_at"] = time.time()
+
+
+def _parse_yarrow_split(text: str) -> tuple[int, int]:
+    parts = [part for part in text.replace("，", " ").replace(",", " ").split() if part]
+    if len(parts) != 2:
+        raise ValueError("请只输入左右两堆数量，例如：24 25。")
+    try:
+        left, right = int(parts[0]), int(parts[1])
+    except ValueError as exc:
+        raise ValueError("左右两堆数量必须是整数。") from exc
+    return left, right
+
+
+def _yarrow_prompt(state: dict[str, Any]) -> tuple[str, str]:
+    line = int(state["line"])
+    change = int(state["change"])
+    total = int(state["current_total"])
+    return (
+        f"大衍第 {line} 爻第 {change} 变",
+        f"请将 {total} 根蓍草任意分成左右两堆，并输入左右数量。\n"
+        "输入格式：左 右，例如：24 25。\n发送“取消”可退出本次手动起卦。",
+    )
+
+
+def _manual_coin_trace(values: list[int], coins: list[list[str]]) -> dict[str, Any]:
+    return {
+        "kind": "manual_coin",
+        "lines_bottom_up": [
+            {"position": index + 1, "faces": faces, "value": values[index]}
+            for index, faces in enumerate(coins)
+        ],
+    }
 
 
 def _parse_positive_int(text: str, *, minimum: int = 1, maximum: int | None = None) -> int:
@@ -155,6 +212,7 @@ async def _run_cast(
     method: str,
     manual_values: list[int] | None = None,
     manual_coins: list[list[str]] | None = None,
+    manual_trace: dict[str, Any] | None = None,
     random_mode: bool = False,
 ) -> None:
     group_id = get_group_id(event)
@@ -162,8 +220,20 @@ async def _run_cast(
     cfg = await get_or_create_group_config(session, group_id)
     if not cfg.enabled and not event_is_group_admin(event):
         await _notice(matcher, "易经插件已关闭", "本群已关闭易经插件。")
+    if method == "default":
+        method = cfg.default_method
 
-    if not random_mode and question:
+    if random_mode:
+        preprocess = {
+            "allowed": True,
+            "reason": "",
+            "warnings": [],
+            "sensitive_keywords": [],
+            "llm_used": False,
+            "history_count": 0,
+            "random_mode": True,
+        }
+    elif question:
         history = await recent_records(
             session,
             group_id=group_id,
@@ -198,38 +268,47 @@ async def _run_cast(
     else:
         preprocess = local_preprocess(question or "", [])
 
-    quota = await daily_quota_count(session, group_id, user_hash)
-    if quota >= cfg.daily_limit:
-        await _notice(
-            matcher,
-            "今日次数已达上限",
-            f"你在本群 24 小时内已起卦 {quota} 次，上限为 {cfg.daily_limit} 次。",
-        )
+    if not random_mode:
+        quota = await daily_quota_count(session, group_id, user_hash)
+        if quota >= cfg.daily_limit:
+            await _notice(
+                matcher,
+                "今日次数已达上限",
+                f"你在本群 24 小时内已起卦 {quota} 次，上限为 {cfg.daily_limit} 次。",
+            )
 
-    remain = await cooldown_remaining(session, group_id, cfg.cooldown_seconds)
-    if remain > 0:
-        await _notice(matcher, "群冷却中", f"本群起卦冷却还剩 {remain} 秒。")
+        remain = await cooldown_remaining(session, group_id, cfg.cooldown_seconds)
+        if remain > 0:
+            await _notice(matcher, "群冷却中", f"本群起卦冷却还剩 {remain} 秒。")
 
     if manual_values is not None:
         values = manual_values
         coins = manual_coins or []
         cast_method = method
+        cast_trace = manual_trace or {"kind": method, "lines_bottom_up": [{"value": v} for v in values]}
     else:
         if random_mode:
             cast = cast_random_hexagram()
             values = cast.line_values
             coins = cast.coins
             cast_method = "random"
+            cast_trace = {
+                **(cast.trace or {}),
+                "kind": "random",
+                "selected_method": cast.method,
+            }
         elif method == "yarrow":
             cast = cast_yarrow()
             values = cast.line_values
             coins = cast.coins
             cast_method = "yarrow"
+            cast_trace = cast.trace or {}
         else:
             cast = cast_coin()
             values = cast.line_values
             coins = cast.coins
             cast_method = "coin"
+            cast_trace = cast.trace or {}
 
     resolved = resolve_by_lines(values)
     classic = classic_text_for(resolved)
@@ -254,6 +333,7 @@ async def _run_cast(
         coins=coins,
         line_values=values,
         moving_positions=resolved.moving_positions,
+        cast_trace=cast_trace,
         primary_seq=int(resolved.primary["seq"]),
         changed_seq=int(resolved.changed["seq"]) if resolved.changed else None,
         preprocess=preprocess,
@@ -262,14 +342,15 @@ async def _run_cast(
     record_id = record.id
     created_at = record.created_at.strftime("%Y-%m-%d %H:%M:%S")
 
-    await add_quota(session, group_id, user_hash)
-    await touch_cooldown(
-        session,
-        group_id=group_id,
-        record_id=record_id,
-        user_hash=user_hash,
-        question_norm=normalize_question(question),
-    )
+    if not random_mode:
+        await add_quota(session, group_id, user_hash)
+        await touch_cooldown(
+            session,
+            group_id=group_id,
+            record_id=record_id,
+            user_hash=user_hash,
+            question_norm=normalize_question(question),
+        )
     payload = build_record_card_payload(
         record_id=record_id,
         question=question,
@@ -278,6 +359,7 @@ async def _run_cast(
         resolved=resolved,
         preprocess=preprocess,
         interpretation=interpretation,
+        cast_trace=cast_trace,
         created_at=created_at,
         random_mode=random_mode,
     )
@@ -288,14 +370,14 @@ async def _run_cast(
 async def _help(matcher: Matcher) -> None:
     commands = [
         {"cmd": "易经帮助", "desc": "查看所有交互命令。"},
-        {"cmd": "起卦 问题", "desc": "默认使用三枚铜钱法自动起卦并输出长图。"},
+        {"cmd": "起卦 问题", "desc": "使用本群默认起卦方式自动起卦并输出长图。"},
         {"cmd": "起卦 问题 铜钱", "desc": "精确指定三枚铜钱法。"},
         {"cmd": "起卦 问题 大衍", "desc": "使用大衍筮法概率模拟。"},
-        {"cmd": "起卦 问题 手动", "desc": "进入手动引导，可输入铜钱正反或 6/7/8/9 爻值。"},
-        {"cmd": "解卦 卦象", "desc": "查询并解释一个卦名、卦序、符号或模糊卦象。"},
+        {"cmd": "起卦 问题 手动", "desc": "进入手动引导：铜钱逐爻录入，大衍按十八变录入左右分堆。"},
+        {"cmd": "解卦 卦象", "desc": "查询并解释一个卦名、卦序、符号或模糊卦象，启用 LLM 时会先归一化。"},
         {"cmd": "易经历史", "desc": "查看自己的最近起卦记录。"},
         {"cmd": "易经记录 ID", "desc": "查看指定记录的完整长图。"},
-        {"cmd": "随机一卦", "desc": "随机生成一个观察主题，不使用问题预处理和问题解读。"},
+        {"cmd": "随机一卦", "desc": "随机生成一个观察主题，保存历史但不占日限额、不触发群冷却。"},
         {"cmd": "易经设置", "desc": "查看或修改本群配置。"},
         {"cmd": "易经设置 重复窗口 30", "desc": "设置短期相似问题检测窗口，单位分钟。"},
         {"cmd": "易经设置 历史窗口 120", "desc": "设置传给 LLM 预处理的近期历史窗口，单位分钟。"},
@@ -311,14 +393,24 @@ async def _cast(bot: Bot, event: Event, matcher: Matcher, session: async_scoped_
         body = parse_command_body(raw, "算卦")
     question, method = _parse_cast_body(body)
     if method == "manual":
-        key = (get_group_id(event), get_user_id(event))
-        _MANUAL_SESSIONS[key] = {"question": question, "stage": "method"}
+        if not question:
+            await _notice(matcher, "缺少问题", "请使用：起卦 你的问题 手动")
+        key = _manual_key(bot, event)
+        existing = _MANUAL_SESSIONS.get(key)
+        if existing and not _manual_expired(existing):
+            await _notice(matcher, "已有手动起卦", "你当前已有未完成的手动起卦。发送“取消”可退出。")
+        _MANUAL_SESSIONS[key] = {
+            "question": question,
+            "stage": "method",
+            "started_at": time.time(),
+            "updated_at": time.time(),
+        }
         await _notice(
             matcher,
             "手动起卦引导",
             "请选择手动方式：\n1. 发送：铜钱\n2. 发送：大衍\n\n"
-            "铜钱法随后请自下而上输入 6 组，每组 3 个正/反。\n"
-            "大衍法可直接自下而上输入 6 个爻值：6 7 8 9。",
+            "铜钱法随后逐爻输入每次投掷的 3 个正/反。\n"
+            "大衍法随后按十八变输入每变左右两堆数量。",
         )
     if not question:
         await _notice(matcher, "缺少问题", "请使用：起卦 你的问题\n例如：起卦 此行去山西实习一程怎么样")
@@ -326,16 +418,25 @@ async def _cast(bot: Bot, event: Event, matcher: Matcher, session: async_scoped_
 
 
 @query_matcher.handle()
-async def _query(event: Event, matcher: Matcher) -> None:
+async def _query(event: Event, matcher: Matcher, session: async_scoped_session) -> None:
     raw = get_plain_text(event)
     query = parse_command_body(raw, "解卦")
     if not query:
         await _notice(matcher, "缺少卦象", "请使用：解卦 需\n也可以输入卦序、卦名或符号。")
-    parsed = await parse_hexagram_query(query)
+    cfg = await get_or_create_group_config(session, get_group_id(event))
+    parsed = await parse_hexagram_query(query) if cfg.llm_enabled else {"query": query, "llm_used": False}
     q = str(parsed.get("normalized_query") or parsed.get("query") or query)
     payload = build_hexagram_query_payload(q)
     if not payload.get("found", True):
         await _notice(matcher, "未找到卦象", f"未能识别：{query}\n请尝试输入卦名，如：乾、坤、需；或输入 1-64。")
+    resolved = resolve_by_lines(payload["line_values"])
+    interpretation = await interpret_hexagram_query(
+        query=q,
+        resolved=resolved,
+        classic_text=classic_text_for(resolved),
+        use_llm=cfg.llm_enabled,
+    )
+    payload = build_hexagram_query_payload(q, interpretation=interpretation)
     await _finish_template(matcher, "card.html", payload)
 
 
@@ -352,9 +453,15 @@ async def _record(event: Event, matcher: Matcher, session: async_scoped_session)
     record_id = parse_command_body(get_plain_text(event), "易经记录").strip().upper()
     if not record_id:
         await _notice(matcher, "缺少记录 ID", "请使用：易经记录 YJ-XXXXXXXX")
-    record = await get_record(session, record_id)
+    record = await get_record_for_view(
+        session,
+        record_id,
+        group_id=get_group_id(event),
+        user_hash=hash_user_id(get_user_id(event)),
+        allow_group_admin=event_is_group_admin(event),
+    )
     if record is None:
-        await _notice(matcher, "记录不存在", f"未找到记录：{record_id}")
+        await _notice(matcher, "记录不存在", f"未找到可查看的记录：{record_id}")
     await _finish_template(matcher, "card.html", build_record_payload_from_dict(record_to_dict(record)))
 
 
@@ -428,16 +535,18 @@ async def _settings(event: Event, matcher: Matcher, session: async_scoped_sessio
         {"name": "LLM历史窗口", "value": f"{cfg.history_minutes_for_llm} 分钟"},
         {"name": "本群LLM解读", "value": "开启" if cfg.llm_enabled else "关闭"},
         {"name": "全局LLM配置", "value": "开启" if plugin_config.yijing_llm_enabled else "关闭"},
+        {"name": "随机一卦策略", "value": "保存历史，不占日限额，不触发冷却"},
+        {"name": "手动会话超时", "value": f"{plugin_config.yijing_manual_session_timeout_seconds} 秒"},
         {"name": "铜钱输入", "value": f"{plugin_config.yijing_positive_face}/{plugin_config.yijing_negative_face}"},
     ]
     await _finish_template(matcher, "settings.html", {"rows": rows})
 
 
-_MANUAL_SESSIONS: dict[tuple[str, str], dict[str, Any]] = {}
+_MANUAL_SESSIONS: dict[tuple[str, str, str, str], dict[str, Any]] = {}
 
 
 async def _has_manual_session(event: Event) -> bool:
-    return (get_group_id(event), get_user_id(event)) in _MANUAL_SESSIONS
+    return any(key[2] == get_group_id(event) and key[3] == get_user_id(event) for key in _MANUAL_SESSIONS)
 
 
 manual_input_matcher = on_message(rule=Rule(_has_manual_session), block=True, priority=5)
@@ -446,53 +555,142 @@ manual_service.patch_matcher(manual_input_matcher)
 
 @manual_input_matcher.handle()
 async def _manual_input(bot: Bot, event: Event, matcher: Matcher, session: async_scoped_session) -> None:
-    key = (get_group_id(event), get_user_id(event))
+    key = _manual_key(bot, event)
     state = _MANUAL_SESSIONS.get(key)
     if not state:
         return
+    if _manual_expired(state):
+        _MANUAL_SESSIONS.pop(key, None)
+        await _notice(matcher, "手动起卦已超时", "请重新发送：起卦 你的问题 手动")
     text = get_plain_text(event).strip()
     if text in {"取消", "退出", "停止"}:
         _MANUAL_SESSIONS.pop(key, None)
         await _notice(matcher, "已取消", "本次手动起卦已取消。")
+    _touch_manual(state)
     if state.get("stage") == "method":
         if text in {"铜钱", "硬币", "coin"}:
-            state["stage"] = "values"
+            state["stage"] = "coin_line"
             state["method"] = "manual_coin"
+            state["line"] = 1
+            state["coins"] = []
+            state["values"] = []
             await _notice(
                 matcher,
-                "请输入铜钱结果",
-                f"请自下而上输入 6 组，每组 3 个"
+                "手动铜钱第 1 爻",
+                f"请投掷三枚铜钱，输入第 1 爻的 3 个"
                 f"{plugin_config.yijing_positive_face}/{plugin_config.yijing_negative_face}。\n"
-                "示例：正反正 反反正 正正反 正反反 反正正 反反反",
+                f"示例：{plugin_config.yijing_positive_face}{plugin_config.yijing_negative_face}"
+                f"{plugin_config.yijing_positive_face}\n六爻均按自下而上录入。",
             )
-        if text in {"大衍", "蓍草", "yarrow"}:
-            state["stage"] = "values"
+        elif text in {"大衍", "蓍草", "yarrow"}:
+            state["stage"] = "yarrow_change"
             state["method"] = "manual_yarrow"
+            state["line"] = 1
+            state["change"] = 1
+            state["current_total"] = 49
+            state["values"] = []
+            state["yarrow_lines"] = []
+            title, content = _yarrow_prompt(state)
+            await _notice(matcher, title, "请准备 50 根蓍草或等量替代物，取 1 根不用，余 49 根开始。\n" + content)
+        else:
+            await _notice(matcher, "未识别方式", "请发送：铜钱 或 大衍。发送“取消”可退出。")
+
+    if state.get("stage") == "coin_line":
+        try:
+            value, faces = parse_manual_coin_line(text)
+        except Exception as exc:  # noqa: BLE001
+            await _notice(matcher, "输入格式错误", str(exc), "发送“取消”可退出手动起卦。")
+        state["coins"].append(faces)
+        state["values"].append(value)
+        line = int(state["line"])
+        if line < 6:
+            state["line"] = line + 1
             await _notice(
                 matcher,
-                "请输入大衍结果",
-                "请自下而上输入 6 个爻值，每个只能是 6/7/8/9。\n示例：7 8 9 6 7 8",
+                f"手动铜钱第 {line + 1} 爻",
+                f"已记录第 {line} 爻：{text} → {value}。\n"
+                f"请继续输入第 {line + 1} 爻的 3 个"
+                f"{plugin_config.yijing_positive_face}/{plugin_config.yijing_negative_face}。",
             )
-        await _notice(matcher, "未识别方式", "请发送：铜钱 或 大衍。发送“取消”可退出。")
-    method = str(state.get("method"))
-    try:
-        if method == "manual_coin":
-            values = parse_manual_coin(text)
-            groups = [g for g in text.replace("，", " ").replace(",", " ").split() if g]
-            coins = [list(g) for g in groups]
-        else:
-            values = parse_manual_yarrow(text)
-            coins = []
-    except Exception as exc:  # noqa: BLE001
-        await _notice(matcher, "输入格式错误", str(exc), "发送“取消”可退出手动起卦。")
-    _MANUAL_SESSIONS.pop(key, None)
-    await _run_cast(
-        matcher=matcher,
-        bot=bot,
-        event=event,
-        session=session,
-        question=state.get("question") or None,
-        method=method,
-        manual_values=values,
-        manual_coins=coins,
-    )
+        values = list(state["values"])
+        coins = list(state["coins"])
+        _MANUAL_SESSIONS.pop(key, None)
+        await _run_cast(
+            matcher=matcher,
+            bot=bot,
+            event=event,
+            session=session,
+            question=state.get("question") or None,
+            method="manual_coin",
+            manual_values=values,
+            manual_coins=coins,
+            manual_trace=_manual_coin_trace(values, coins),
+        )
+
+    if state.get("stage") == "yarrow_change":
+        try:
+            left, right = _parse_yarrow_split(text)
+            change_result = calculate_yarrow_change(
+                line_number=int(state["line"]),
+                change_number=int(state["change"]),
+                total_before=int(state["current_total"]),
+                left=left,
+                right=right,
+            )
+        except Exception as exc:  # noqa: BLE001
+            await _notice(matcher, "输入格式错误", str(exc), "发送“取消”可退出手动起卦。")
+
+        current_line = list(state.get("current_line_changes", []))
+        current_line.append(
+            {
+                "change": change_result.change_number,
+                "total_before": change_result.total_before,
+                "left": change_result.left,
+                "right": change_result.right,
+                "removed": change_result.removed,
+                "total_after": change_result.total_after,
+                **change_result.detail,
+            }
+        )
+        state["current_line_changes"] = current_line
+        state["current_total"] = change_result.total_after
+        if int(state["change"]) < 3:
+            state["change"] = int(state["change"]) + 1
+            title, content = _yarrow_prompt(state)
+            await _notice(
+                matcher,
+                title,
+                f"上一变去除 {change_result.removed} 根，余 {change_result.total_after} 根。\n{content}",
+            )
+
+        value = yarrow_line_value(change_result.total_after)
+        line = int(state["line"])
+        state["values"].append(value)
+        state["yarrow_lines"].append({"position": line, "value": value, "changes": current_line})
+        state.pop("current_line_changes", None)
+        if line < 6:
+            state["line"] = line + 1
+            state["change"] = 1
+            state["current_total"] = 49
+            title, content = _yarrow_prompt(state)
+            await _notice(
+                matcher,
+                f"第 {line} 爻完成",
+                f"第 {line} 爻三变后余 {change_result.total_after} 根，得爻值 {value}。\n"
+                f"现在开始第 {line + 1} 爻。\n{content}",
+            )
+
+        values = list(state["values"])
+        trace = {"kind": "manual_yarrow", "lines_bottom_up": list(state["yarrow_lines"])}
+        _MANUAL_SESSIONS.pop(key, None)
+        await _run_cast(
+            matcher=matcher,
+            bot=bot,
+            event=event,
+            session=session,
+            question=state.get("question") or None,
+            method="manual_yarrow",
+            manual_values=values,
+            manual_coins=[],
+            manual_trace=trace,
+        )

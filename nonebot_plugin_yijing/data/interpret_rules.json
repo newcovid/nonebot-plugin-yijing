@@ -6,6 +6,12 @@
     "description": "以本卦为体，动爻为变，变卦为趋势；经典文本优先，现代解释谨慎。"
   },
   {
+    "id": "dynamic_changed_hexagram",
+    "name": "动态变卦规则",
+    "priority": 150,
+    "description": "变卦不在静态卦关系表中枚举；每次起卦根据老阴6、老阳9的动爻实时翻转计算。"
+  },
+  {
     "id": "sensitive_warning",
     "name": "敏感问题提示",
     "priority": 200,

@@ -32,6 +32,15 @@ CORE_DATA_FILES = {
     "casting_rules.json",
     "interpret_rules.json",
     "special_texts.json",
+    "reserved_tables.json",
+    "dynasty_commentaries.json",
+    "meihua_rules.json",
+    "najia_rules.json",
+    "ganzhi_calendar.json",
+    "wuxing_strength.json",
+    "liuqin_liushen.json",
+    "modern_explanations.json",
+    "scenario_templates.json",
 }
 
 

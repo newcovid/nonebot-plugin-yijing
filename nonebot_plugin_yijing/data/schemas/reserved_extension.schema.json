@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/newcovid/nonebot-plugin-yijing/data/schemas/reserved_extension.schema.json",
+  "title": "reserved_extension",
+  "description": "Reserved extension corpus layer. Empty arrays are valid until sourced content is collated.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": true,
+    "required": [
+      "id",
+      "source_id",
+      "status"
+    ],
+    "properties": {
+      "id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "source_id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "placeholder",
+          "draft",
+          "seeded",
+          "checked",
+          "verified"
+        ]
+      },
+      "source_locator": {
+        "type": "string"
+      },
+      "collation_notes": {
+        "type": "string"
+      }
+    }
+  }
+}

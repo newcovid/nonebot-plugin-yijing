@@ -22,6 +22,13 @@ def test_group_config_has_window_settings() -> None:
     assert columns["history_minutes_for_llm"].default is not None
 
 
+def test_cast_record_has_cast_trace_field() -> None:
+    columns = CastRecord.__table__.columns
+
+    assert "cast_trace_json" in columns
+    assert columns["cast_trace_json"].default is not None
+
+
 def test_cast_record_index_names_are_stable() -> None:
     index_names = {index.name for index in CastRecord.__table__.indexes}
 
@@ -57,6 +64,7 @@ def test_record_to_dict_serializes_loaded_cast_record() -> None:
         coins_json="[]",
         line_values_json="[7, 7, 7, 7, 7, 7]",
         moving_positions_json="[]",
+        cast_trace_json='{"kind": "yarrow"}',
         primary_seq=1,
         changed_seq=None,
         preprocess_json='{"allowed": true, "warnings": [], "llm_used": false}',
@@ -74,6 +82,7 @@ def test_record_to_dict_serializes_loaded_cast_record() -> None:
     assert data["primary_seq"] == 1
     assert data["changed_seq"] is None
     assert data["coins"] == []
+    assert data["cast_trace"]["kind"] == "yarrow"
     assert data["preprocess"]["allowed"] is True
     assert data["interpretation"]["summary"] == "测试摘要"
     assert data["created_at"] == "2026-07-08 12:30:00"

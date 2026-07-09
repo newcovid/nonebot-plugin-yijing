@@ -140,3 +140,48 @@ async def parse_hexagram_query(query: str) -> dict[str, Any]:
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"Yijing LLM parse hexagram failed: {exc}")
         return {"query": query, "llm_used": False}
+
+
+async def interpret_hexagram_query(
+    *,
+    query: str,
+    resolved: ResolvedHexagram,
+    classic_text: dict[str, Any],
+    use_llm: bool = True,
+) -> dict[str, Any]:
+    fallback = {
+        "summary": f"你查询的是 {resolved.primary['name']} 卦。当前为静卦查询，不针对具体问题推演。",
+        "current_situation": classic_text["primary"]["guaci"].get("text", ""),
+        "change_trend": "静态查卦不产生变卦。",
+        "advice": ["可结合卦辞、大象和六爻位置理解该卦。"],
+        "risks": [],
+        "llm_used": False,
+        "disclaimer": "本结果为传统文本解释，不构成现实决策建议。",
+    }
+    if not use_llm or not _enabled():
+        return fallback
+    system = (
+        "你是《周易》静态卦象解释助手。必须只输出JSON。"
+        "只能基于查询词、卦象、卦辞、象辞、彖传、爻辞解释；"
+        "不得编造起卦过程，不得给出确定性预测。"
+    )
+    payload = {
+        "query": query,
+        "primary_hexagram": resolved.primary,
+        "classic_text": classic_text,
+        "required_schema": {
+            "summary": "str",
+            "current_situation": "str",
+            "change_trend": "str",
+            "advice": "list[str]",
+            "risks": "list[str]",
+            "disclaimer": "str",
+        },
+    }
+    try:
+        result = await _chat_json(system, payload)
+        result["llm_used"] = True
+        return {**fallback, **result}
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(f"Yijing LLM query interpretation failed: {exc}")
+        return fallback

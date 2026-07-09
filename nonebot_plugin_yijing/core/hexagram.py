@@ -44,3 +44,7 @@ def line_label(position: int, bit: int) -> str:
 def render_line_shape(bit: int, moving: bool = False) -> str:
     base = "━━━━━━" if bit else "━━  ━━"
     return f"{base} {'动' if moving else '静'}"
+
+
+def changed_hexagram_from_values(values: list[int]) -> dict | None:
+    return resolve_by_lines(values).changed

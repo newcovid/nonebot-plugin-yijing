@@ -8,6 +8,7 @@ from nonebot_plugin_yijing.services.payload import (
     build_hexagram_query_payload,
     build_history_payload,
     build_record_card_payload,
+    build_record_payload_from_dict,
 )
 
 
@@ -44,6 +45,7 @@ def test_record_card_payload_contains_template_sections() -> None:
         resolved=resolved,
         preprocess={"allowed": True, "warnings": [], "llm_used": False},
         interpretation={"summary": "测试摘要", "advice": ["测试建议"]},
+        cast_trace={"kind": "coin"},
         created_at="2026-07-08 12:00:00",
     )
 
@@ -52,6 +54,7 @@ def test_record_card_payload_contains_template_sections() -> None:
     assert payload["question"] == "此行去山西实习一程怎么样"
     assert payload["method"] == "三枚铜钱法"
     assert payload["has_coins"] is True
+    assert payload["cast_trace"]["kind"] == "coin"
     assert payload["primary"] == resolved.primary
     assert payload["changed"] == resolved.changed
     assert payload["primary_text"]
@@ -80,6 +83,24 @@ def test_history_payload_supports_non_empty_records() -> None:
     assert item["primary"]["seq"] == 63
     assert item["changed"]["seq"] == 64
     assert item["moving_positions"] == [3, 4]
+
+
+def test_record_payload_from_dict_preserves_random_title() -> None:
+    data = {
+        "id": "YJ-RANDOM01",
+        "question": "（未保存原问题）",
+        "method": "random",
+        "line_values": [7, 7, 7, 7, 7, 7],
+        "coins": [],
+        "preprocess": {"allowed": True},
+        "interpretation": {"summary": "随机摘要"},
+        "cast_trace": {"kind": "random", "selected_method": "yarrow"},
+        "created_at": "2026-07-08 12:00:00",
+    }
+
+    payload = build_record_payload_from_dict(data)
+
+    assert payload["title"] == "随机一卦"
 
 
 def test_hexagram_query_payload_supports_found_case() -> None:

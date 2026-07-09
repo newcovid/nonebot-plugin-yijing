@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/newcovid/nonebot-plugin-yijing/data/schemas/reserved_tables.schema.json",
+  "title": "reserved_tables",
+  "description": "Registry of reserved future corpus layers.",
+  "type": "object",
+  "additionalProperties": {
+    "type": "array"
+  }
+}

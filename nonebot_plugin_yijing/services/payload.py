@@ -38,6 +38,7 @@ def build_record_card_payload(
     resolved: ResolvedHexagram,
     preprocess: dict[str, Any],
     interpretation: dict[str, Any],
+    cast_trace: dict[str, Any] | None = None,
     created_at: str | None = None,
     random_mode: bool = False,
 ) -> dict[str, Any]:
@@ -71,7 +72,9 @@ def build_record_card_payload(
         "method": METHOD_NAME.get(method, method),
         "method_raw": method,
         "coins": coins,
+        "cast_trace": cast_trace or {},
         "has_coins": bool(coins),
+        "has_yarrow_trace": (cast_trace or {}).get("kind") == "manual_yarrow",
         "line_values": resolved.line_values,
         "moving_positions": resolved.moving_positions,
         "primary": resolved.primary,
@@ -95,7 +98,9 @@ def build_record_payload_from_dict(data: dict[str, Any]) -> dict[str, Any]:
         resolved=resolved,
         preprocess=data.get("preprocess", {}),
         interpretation=data.get("interpretation", {}),
+        cast_trace=data.get("cast_trace", {}),
         created_at=data.get("created_at", ""),
+        random_mode=data.get("method") == "random",
     )
 
 
@@ -120,12 +125,12 @@ def build_history_payload(records: list[Any]) -> dict[str, Any]:
     return {"title": "易经历史记录", "items": items}
 
 
-def build_hexagram_query_payload(query: str) -> dict[str, Any]:
+def build_hexagram_query_payload(query: str, interpretation: dict[str, Any] | None = None) -> dict[str, Any]:
     hexagram = find_hexagram(query)
     if hexagram is None:
         return {"found": False, "query": query, "title": "解卦结果"}
     resolved = resolve_static_hexagram(int(hexagram["seq"]))
-    interpretation = {
+    interpretation = interpretation or {
         "summary": f"你查询的是 {hexagram['name']} 卦。当前为静卦查询，不针对具体问题推演。",
         "current_situation": get_hexagram_text(int(hexagram["seq"]))["guaci"].get("text", ""),
         "change_trend": "静态查卦不产生变卦。",
@@ -141,4 +146,5 @@ def build_hexagram_query_payload(query: str) -> dict[str, Any]:
         resolved=resolved,
         preprocess={"allowed": True, "warnings": [], "llm_used": False},
         interpretation=interpretation,
+        cast_trace={"kind": "query"},
     )

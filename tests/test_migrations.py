@@ -12,6 +12,7 @@ from nonebot_plugin_yijing.models import CastRecord, GroupConfig, GroupCooldown,
 
 INITIAL_MIGRATION_FILE = "20260708_01_initial_yijing_tables.py"
 WINDOWS_MIGRATION_FILE = "20260708_02_add_group_setting_windows.py"
+CAST_TRACE_MIGRATION_FILE = "20260709_01_add_cast_trace.py"
 LEGACY_MIGRATION_FILE = "8f2b7c4a1d00_init_yijing.py"
 
 
@@ -26,6 +27,7 @@ def test_migrations_are_packaged() -> None:
     assert (migrations / "__init__.py").is_file()
     assert (migrations / INITIAL_MIGRATION_FILE).is_file()
     assert (migrations / WINDOWS_MIGRATION_FILE).is_file()
+    assert (migrations / CAST_TRACE_MIGRATION_FILE).is_file()
     assert not (migrations / LEGACY_MIGRATION_FILE).is_file()
 
 
@@ -54,9 +56,10 @@ def test_alembic_revision_graph_has_single_yijing_head() -> None:
 
         script = ScriptDirectory.from_config(config)
 
-    assert script.get_heads() == ["20260708_02"]
+    assert script.get_heads() == ["20260709_01"]
     assert script.get_revision("nonebot_plugin_yijing").revision == "20260708_01"
     assert script.get_revision("20260708_02").down_revision == "20260708_01"
+    assert script.get_revision("20260709_01").down_revision == "20260708_02"
 
 
 def test_initial_migration_mentions_all_model_tables() -> None:
@@ -91,3 +94,12 @@ def test_windows_migration_extends_initial_migration() -> None:
     assert '"history_minutes_for_llm"' in text
     assert 'server_default="30"' in text
     assert 'server_default="120"' in text
+
+
+def test_cast_trace_migration_extends_windows_migration() -> None:
+    text = _migration_text(CAST_TRACE_MIGRATION_FILE)
+
+    assert 'revision: str = "20260709_01"' in text
+    assert 'down_revision: str | Sequence[str] | None = "20260708_02"' in text
+    assert '"cast_trace_json"' in text
+    assert 'server_default="{}"' in text

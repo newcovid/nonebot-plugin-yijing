@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.1.3 - 2026-07-09
+
+### Added
+
+- Add reserved corpus tables and schemas for dynasty commentaries, Meihua rules,
+  Najia rules, Ganzhi calendar, Wuxing strength, Liuqin/Liushen, modern explanations,
+  and scenario templates.
+- Persist raw cast traces for automatic, manual, and random casting records.
+- Add interactive manual casting flows for coin and full yarrow-stalk input.
+
+### Changed
+
+- Resolve default, explicit coin, explicit yarrow, manual, query, random, history,
+  record, help, and settings command flows against the shared corpus and runtime settings.
+- Treat changed hexagrams as dynamic results computed from moving lines instead of a
+  static 64x64 relation table.
+- Reorder rendered card payloads to show raw state, hexagrams, line movement, corpus
+  excerpts, interpretation, risk notices, disclaimer, and source notes.
+
+### Fixed
+
+- Normalize Yi terminology so `乾之策` is preserved while unrelated `干` usage remains
+  untouched.
+- Scope record viewing to the owner in the same group unless the requester is an admin.
+
 ## 0.1.2 - 2026-07-09
 
 ### Fixed

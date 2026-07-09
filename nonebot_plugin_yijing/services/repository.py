@@ -48,6 +48,7 @@ async def save_record(
     coins: list[list[str]],
     line_values: list[int],
     moving_positions: list[int],
+    cast_trace: dict[str, Any] | None,
     primary_seq: int,
     changed_seq: int | None,
     preprocess: dict[str, Any],
@@ -67,6 +68,7 @@ async def save_record(
         coins_json=json.dumps(coins, ensure_ascii=False),
         line_values_json=json.dumps(line_values, ensure_ascii=False),
         moving_positions_json=json.dumps(moving_positions, ensure_ascii=False),
+        cast_trace_json=json.dumps(cast_trace or {}, ensure_ascii=False),
         primary_seq=primary_seq,
         changed_seq=changed_seq,
         preprocess_json=json.dumps(preprocess, ensure_ascii=False),
@@ -129,6 +131,22 @@ async def touch_cooldown(
 
 async def get_record(session: AsyncSession, record_id: str) -> CastRecord | None:
     return await session.get(CastRecord, record_id.upper())
+
+
+async def get_record_for_view(
+    session: AsyncSession,
+    record_id: str,
+    *,
+    group_id: str,
+    user_hash: str,
+    allow_group_admin: bool = False,
+) -> CastRecord | None:
+    record = await get_record(session, record_id)
+    if record is None or record.group_id != group_id:
+        return None
+    if allow_group_admin or record.user_id_hash == user_hash:
+        return record
+    return None
 
 
 def _record_stmt(group_id: str, user_hash: str | None = None) -> Select[tuple[CastRecord]]:
@@ -194,6 +212,7 @@ def record_to_dict(record: CastRecord) -> dict[str, Any]:
         "primary_seq": record.primary_seq,
         "changed_seq": record.changed_seq,
         "coins": json.loads(record.coins_json),
+        "cast_trace": json.loads(getattr(record, "cast_trace_json", "{}") or "{}"),
         "preprocess": json.loads(record.preprocess_json or "{}"),
         "interpretation": json.loads(record.interpretation_json or "{}"),
         "created_at": record.created_at.strftime("%Y-%m-%d %H:%M:%S"),

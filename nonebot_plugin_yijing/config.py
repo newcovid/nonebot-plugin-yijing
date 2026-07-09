@@ -25,6 +25,7 @@ class YijingConfig(BaseModel):
     yijing_daily_limit_per_user: int = Field(default=10, ge=1, description="单用户每日起卦次数")
     yijing_duplicate_window_minutes: int = Field(default=30, ge=1, description="短期相似问题窗口")
     yijing_history_minutes_for_llm: int = Field(default=120, ge=1, description="默认传给 LLM 的历史窗口")
+    yijing_manual_session_timeout_seconds: int = Field(default=900, ge=60, description="手动起卦会话超时秒数")
     yijing_store_question: bool = Field(default=True, description="是否保存原始问题文本")
     yijing_user_hash_salt: str = Field(default="change-me", description="用户ID哈希盐")
 
