@@ -1,6 +1,11 @@
 from __future__ import annotations
 
+from importlib import util as importlib_util
 import importlib.resources as resources
+from pathlib import Path
+
+from alembic.config import Config
+from alembic.script import ScriptDirectory
 
 from nonebot_plugin_yijing.models import CastRecord, GroupConfig, GroupCooldown, RuntimeQuota
 
@@ -30,6 +35,28 @@ def test_initial_migration_uses_plugin_branch_label() -> None:
     assert 'revision: str = "20260708_01"' in text
     assert 'down_revision: str | Sequence[str] | None = None' in text
     assert 'branch_labels: str | Sequence[str] | None = ("nonebot_plugin_yijing",)' in text
+
+
+def test_alembic_revision_graph_has_single_yijing_head() -> None:
+    orm_spec = importlib_util.find_spec("nonebot_plugin_orm")
+    assert orm_spec is not None
+    assert orm_spec.submodule_search_locations is not None
+
+    migrations = resources.files("nonebot_plugin_yijing") / "migrations"
+    with resources.as_file(migrations) as migrations_path:
+        config = Config()
+        config.set_main_option(
+            "script_location",
+            str(Path(orm_spec.submodule_search_locations[0]) / "templates" / "generic"),
+        )
+        config.set_main_option("version_locations", str(migrations_path))
+        config.set_main_option("path_separator", "os")
+
+        script = ScriptDirectory.from_config(config)
+
+    assert script.get_heads() == ["20260708_02"]
+    assert script.get_revision("nonebot_plugin_yijing").revision == "20260708_01"
+    assert script.get_revision("20260708_02").down_revision == "20260708_01"
 
 
 def test_initial_migration_mentions_all_model_tables() -> None:
