@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2 - 2026-07-09
+
+### Fixed
+
+- Remove a legacy Alembic migration that reused the `nonebot_plugin_yijing` branch label
+  and prevented `nonebot-plugin-orm` startup checks from completing.
+
 ## 0.1.1 - 2026-07-08
 
 ### Changed

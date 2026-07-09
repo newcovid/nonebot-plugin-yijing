@@ -7,6 +7,7 @@ from nonebot_plugin_yijing.models import CastRecord, GroupConfig, GroupCooldown,
 
 INITIAL_MIGRATION_FILE = "20260708_01_initial_yijing_tables.py"
 WINDOWS_MIGRATION_FILE = "20260708_02_add_group_setting_windows.py"
+LEGACY_MIGRATION_FILE = "8f2b7c4a1d00_init_yijing.py"
 
 
 def _migration_text(filename: str) -> str:
@@ -20,6 +21,7 @@ def test_migrations_are_packaged() -> None:
     assert (migrations / "__init__.py").is_file()
     assert (migrations / INITIAL_MIGRATION_FILE).is_file()
     assert (migrations / WINDOWS_MIGRATION_FILE).is_file()
+    assert not (migrations / LEGACY_MIGRATION_FILE).is_file()
 
 
 def test_initial_migration_uses_plugin_branch_label() -> None:
