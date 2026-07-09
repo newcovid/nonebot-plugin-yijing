@@ -1,22 +1,36 @@
 # nonebot-plugin-yijing
 
-群内自助进行基于《周易》的起卦、查卦、解卦、历史记录与图片化输出的 NoneBot2 插件。
+[English](README.en.md)
 
-> 当前版本是可运行工程骨架 + 种子资料库。结构、数据表、命令、ORM、权限、HTML 长图渲染链路已经搭好；经传全文需要在后续版本继续校勘补录。
+基于《周易》的 NoneBot2 群聊起卦、查卦、解卦与图片化输出插件。
 
-## 特性
+> 当前版本是可运行的 Alpha 工程：命令、ORM、权限、HTML 长图渲染、资料库结构与种子数据已经接通；经传全文仍在持续校勘补录。
 
-- `nonebot-plugin-alconna` 命令解析。
-- `nonebot-plugin-orm[sqlite]` + SQLite 存储历史、配置、限额、冷却。
-- `nonebot-plugin-htmlrender` 渲染所有交互输出为图片。
-- `nonebot-plugin-access-control` + `nonebot-plugin-access-control-api` 做插件级/功能级权限管理。
-- 支持三枚铜钱法、大衍筮法概率模拟、手动输入、随机一卦。
-- 所有铜钱/硬币均统一使用“正/反”，可通过环境变量调整正反字符和数值。
-- 起卦记录包含时间信息，用于冷却、日限额、短期相似问题判断。
-- 可选 OpenAI 兼容 LLM：用于问题预处理、三不占判断、短期历史对照、综合解读。
-- 资料库结构预留完整经传与后续术数扩展字段。
+## 介绍
+
+`nonebot-plugin-yijing` 面向 OneBot V11 群聊场景，提供群内自助起卦、查询、历史记录与解读输出。插件将交互结果统一渲染为图片，便于在 QQ 群等聊天环境中展示。
+
+插件支持本地规则解读，并可选接入 OpenAI 兼容 LLM，用于问题预处理、三不占判断、近期历史对照与综合解读。LLM 失败时会自动降级到本地逻辑，不阻塞核心起卦流程。
+
+## 功能
+
+- 使用 `nonebot-plugin-alconna` 解析命令。
+- 使用 `nonebot-plugin-orm[sqlite]` + SQLite 存储历史、配置、限额与冷却。
+- 使用 `nonebot-plugin-htmlrender` 将帮助、起卦、查卦、历史等输出渲染为图片。
+- 使用 `nonebot-plugin-access-control` 与 `nonebot-plugin-access-control-api` 管理插件级和功能级权限。
+- 支持三枚铜钱法、大衍筮法概率模拟、手动输入与随机一卦。
+- 起卦记录包含时间信息，可用于冷却、日限额与短期相似问题判断。
+- 资料库预留完整经传、关系、来源、起卦规则、解读规则与后续术数扩展字段。
 
 ## 安装
+
+### 使用 nb-cli
+
+```bash
+nb plugin install nonebot-plugin-yijing
+```
+
+### 使用包管理器
 
 ```bash
 pip install nonebot-plugin-yijing
@@ -34,27 +48,29 @@ pip install -e .
 pip install "nonebot-plugin-yijing @ git+ssh://git@github.com/newcovid/nonebot-plugin-yijing.git@<commit-sha>"
 ```
 
-在 NoneBot 项目中加载：
+### 在 NoneBot 项目中加载
 
 ```python
 nonebot.load_plugin("nonebot_plugin_yijing")
 ```
 
-或在 `pyproject.toml` 中：
+或在 `pyproject.toml` 中配置：
 
 ```toml
 [tool.nonebot]
 plugins = ["nonebot_plugin_yijing"]
 ```
 
-## 依赖插件
+## 依赖
+
+基础依赖会随插件安装。若需要在现有项目中显式补齐依赖，可执行：
 
 ```bash
 pip install "nonebot-plugin-orm[sqlite]" nonebot-plugin-alconna nonebot-plugin-htmlrender
 pip install nonebot-plugin-access-control nonebot-plugin-access-control-api
 ```
 
-本插件当前保留 `nonebot-adapter-onebot` 作为硬依赖，因为当前发布目标主要是 OneBot V11 群聊环境。
+本插件当前保留 `nonebot-adapter-onebot` 作为硬依赖，因为发布目标主要是 OneBot V11 群聊环境。
 
 ## ORM 初始化
 
@@ -73,7 +89,9 @@ ALEMBIC_STARTUP_CHECK=false
 
 排查结束后应移除该配置，并重新执行 `nb orm upgrade` 与 `nb orm check`。
 
-## 基础配置
+## 配置
+
+### 基础配置
 
 ```env
 SQLALCHEMY_DATABASE_URL=sqlite+aiosqlite:///./data/yijing.sqlite3
@@ -99,7 +117,7 @@ YIJING_LLM_ENABLED=false
 # YIJING_LLM_MODEL=gpt-4o-mini
 ```
 
-## htmlrender / Playwright 配置
+### htmlrender / Playwright
 
 本插件以 `nonebot-plugin-htmlrender>=0.7.1` 为基线。推荐本地开发配置：
 
@@ -120,10 +138,12 @@ RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":true,"close_on_exi
 
 这种部署方式要求 Dockerfile 或镜像构建脚本确实把 Chromium 安装到了 `/ms-playwright`。如果没有预装浏览器，不要设置 `skip_browser_install=true`。
 
-## 命令
+## 使用
+
+### 命令
 
 | 命令 | 说明 |
-|---|---|
+| --- | --- |
 | `易经帮助` | 查看帮助长图 |
 | `起卦 问题` | 默认三枚铜钱法起卦并解卦 |
 | `起卦 问题 铜钱` | 精确指定铜钱法 |
@@ -153,10 +173,10 @@ RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":true,"close_on_exi
 
 其中：
 
-- `6` 老阴，动爻，阴变阳。
-- `7` 少阳，静爻。
-- `8` 少阴，静爻。
-- `9` 老阳，动爻，阳变阴。
+- `6`：老阴，动爻，阴变阳。
+- `7`：少阳，静爻。
+- `8`：少阴，静爻。
+- `9`：老阳，动爻，阳变阴。
 
 ## 权限控制
 
@@ -179,27 +199,9 @@ nonebot_plugin_yijing.manual
 /ac permission allow --sbj qq:g123456789 --srv nonebot_plugin_yijing.query
 ```
 
-## 资料库结构
+## 资料库
 
-`nonebot_plugin_yijing/data/` 已预留：
-
-1. 八卦表：`trigrams.json`
-2. 六十四卦表：`hexagrams.json`
-3. 六爻表：`lines.json`
-4. 卦辞表：`guaci.json`
-5. 爻辞表：`yaoci.json`
-6. 彖传表：`tuan.json`
-7. 象传表：`xiang.json`
-8. 文言传表：`wenyan.json`
-9. 系辞上下表：`xici_shang.json`、`xici_xia.json`
-10. 说卦表：`shuogua.json`
-11. 序卦表：`xugua.json`
-12. 杂卦表：`zagua.json`
-13. 卦关系表：`relations.json`
-14. 来源表：`sources.json`
-15. 起卦规则表：`casting_rules.json`
-16. 解读规则表：`interpret_rules.json`
-17. 预留扩展表：`reserved_tables.json`
+资料库位于 `nonebot_plugin_yijing/data/`，结构说明见 [`nonebot_plugin_yijing/data/README.md`](nonebot_plugin_yijing/data/README.md)。
 
 当前内置完整项：八卦、六十四卦、六爻骨架、卦辞、卦关系、起卦规则、解读规则。
 
@@ -211,7 +213,7 @@ nonebot_plugin_yijing.manual
 
 - 判断问题是否明确。
 - 判断是否违反“不诚不占、不义不占、不疑不占”。
-- 对照参数化历史记录，识别短期重复/相似问题。
+- 对照参数化历史记录，识别短期重复或相似问题。
 - 标注医疗、法律、投资、人身安全等敏感领域。
 
 LLM 接口为 OpenAI 兼容 `/chat/completions`，失败会自动降级到本地规则，不阻塞起卦核心流程。
@@ -224,7 +226,7 @@ LLM 接口为 OpenAI 兼容 `/chat/completions`，失败会自动降级到本地
 - 若希望降低存储敏感内容的风险，可设置 `YIJING_STORE_QUESTION=false`。此时历史记录会保留卦象和结构化结果，但原始问题文本不会保存。
 - 本插件只提供本地降级逻辑，不代理或改变第三方模型服务商的数据处理规则。请按实际接入的模型服务商补充群公告或隐私说明。
 
-## 开发质量检查
+## 开发
 
 ```bash
 python -m pip install -e ".[dev]"
@@ -235,19 +237,15 @@ python -m build --sdist --wheel .
 twine check dist/*
 ```
 
-## 服务器冒烟测试
-
-服务器升级、换镜像、换 htmlrender/Playwright 基线后，建议按照 `docs/server-smoke-test.md` 执行真实群聊冒烟测试。
-
 ## 更多文档
 
-- `docs/server-smoke-test.md`：服务器升级、包安装、真实群聊命令验收清单。
-- `docs/data-collation.md`：经传资料库补录、来源、状态与校勘流程。
-- `docs/release.md`：构建、验包、发布、服务器验证与 PyPI 发布流程。
+- [`docs/server-smoke-test.md`](docs/server-smoke-test.md)：服务器升级、包安装、真实群聊命令验收清单。
+- [`docs/data-collation.md`](docs/data-collation.md)：经传资料库补录、来源、状态与校勘流程。
+- [`docs/release.md`](docs/release.md)：构建、验包、发布、服务器验证与 PyPI 发布流程。
 
 ## 许可证
 
-本项目使用 MIT License。详见 `LICENSE`。
+本项目使用 MIT License。详见 [`LICENSE`](LICENSE)。
 
 ## 免责声明
 
