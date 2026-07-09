@@ -119,17 +119,21 @@ The publish workflow is configured to run on tags matching `v*` and can also be 
 
 ## 7. PyPI publishing
 
-Current alpha workflow uses `PYPI_API_TOKEN`.
+The release workflow uses PyPI Trusted Publishing.
 
 Requirements:
 
-- Token should be project-scoped when the PyPI project exists.
+- PyPI must have a trusted publisher or pending publisher configured for:
+  - project: `nonebot-plugin-yijing`
+  - owner: `newcovid`
+  - repository: `nonebot-plugin-yijing`
+  - workflow: `publish.yml`
+  - environment: empty, unless the workflow starts using a GitHub environment
+- The workflow must keep `id-token: write`.
 - `twine check dist/*` must pass before upload.
 - The GitHub Actions publish job should not run from unreviewed branches.
 
-Later improvement:
-
-- Replace long-lived token publishing with PyPI Trusted Publishing.
+Do not add a long-lived `PYPI_API_TOKEN` unless trusted publishing is unavailable.
 
 ## 8. Post-release checks
 
