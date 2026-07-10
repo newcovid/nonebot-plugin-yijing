@@ -2,17 +2,15 @@
 
 This document describes the release process for `nonebot-plugin-yijing`.
 
-The project is still alpha. Treat every release as reproducibility work first and feature delivery second.
-
 ## 1. Release channels
 
-Recommended progression:
+Public installation channels:
 
-1. GitHub commit install for alpha deployment validation.
-2. Local wheel install for package validation.
-3. TestPyPI for first public package rehearsal, if needed.
-4. PyPI for tagged alpha release.
-5. NoneBot Plugin Store submission only after CI, docs, privacy notes, and package metadata are stable.
+1. PyPI for tagged releases.
+2. NoneBot Plugin Store after the listing is accepted.
+
+Local wheels and TestPyPI may still be used internally to validate release artifacts, but
+they are not public installation channels.
 
 ## 2. Pre-release checks
 
@@ -89,35 +87,18 @@ deactivate
 
 Avoid using a full plugin import as the only smoke test because plugin import can require a properly initialized NoneBot driver and adapter context.
 
-## 5. Deployment validation from GitHub commit
-
-Before PyPI, validate a specific commit in an external deployment or staging project:
-
-```text
-nonebot-plugin-yijing @ git+ssh://git@github.com/newcovid/nonebot-plugin-yijing.git@<commit-sha>
-```
-
-Then run:
-
-```bash
-nb orm upgrade
-nb orm check
-```
-
-Follow `docs/deployment-smoke-test.md` for package, ORM, rendering, and chat-command checks.
-
-## 6. Tagging
+## 5. Tagging
 
 Use a `v` prefix for release tags:
 
 ```bash
-git tag v0.1.4
-git push origin v0.1.4
+git tag v0.2.0
+git push origin v0.2.0
 ```
 
 The publish workflow is configured to run on tags matching `v*` and can also be dispatched manually.
 
-## 7. PyPI publishing
+## 6. PyPI publishing
 
 The release workflow uses PyPI Trusted Publishing.
 
@@ -135,7 +116,7 @@ Requirements:
 
 Do not add a long-lived `PYPI_API_TOKEN` unless trusted publishing is unavailable.
 
-## 8. Post-release checks
+## 7. Post-release checks
 
 After publishing:
 
@@ -143,7 +124,7 @@ After publishing:
 python -m venv .venv-release-test
 . .venv-release-test/bin/activate
 python -m pip install --upgrade pip
-python -m pip install nonebot-plugin-yijing==0.1.4
+python -m pip install nonebot-plugin-yijing==0.2.0
 python - <<'PY'
 import importlib.resources as resources
 root = resources.files('nonebot_plugin_yijing')
@@ -152,9 +133,10 @@ PY
 deactivate
 ```
 
-Then update the target deployment to the exact version and repeat the deployment smoke test.
+Then update the target deployment to the exact version and verify plugin loading, ORM
+migrations, image replies, and the documented chat commands.
 
-## 9. Do not release when
+## 8. Do not release when
 
 Do not publish a release if any of the following is true:
 

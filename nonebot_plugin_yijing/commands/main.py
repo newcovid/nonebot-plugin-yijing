@@ -99,7 +99,7 @@ for matcher, service in [
 
 async def _finish_template(matcher: Matcher, template: str, data: dict[str, Any]) -> None:
     image = await render_image(template, data)
-    await matcher.finish(image_message(image))
+    await matcher.finish(await image_message(image))
 
 
 async def _notice(matcher: Matcher, title: str, content: str, hint: str = "") -> None:
@@ -383,24 +383,36 @@ async def _run_cast(
     await _finish_template(matcher, "card.html", payload)
 
 
+HELP_COMMANDS = [
+    {"cmd": "易经帮助", "desc": "查看所有交互命令。"},
+    {"cmd": "起卦 问题", "desc": "使用本群默认起卦方式自动起卦并输出长图。"},
+    {"cmd": "起卦 问题 铜钱", "desc": "精确指定三枚铜钱法。"},
+    {"cmd": "起卦 问题 大衍", "desc": "使用大衍筮法概率模拟。"},
+    {"cmd": "起卦 问题 手动", "desc": "进入手动引导：铜钱逐爻录入，大衍按十八变录入左右分堆。"},
+    {"cmd": "解卦 卦象", "desc": "查询并解释卦名、卦序、符号或模糊卦象；启用 LLM 时会先归一化。"},
+    {"cmd": "易经历史", "desc": "查看自己的最近起卦记录。"},
+    {"cmd": "易经记录 ID", "desc": "查看指定记录的完整长图。"},
+    {"cmd": "易经清理 ID / 全部", "desc": "清理指定记录，或清理本群全部个人历史。"},
+    {"cmd": "随机一卦", "desc": "随机生成观察主题；保存历史但不占日限额、不触发群冷却。"},
+    {
+        "cmd": "易经设置",
+        "desc": "查看或修改本群配置。以下子命令仅限群主、管理员或 superuser。",
+        "children": [
+            {"cmd": "开启 / 关闭", "desc": "启用或停用本群插件。"},
+            {"cmd": "冷却 秒数", "desc": "设置群级起卦冷却，0 表示关闭冷却。"},
+            {"cmd": "日限额 次数", "desc": "设置单用户 24 小时起卦次数上限。"},
+            {"cmd": "重复窗口 分钟", "desc": "设置短期相似问题检测窗口。"},
+            {"cmd": "历史窗口 分钟", "desc": "设置传给 LLM 预处理的近期历史窗口。"},
+            {"cmd": "默认 铜钱 / 大衍", "desc": "设置本群默认起卦方式。"},
+            {"cmd": "LLM 开启 / 关闭", "desc": "启用或停用本群 LLM 解读。"},
+        ],
+    },
+]
+
+
 @help_matcher.handle()
 async def _help(matcher: Matcher) -> None:
-    commands = [
-        {"cmd": "易经帮助", "desc": "查看所有交互命令。"},
-        {"cmd": "起卦 问题", "desc": "使用本群默认起卦方式自动起卦并输出长图。"},
-        {"cmd": "起卦 问题 铜钱", "desc": "精确指定三枚铜钱法。"},
-        {"cmd": "起卦 问题 大衍", "desc": "使用大衍筮法概率模拟。"},
-        {"cmd": "起卦 问题 手动", "desc": "进入手动引导：铜钱逐爻录入，大衍按十八变录入左右分堆。"},
-        {"cmd": "解卦 卦象", "desc": "查询并解释一个卦名、卦序、符号或模糊卦象，启用 LLM 时会先归一化。"},
-        {"cmd": "易经历史", "desc": "查看自己的最近起卦记录。"},
-        {"cmd": "易经记录 ID", "desc": "查看指定记录的完整长图。"},
-        {"cmd": "易经清理 ID / 全部", "desc": "清理自己的指定起卦记录，或清理本群全部个人历史。"},
-        {"cmd": "随机一卦", "desc": "随机生成一个观察主题，保存历史但不占日限额、不触发群冷却。"},
-        {"cmd": "易经设置", "desc": "查看或修改本群配置。"},
-        {"cmd": "易经设置 重复窗口 30", "desc": "设置短期相似问题检测窗口，单位分钟。"},
-        {"cmd": "易经设置 历史窗口 120", "desc": "设置传给 LLM 预处理的近期历史窗口，单位分钟。"},
-    ]
-    await _finish_template(matcher, "help.html", {"commands": commands})
+    await _finish_template(matcher, "help.html", {"commands": HELP_COMMANDS})
 
 
 @cast_matcher.handle()

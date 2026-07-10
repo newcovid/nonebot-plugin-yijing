@@ -4,11 +4,9 @@
 
 基于《周易》的 NoneBot2 群聊起卦、查卦、解卦与图片化输出插件。
 
-> 当前版本是可运行的 Alpha 工程：命令、ORM、权限、HTML 长图渲染、核心经传资料库与后续扩展资料层已经接通；历代注释和术数扩展仍在持续校勘补录。
-
 ## 介绍
 
-`nonebot-plugin-yijing` 面向 OneBot V11 群聊场景，提供群内自助起卦、查询、历史记录与解读输出。插件将交互结果统一渲染为图片，便于在 QQ 群等聊天环境中展示。
+`nonebot-plugin-yijing` 面向 NoneBot2 的多适配器聊天场景，提供自助起卦、查询、历史记录与解读输出。插件将交互结果统一渲染为图片，便于在各类聊天环境中展示。
 
 插件支持本地规则解读，并可选接入 OpenAI 兼容 LLM，用于问题预处理、三不占判断、近期历史对照与综合解读。LLM 失败时会自动降级到本地逻辑，不阻塞核心起卦流程。
 
@@ -24,7 +22,9 @@
 
 ## 安装
 
-### 使用 nb-cli
+### NoneBot 插件商店
+
+插件上架 NoneBot 插件商店后，可使用 nb-cli 安装：
 
 ```bash
 nb plugin install nonebot-plugin-yijing
@@ -34,18 +34,6 @@ nb plugin install nonebot-plugin-yijing
 
 ```bash
 pip install nonebot-plugin-yijing
-```
-
-开发目录安装：
-
-```bash
-pip install -e .
-```
-
-从 GitHub 指定提交安装，适合 Alpha 部署验证：
-
-```bash
-pip install "nonebot-plugin-yijing @ git+ssh://git@github.com/newcovid/nonebot-plugin-yijing.git@<commit-sha>"
 ```
 
 ### 在 NoneBot 项目中加载
@@ -63,14 +51,7 @@ plugins = ["nonebot_plugin_yijing"]
 
 ## 依赖
 
-基础依赖会随插件安装。若需要在现有项目中显式补齐依赖，可执行：
-
-```bash
-pip install "nonebot-plugin-orm[sqlite]" nonebot-plugin-alconna nonebot-plugin-htmlrender
-pip install nonebot-plugin-access-control nonebot-plugin-access-control-api
-```
-
-本插件当前保留 `nonebot-adapter-onebot` 作为硬依赖，因为发布目标主要是 OneBot V11 群聊环境。
+运行依赖会随插件自动安装。插件不绑定具体适配器，请在宿主 NoneBot 项目中按实际平台安装并配置适配器。
 
 ## ORM 初始化
 
@@ -80,14 +61,6 @@ pip install nonebot-plugin-access-control nonebot-plugin-access-control-api
 nb orm upgrade
 nb orm check
 ```
-
-不建议在常规配置中默认关闭 ORM 启动检查。只有在本地临时排查迁移问题时，才可短暂加入：
-
-```env
-ALEMBIC_STARTUP_CHECK=false
-```
-
-排查结束后应移除该配置，并重新执行 `nb orm upgrade` 与 `nb orm check`。
 
 ## 配置
 
@@ -100,9 +73,6 @@ ALEMBIC_STARTUP_CHECK=false
 # nonebot-plugin-orm 使用的 SQLite 数据库地址；使用其他数据库时请替换。
 SQLALCHEMY_DATABASE_URL=sqlite+aiosqlite:///./data/yijing.sqlite3
 
-# 仅在本地排查 ORM 迁移失败时关闭启动迁移检查，常规部署不要设置。
-# ALEMBIC_STARTUP_CHECK=false
-
 # access-control
 # 自动为插件命令接入 access-control 的权限与限流规则。
 ACCESS_CONTROL_AUTO_PATCH_ENABLED=true
@@ -110,22 +80,6 @@ ACCESS_CONTROL_AUTO_PATCH_ENABLED=true
 ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED=true
 # 命令触发 access-control 限流时向用户回复提示。
 ACCESS_CONTROL_REPLY_ON_RATE_LIMITED_ENABLED=true
-
-# htmlrender / Playwright 本地开发基线
-# 使用 Playwright 作为 HTML 截图渲染后端。
-RENDER_BACKEND=playwright
-# htmlrender 启动时探测浏览器是否可用。
-RENDER_STARTUP_MODE=probe
-# 使用本地 Chromium；缺失时允许安装，并附加适合容器的启动参数。
-RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":false,"close_on_exit":true,"launch_args":"--no-sandbox --disable-dev-shm-usage --disable-gpu"}
-
-# Docker 镜像已将 Chromium 预装到 /ms-playwright 时，可改用以下三项。
-# 从容器内的这个路径读取预装 Playwright 浏览器。
-# RENDER_STORAGE_PATH=/ms-playwright
-# 探测预装浏览器是否可用；与上方本地配置相同，可直接保留。
-# RENDER_STARTUP_MODE=probe
-# 跳过浏览器安装，因为生产镜像已经包含 Chromium。
-# RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":true,"close_on_exit":true,"cleanup_legacy_cache":true,"launch_args":"--no-sandbox --disable-dev-shm-usage --disable-gpu"}
 
 # 易经插件全局默认值
 # 新群首次初始化时的默认起卦方式：coin（铜钱）或 yarrow（大衍）。
@@ -176,14 +130,9 @@ YIJING_LLM_ENABLED=false
 | 配置项 | 默认值 | 说明 |
 | --- | --- | --- |
 | `SQLALCHEMY_DATABASE_URL` | 由宿主项目决定 | `nonebot-plugin-orm` 数据库连接串；SQLite 部署可使用示例值。 |
-| `ALEMBIC_STARTUP_CHECK` | `true` | ORM 启动迁移检查；只建议在本地临时排查迁移问题时设为 `false`。 |
 | `ACCESS_CONTROL_AUTO_PATCH_ENABLED` | access-control 默认值 | 是否自动接入 access-control 权限补丁；推荐保持 `true`。 |
 | `ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED` | access-control 默认值 | 权限拒绝时是否由 access-control 回复提示。 |
 | `ACCESS_CONTROL_REPLY_ON_RATE_LIMITED_ENABLED` | access-control 默认值 | 被 access-control 限流时是否回复提示。 |
-| `RENDER_BACKEND` | htmlrender 默认值 | htmlrender 后端；本插件推荐 `playwright`。 |
-| `RENDER_STARTUP_MODE` | htmlrender 默认值 | htmlrender 启动时浏览器探测策略；示例使用 `probe`。 |
-| `RENDER_STORAGE_PATH` | htmlrender 默认值 | Playwright 浏览器缓存/安装目录；Docker 预装浏览器时可设为 `/ms-playwright`。 |
-| `RENDER_PLAYWRIGHT` | htmlrender 默认值 | Playwright JSON 配置，包括浏览器引擎、是否跳过安装和启动参数。 |
 | `YIJING_DEFAULT_METHOD` | `coin` | 新群默认起卦方式；可选 `coin` 三枚铜钱法，或 `yarrow` 大衍筮法模拟。 |
 | `YIJING_POSITIVE_FACE` | `正` | 手动铜钱输入中代表正面的文本。 |
 | `YIJING_NEGATIVE_FACE` | `反` | 手动铜钱输入中代表反面的文本。 |
@@ -207,27 +156,6 @@ YIJING_LLM_ENABLED=false
 
 群配置表会在群首次使用时从这些 `YIJING_*` 全局默认值初始化。其中启用状态、默认起卦方式、冷却、日限额、重复窗口、LLM 历史窗口和本群 LLM 开关，可通过 `易经设置` 在群内继续调整。
 
-### htmlrender / Playwright
-
-本插件以 `nonebot-plugin-htmlrender>=0.7.1` 为基线。推荐本地开发配置：
-
-```env
-RENDER_BACKEND=playwright
-RENDER_STARTUP_MODE=probe
-RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":false,"close_on_exit":true,"launch_args":"--no-sandbox --disable-dev-shm-usage --disable-gpu"}
-```
-
-生产 Docker 环境如果在镜像构建阶段把 Playwright Chromium 安装到 `/ms-playwright`，推荐：
-
-```env
-RENDER_BACKEND=playwright
-RENDER_STARTUP_MODE=probe
-RENDER_STORAGE_PATH=/ms-playwright
-RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":true,"close_on_exit":true,"cleanup_legacy_cache":true,"launch_args":"--no-sandbox --disable-dev-shm-usage --disable-gpu"}
-```
-
-这种部署方式要求 Dockerfile 或镜像构建脚本确实把 Chromium 安装到了 `/ms-playwright`。如果没有预装浏览器，不要设置 `skip_browser_install=true`。
-
 ## 使用
 
 ### 命令
@@ -246,6 +174,18 @@ RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":true,"close_on_exi
 | `易经清理 全部` | 清理自己在当前群的全部起卦历史，不重置日限额和群冷却 |
 | `随机一卦` | 随机生成一个观察主题，保存历史但不占日限额、不触发冷却 |
 | `易经设置` | 查看或修改本群配置 |
+
+`易经设置` 的子命令：
+
+| 子命令 | 说明 |
+| --- | --- |
+| `开启` / `关闭` | 启用或停用本群插件 |
+| `冷却 秒数` | 设置群级起卦冷却，`0` 表示关闭冷却 |
+| `日限额 次数` | 设置单用户 24 小时起卦次数上限 |
+| `重复窗口 分钟` | 设置短期相似问题检测窗口 |
+| `历史窗口 分钟` | 设置传给 LLM 预处理的近期历史窗口 |
+| `默认 铜钱/大衍` | 设置本群默认起卦方式 |
+| `LLM 开启/关闭` | 启用或停用本群 LLM 解读 |
 
 ### 手动铜钱输入
 
@@ -316,7 +256,6 @@ LLM 接口为 OpenAI 兼容 `/chat/completions`，失败会自动降级到本地
 ## 开发
 
 ```bash
-python -m pip install -e ".[dev]"
 ruff check .
 python -m compileall nonebot_plugin_yijing
 pytest -q
@@ -326,7 +265,6 @@ twine check dist/*
 
 ## 更多文档
 
-- [`docs/deployment-smoke-test.md`](docs/deployment-smoke-test.md)：包安装、ORM、渲染与聊天命令验收清单。
 - [`docs/data-collation.md`](docs/data-collation.md)：经传资料库补录、来源、状态与校勘流程。
 - [`docs/release.md`](docs/release.md)：构建、验包、发布、部署验证与 PyPI 发布流程。
 

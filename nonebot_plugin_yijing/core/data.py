@@ -53,7 +53,7 @@ def _normalize_xiaoxiang(
 ) -> list[dict[str, Any]]:
     """Return small-image records with a stable list-of-objects shape.
 
-    Early alpha data allowed ``xiaoxiang`` to be an empty list or a mapping such as
+    Legacy data allowed ``xiaoxiang`` to be an empty list or a mapping such as
     ``{"1": "..."}``. Runtime code normalizes both forms so old seed data does
     not leak schema instability into rendering or LLM prompts.
     """

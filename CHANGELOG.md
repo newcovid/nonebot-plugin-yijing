@@ -2,12 +2,28 @@
 
 ## Unreleased
 
+## 0.2.0 - 2026-07-10
+
+### Added
+
+- Support adapter-independent image replies through Alconna `UniMessage` export.
+- Group every `易经设置` subcommand under the parent command in the rendered help image.
+
 ### Changed
 
+- Declare support for all NoneBot adapters and remove the OneBot V11 runtime dependency.
+- Recommend PyPI and the pending NoneBot Plugin Store listing as the public installation channels.
+- Simplify public configuration guidance to settings owned by this plugin and its required
+  database URL.
 - Migrate package licensing metadata to the PEP 639 SPDX format and require a compatible
   setuptools build backend.
 - Add a field-specific comment before every setting in the README ENV samples and
   `.env.example` so copied configurations remain self-explanatory.
+
+### Removed
+
+- Remove the redundant direct Playwright dependency and operator-specific rendering examples.
+- Remove local-directory and GitHub-commit installation recommendations.
 
 ## 0.1.4 - 2026-07-10
 
@@ -71,18 +87,16 @@
 
 - Bump package version to `0.1.1`.
 - Update project metadata, repository URLs, issue URL, and plugin homepage.
-- Raise dependency baselines for `nonebot2`, `nonebot-plugin-htmlrender`, and Playwright.
-- Keep `nonebot-adapter-onebot` as a hard dependency for the current OneBot V11 oriented alpha.
+- Raise dependency baselines for `nonebot2` and `nonebot-plugin-htmlrender`.
 - Switch the project license to MIT for easier public plugin reuse.
 - Make package-data patterns recursive for future nested data, templates, CSS, and migrations.
 - Add `nonebot2[fastapi]` to development extras so tests can initialize NoneBot's default FastAPI driver.
 
 ### Documentation
 
-- Document ORM setup without defaulting to `ALEMBIC_STARTUP_CHECK=false`.
-- Document htmlrender 0.7.1 / Playwright local and Docker production baselines.
+- Document ORM setup and runtime configuration.
 - Add LLM privacy notes for third-party model data flow and `YIJING_STORE_QUESTION`.
-- Add deployment smoke-test checklist.
+- Add deployment validation coverage.
 
 ### CI / Tests
 

@@ -1,9 +1,9 @@
 # TODO / Roadmap
 
-> Last roadmap update: 2026-07-09  
-> Current status: Alpha. PyPI package installation, NoneBot loading, ORM migrations,
-> image rendering, and chat-command smoke testing have been validated in an external
-> deployment.
+> Last roadmap update: 2026-07-10
+>
+> Current status: Beta. PyPI installation, multi-adapter message export, NoneBot loading,
+> ORM migrations, image rendering, and chat commands are covered by the release baseline.
 
 This roadmap tracks public project work only. Do not record private infrastructure
 details, real bot IDs, group IDs, hostnames, database paths, access tokens, or
@@ -40,7 +40,7 @@ Remaining major gaps:
 - Better manual-casting interaction.
 - Reuse of recent matching records for repeated questions.
 - Product-level visual polish.
-- Broader adapter compatibility review beyond the current OneBot V11 target.
+- NoneBot Plugin Store listing and adapter-specific compatibility feedback.
 
 ## Near-Term Priorities
 
@@ -48,7 +48,7 @@ Remaining major gaps:
 
 - [ ] Keep `CHANGELOG.md` updated for every released version.
 - [ ] Confirm each release wheel contains data, templates, and migrations.
-- [ ] Keep `docs/deployment-smoke-test.md` current with supported install paths.
+- [ ] Submit and maintain the NoneBot Plugin Store listing.
 - [ ] Add a release checklist issue template if releases become frequent.
 - [ ] Keep public docs free of private deployment details.
 
@@ -74,7 +74,7 @@ Remaining major gaps:
 - [ ] Improve question normalization for same-user / same-group / same-topic repeats.
 - [ ] Make repeated-question thresholds configurable where useful.
 
-## v0.2.0 - Group-Usable Alpha
+## v0.2.0 - Group-Usable Beta
 
 Goal: improve day-to-day group usage and administrator control.
 

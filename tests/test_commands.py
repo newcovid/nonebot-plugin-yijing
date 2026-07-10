@@ -5,17 +5,19 @@ from dataclasses import dataclass
 import pytest
 
 from nonebot_plugin_yijing.commands.main import (
+    HELP_COMMANDS,
     _manual_expired,
     _manual_key,
     _parse_cast_body,
     _parse_history_cleanup_target,
     _parse_yarrow_split,
 )
+from nonebot_plugin_yijing.utils import get_group_id
 
 
 @dataclass
 class FakeBot:
-    type: str = "OneBot V11"
+    type: str = "Discord"
     self_id: str = "10000"
 
 
@@ -44,13 +46,68 @@ def test_parse_cast_body_distinguishes_default_and_explicit_methods(
 
 
 def test_manual_key_isolated_by_bot_group_and_user() -> None:
-    assert _manual_key(FakeBot(), FakeEvent()) == ("OneBot V11", "10000", "20000", "30000")
+    assert _manual_key(FakeBot(), FakeEvent()) == (
+        "Discord",
+        "10000",
+        get_group_id(FakeEvent()),
+        "30000",
+    )
     assert _manual_key(FakeBot(self_id="10001"), FakeEvent()) != _manual_key(
         FakeBot(), FakeEvent()
     )
     assert _manual_key(FakeBot(), FakeEvent(user_id="30001")) != _manual_key(
         FakeBot(), FakeEvent()
     )
+
+
+def test_help_nests_every_settings_subcommand() -> None:
+    settings = next(item for item in HELP_COMMANDS if item["cmd"] == "易经设置")
+    assert not any(item["cmd"].startswith("易经设置 ") for item in HELP_COMMANDS)
+    assert [item["cmd"] for item in settings["children"]] == [
+        "开启 / 关闭",
+        "冷却 秒数",
+        "日限额 次数",
+        "重复窗口 分钟",
+        "历史窗口 分钟",
+        "默认 铜钱 / 大衍",
+        "LLM 开启 / 关闭",
+    ]
+
+
+def test_generic_session_id_is_used_when_adapter_has_no_group_fields() -> None:
+    class SessionEvent:
+        def get_session_id(self) -> str:
+            return "channel_42"
+
+        def get_user_id(self) -> str:
+            return "user_7"
+
+    context_id = get_group_id(SessionEvent())  # type: ignore[arg-type]
+    assert ":session:" in context_id
+    assert context_id.endswith(":channel_42")
+
+
+def test_adapter_namespace_prevents_group_id_collisions() -> None:
+    class AdapterAEvent(FakeEvent):
+        pass
+
+    class AdapterBEvent(FakeEvent):
+        pass
+
+    AdapterAEvent.__module__ = "nonebot.adapters.adapter_a.event"
+    AdapterBEvent.__module__ = "nonebot.adapters.adapter_b.event"
+
+    assert get_group_id(AdapterAEvent()) == "adapter_a:group:20000"
+    assert get_group_id(AdapterBEvent()) == "adapter_b:group:20000"
+
+
+def test_onebot_group_key_remains_backward_compatible() -> None:
+    class OneBotEvent(FakeEvent):
+        pass
+
+    OneBotEvent.__module__ = "nonebot.adapters.onebot.v11.event"
+
+    assert get_group_id(OneBotEvent()) == "20000"
 
 
 def test_parse_yarrow_split_accepts_two_integer_piles() -> None:

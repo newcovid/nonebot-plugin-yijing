@@ -15,15 +15,32 @@ def utcnow() -> datetime:
     return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
+def _event_namespace(event: Event) -> str:
+    module = event.__class__.__module__
+    if module.startswith("nonebot.adapters."):
+        return module.removeprefix("nonebot.adapters.").split(".", 1)[0]
+    return module
+
+
 def get_group_id(event: Event) -> str:
+    namespace = _event_namespace(event)
     group_id = getattr(event, "group_id", None)
     if group_id is not None:
-        return str(group_id)
+        if event.__class__.__module__.startswith("nonebot.adapters.onebot."):
+            # Preserve keys written by releases that only supported OneBot V11.
+            return str(group_id)
+        return f"{namespace}:group:{group_id}"
     guild_id = getattr(event, "guild_id", None)
     channel_id = getattr(event, "channel_id", None)
     if guild_id is not None and channel_id is not None:
-        return f"guild:{guild_id}:{channel_id}"
-    return "private"
+        return f"{namespace}:guild:{guild_id}:{channel_id}"
+    try:
+        raw_session_id = event.get_session_id()
+    except Exception:
+        raw_session_id = None
+    if raw_session_id is not None and str(raw_session_id):
+        return f"{namespace}:session:{raw_session_id}"
+    return f"{namespace}:private:{get_user_id(event)}"
 
 
 def get_user_id(event: Event) -> str:

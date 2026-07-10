@@ -2,7 +2,7 @@
 
 This document defines how the built-in Zhouyi/Yijing corpus should be expanded without breaking the long-term data model.
 
-The goal is not to make the first alpha release text-complete. The goal is to make every later text-completion change traceable, reviewable, and testable.
+The goal is not to make every release text-complete. The goal is to make every later text-completion change traceable, reviewable, and testable.
 
 ## 1. Principles
 
@@ -64,14 +64,14 @@ Use a small lifecycle vocabulary when adding or revising text records.
 placeholder -> draft -> checked -> verified
 ```
 
-The current alpha data also contains `seeded` for early seed records. New data should prefer:
+Legacy data also contains `seeded` for early seed records. New data should prefer:
 
 - `placeholder`: structure exists, text is not collated.
 - `draft`: text has been entered from a source but not reviewed.
 - `checked`: text has been checked once against the cited source.
 - `verified`: text has been checked against at least one authoritative source and is ready for release notes.
 
-During alpha, placeholders are allowed. After the v0.3.0 corpus milestone, core placeholders should become CI failures for the files declared complete.
+Until the v0.3.0 corpus milestone, placeholders are allowed. After that milestone, core placeholders should become CI failures for the files declared complete.
 
 ## 5. Source policy
 

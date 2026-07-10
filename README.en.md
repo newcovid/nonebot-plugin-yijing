@@ -4,11 +4,9 @@
 
 A NoneBot2 plugin for I Ching group-chat divination, lookup, interpretation, history, and image-rendered replies.
 
-> The current release is a runnable Alpha project. Commands, ORM, permissions, HTML image rendering, data schemas, and seed data are wired up; the full classical corpus is still being collated and proofread.
-
 ## Introduction
 
-`nonebot-plugin-yijing` targets OneBot V11 group-chat usage. It lets users cast hexagrams, query hexagram text, view history, and receive rendered image replies directly in chat.
+`nonebot-plugin-yijing` supports multi-adapter NoneBot2 chat environments. It lets users cast hexagrams, query hexagram text, view history, and receive rendered image replies directly in chat.
 
 The plugin works with local rule-based interpretation by default. An optional OpenAI-compatible LLM can be enabled for question preprocessing, "three don'ts" checks, recent-history comparison, and synthesized interpretation. If the LLM request fails, the plugin falls back to local logic and does not block the core casting flow.
 
@@ -24,7 +22,9 @@ The plugin works with local rule-based interpretation by default. An optional Op
 
 ## Installation
 
-### With nb-cli
+### NoneBot Plugin Store
+
+After the plugin is listed in the NoneBot Plugin Store, install it with nb-cli:
 
 ```bash
 nb plugin install nonebot-plugin-yijing
@@ -34,18 +34,6 @@ nb plugin install nonebot-plugin-yijing
 
 ```bash
 pip install nonebot-plugin-yijing
-```
-
-Editable development install:
-
-```bash
-pip install -e .
-```
-
-Install a specific GitHub commit for Alpha deployment validation:
-
-```bash
-pip install "nonebot-plugin-yijing @ git+ssh://git@github.com/newcovid/nonebot-plugin-yijing.git@<commit-sha>"
 ```
 
 ### Load in a NoneBot project
@@ -63,14 +51,7 @@ plugins = ["nonebot_plugin_yijing"]
 
 ## Dependencies
 
-Runtime dependencies are installed with the plugin. To explicitly install the main integration plugins in an existing project:
-
-```bash
-pip install "nonebot-plugin-orm[sqlite]" nonebot-plugin-alconna nonebot-plugin-htmlrender
-pip install nonebot-plugin-access-control nonebot-plugin-access-control-api
-```
-
-The plugin currently keeps `nonebot-adapter-onebot` as a required dependency because its primary release target is OneBot V11 group chat.
+Runtime dependencies are installed automatically. The plugin does not require a specific adapter; install and configure the adapter for the platform used by the host NoneBot project.
 
 ## ORM Setup
 
@@ -80,14 +61,6 @@ Run after first install or upgrade:
 nb orm upgrade
 nb orm check
 ```
-
-Do not disable the ORM startup check in normal configuration. Only use the following temporarily while diagnosing local migration issues:
-
-```env
-ALEMBIC_STARTUP_CHECK=false
-```
-
-Remove it after troubleshooting, then run `nb orm upgrade` and `nb orm check` again.
 
 ## Configuration
 
@@ -101,9 +74,6 @@ your deployment. See [`.env.example`](.env.example) for the complete sample.
 # SQLite database URL used by nonebot-plugin-orm; replace it when using another database.
 SQLALCHEMY_DATABASE_URL=sqlite+aiosqlite:///./data/yijing.sqlite3
 
-# Disable ORM startup migration checks only while diagnosing local migration failures.
-# ALEMBIC_STARTUP_CHECK=false
-
 # access-control
 # Automatically apply access-control permission and rate-limit rules to plugin matchers.
 ACCESS_CONTROL_AUTO_PATCH_ENABLED=true
@@ -111,22 +81,6 @@ ACCESS_CONTROL_AUTO_PATCH_ENABLED=true
 ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED=true
 # Reply to the user when access-control rate-limits a command.
 ACCESS_CONTROL_REPLY_ON_RATE_LIMITED_ENABLED=true
-
-# htmlrender / Playwright: local development baseline
-# Use Playwright as the HTML screenshot backend.
-RENDER_BACKEND=playwright
-# Probe browser availability during htmlrender startup.
-RENDER_STARTUP_MODE=probe
-# Launch local Chromium, install it when missing, and apply container-safe launch flags.
-RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":false,"close_on_exit":true,"launch_args":"--no-sandbox --disable-dev-shm-usage --disable-gpu"}
-
-# When Chromium is preinstalled to /ms-playwright in Docker, use these three overrides.
-# Read the preinstalled Playwright browser from this container path.
-# RENDER_STORAGE_PATH=/ms-playwright
-# Probe the preinstalled browser; this can remain identical to the local setting above.
-# RENDER_STARTUP_MODE=probe
-# Skip browser installation because the production image already contains Chromium.
-# RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":true,"close_on_exit":true,"cleanup_legacy_cache":true,"launch_args":"--no-sandbox --disable-dev-shm-usage --disable-gpu"}
 
 # Yijing global defaults
 # Default casting method for newly initialized groups: coin or yarrow.
@@ -177,14 +131,9 @@ YIJING_LLM_ENABLED=false
 | Key | Default | Description |
 | --- | --- | --- |
 | `SQLALCHEMY_DATABASE_URL` | Set by the host project | Database URL for `nonebot-plugin-orm`; the sample value is suitable for SQLite deployments. |
-| `ALEMBIC_STARTUP_CHECK` | `true` | ORM startup migration check; set to `false` only temporarily while diagnosing local migration issues. |
 | `ACCESS_CONTROL_AUTO_PATCH_ENABLED` | access-control default | Whether access-control automatically patches matchers; keeping `true` is recommended. |
 | `ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED` | access-control default | Whether access-control replies when permission is denied. |
 | `ACCESS_CONTROL_REPLY_ON_RATE_LIMITED_ENABLED` | access-control default | Whether access-control replies when a request is rate-limited. |
-| `RENDER_BACKEND` | htmlrender default | htmlrender backend; this plugin recommends `playwright`. |
-| `RENDER_STARTUP_MODE` | htmlrender default | Browser startup probing mode; the sample uses `probe`. |
-| `RENDER_STORAGE_PATH` | htmlrender default | Playwright browser storage/install path; Docker images with preinstalled browsers can use `/ms-playwright`. |
-| `RENDER_PLAYWRIGHT` | htmlrender default | JSON configuration for Playwright, including engine, install behavior, and launch arguments. |
 | `YIJING_DEFAULT_METHOD` | `coin` | Default casting method for new groups: `coin` for three-coin casting or `yarrow` for simulated yarrow-stalk casting. |
 | `YIJING_POSITIVE_FACE` | `正` | Text used for the positive face in manual coin input. |
 | `YIJING_NEGATIVE_FACE` | `反` | Text used for the negative face in manual coin input. |
@@ -210,27 +159,6 @@ Group settings are initialized from these global `YIJING_*` defaults on first us
 state, default casting method, cooldown, daily limit, duplicate window, LLM history window,
 and group-level LLM switch can later be changed with `易经设置`.
 
-### htmlrender / Playwright
-
-This plugin uses `nonebot-plugin-htmlrender>=0.7.1` as its baseline. Recommended local development configuration:
-
-```env
-RENDER_BACKEND=playwright
-RENDER_STARTUP_MODE=probe
-RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":false,"close_on_exit":true,"launch_args":"--no-sandbox --disable-dev-shm-usage --disable-gpu"}
-```
-
-For production Docker images that install Playwright Chromium into `/ms-playwright` during image build:
-
-```env
-RENDER_BACKEND=playwright
-RENDER_STARTUP_MODE=probe
-RENDER_STORAGE_PATH=/ms-playwright
-RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":true,"close_on_exit":true,"cleanup_legacy_cache":true,"launch_args":"--no-sandbox --disable-dev-shm-usage --disable-gpu"}
-```
-
-Only set `skip_browser_install=true` if the image really includes the browser at `/ms-playwright`.
-
 ## Usage
 
 ### Commands
@@ -249,6 +177,18 @@ Only set `skip_browser_install=true` if the image really includes the browser at
 | `易经清理 全部` | Delete all of your casting history in the current group without resetting quota or cooldown |
 | `随机一卦` | Generate a random observation topic, save it, but do not consume quota or cooldown |
 | `易经设置` | View or modify group settings |
+
+`易经设置` subcommands:
+
+| Subcommand | Description |
+| --- | --- |
+| `开启` / `关闭` | Enable or disable the plugin in the current group |
+| `冷却 秒数` | Set the group casting cooldown; `0` disables it |
+| `日限额 次数` | Set the per-user rolling 24-hour casting limit |
+| `重复窗口 分钟` | Set the recent similar-question detection window |
+| `历史窗口 分钟` | Set the recent-history window used by LLM preprocessing |
+| `默认 铜钱/大衍` | Set the group's default casting method |
+| `LLM 开启/关闭` | Enable or disable LLM interpretation for the group |
 
 ### Manual coin input
 
@@ -319,7 +259,6 @@ Privacy notes:
 ## Development
 
 ```bash
-python -m pip install -e ".[dev]"
 ruff check .
 python -m compileall nonebot_plugin_yijing
 pytest -q
@@ -329,7 +268,6 @@ twine check dist/*
 
 ## More Documentation
 
-- [`docs/deployment-smoke-test.md`](docs/deployment-smoke-test.md): package install, ORM, rendering, and chat-command acceptance checklist.
 - [`docs/data-collation.md`](docs/data-collation.md): corpus collation, sources, status, and proofreading workflow.
 - [`docs/release.md`](docs/release.md): build, package check, release, deployment validation, and PyPI publishing workflow.
 
