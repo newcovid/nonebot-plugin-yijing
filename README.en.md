@@ -76,8 +76,8 @@ nb orm check
 
 ## Configuration
 
-Put configuration in the NoneBot project's `.env` file or the environment file used by
-your deployment. See [`.env.example`](.env.example) for the complete sample.
+Put configuration in the NoneBot project's `.env` file or its active environment file.
+See [`.env.example`](.env.example) for the complete sample.
 
 ### ENV sample
 
@@ -144,7 +144,7 @@ YIJING_LLM_ENABLED=false
 
 | Key | Default | Description |
 | --- | --- | --- |
-| `SQLALCHEMY_DATABASE_URL` | Set by the host project | Database URL for `nonebot-plugin-orm`; the sample value is suitable for SQLite deployments. |
+| `SQLALCHEMY_DATABASE_URL` | Set by the host project | Database URL for `nonebot-plugin-orm`; the sample value is suitable for SQLite projects. |
 | `RENDER_BACKEND` | htmlrender default | Image renderer backend; this plugin recommends and validates `playwright`. |
 | `ACCESS_CONTROL_AUTO_PATCH_ENABLED` | access-control default | Whether access-control automatically patches matchers; keeping `true` is recommended. |
 | `ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED` | access-control default | Whether access-control replies when permission is denied. |
@@ -296,7 +296,7 @@ twine check dist/*
 ## More Documentation
 
 - [`docs/data-collation.md`](docs/data-collation.md): corpus collation, sources, status, and proofreading workflow.
-- [`docs/release.md`](docs/release.md): build, package check, release, deployment validation, and PyPI publishing workflow.
+- [`docs/release.md`](docs/release.md): build, package check, release validation, and PyPI publishing workflow.
 
 ## License
 

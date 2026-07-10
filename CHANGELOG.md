@@ -123,7 +123,7 @@
 
 - Document ORM setup and runtime configuration.
 - Add LLM privacy notes for third-party model data flow and `YIJING_STORE_QUESTION`.
-- Add deployment validation coverage.
+- Add release validation coverage.
 
 ### CI / Tests
 

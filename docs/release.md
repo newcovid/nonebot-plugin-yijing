@@ -30,7 +30,7 @@ Also confirm:
 - `CHANGELOG.md` has a release entry.
 - `README.md` describes current limitations accurately.
 - `LICENSE` and `pyproject.toml` license metadata match.
-- No private `.env`, SQLite database, logs, cache, or deployment-only path is included.
+- No private `.env`, SQLite database, logs, cache, or machine-specific path is included.
 - `nonebot_plugin_yijing/data/`, `templates/`, and `migrations/` are included in the wheel.
 
 ## 3. Wheel content inspection
@@ -133,7 +133,7 @@ PY
 deactivate
 ```
 
-Then update the target deployment to the exact version and verify plugin loading, ORM
+Then install the exact version in a regular NoneBot project and verify plugin loading, ORM
 migrations, image replies, and the documented chat commands.
 
 ## 8. Do not release when

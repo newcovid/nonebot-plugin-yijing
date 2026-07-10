@@ -143,7 +143,7 @@ YIJING_LLM_ENABLED=false
 
 | 配置项 | 默认值 | 说明 |
 | --- | --- | --- |
-| `SQLALCHEMY_DATABASE_URL` | 由宿主项目决定 | `nonebot-plugin-orm` 数据库连接串；SQLite 部署可使用示例值。 |
+| `SQLALCHEMY_DATABASE_URL` | 由宿主项目决定 | `nonebot-plugin-orm` 数据库连接串；SQLite 项目可使用示例值。 |
 | `RENDER_BACKEND` | 由 htmlrender 决定 | 图片渲染后端；本插件推荐并验证 `playwright`。 |
 | `ACCESS_CONTROL_AUTO_PATCH_ENABLED` | access-control 默认值 | 是否自动接入 access-control 权限补丁；推荐保持 `true`。 |
 | `ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED` | access-control 默认值 | 权限拒绝时是否由 access-control 回复提示。 |
@@ -292,7 +292,7 @@ twine check dist/*
 ## 更多文档
 
 - [`docs/data-collation.md`](docs/data-collation.md)：经传资料库补录、来源、状态与校勘流程。
-- [`docs/release.md`](docs/release.md)：构建、验包、发布、部署验证与 PyPI 发布流程。
+- [`docs/release.md`](docs/release.md)：构建、验包、发行验证与 PyPI 发布流程。
 
 ## 许可证
 
