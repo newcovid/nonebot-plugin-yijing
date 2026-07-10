@@ -111,8 +111,8 @@ Follow `docs/deployment-smoke-test.md` for package, ORM, rendering, and chat-com
 Use a `v` prefix for release tags:
 
 ```bash
-git tag v0.1.2
-git push origin v0.1.2
+git tag v0.1.4
+git push origin v0.1.4
 ```
 
 The publish workflow is configured to run on tags matching `v*` and can also be dispatched manually.
@@ -143,7 +143,7 @@ After publishing:
 python -m venv .venv-release-test
 . .venv-release-test/bin/activate
 python -m pip install --upgrade pip
-python -m pip install nonebot-plugin-yijing==0.1.2
+python -m pip install nonebot-plugin-yijing==0.1.4
 python - <<'PY'
 import importlib.resources as resources
 root = resources.files('nonebot_plugin_yijing')

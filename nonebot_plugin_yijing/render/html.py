@@ -5,6 +5,8 @@ from typing import Any
 
 from nonebot import require
 
+from ..config import plugin_config
+
 require("nonebot_plugin_htmlrender")
 
 from nonebot_plugin_htmlrender import render_template  # noqa: E402
@@ -24,10 +26,10 @@ async def render_image(template_name: str, data: dict[str, Any]) -> bytes:
         template_name=template_name,
         templates=data,
         pages={
-            "viewport": {"width": 920, "height": 10},
+            "viewport": {"width": plugin_config.yijing_render_width, "height": 10},
             "base_url": "about:blank",
         },
         wait=50,
-        device_scale_factor=2,
+        device_scale_factor=plugin_config.yijing_render_scale,
         screenshot_timeout=60_000,
     )

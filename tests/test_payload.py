@@ -62,6 +62,23 @@ def test_record_card_payload_contains_template_sections() -> None:
     assert len(payload["line_rows"]) == 6
     assert payload["line_rows"][0]["position"] == 6
     assert payload["line_rows"][-1]["position"] == 1
+    assert [row["label"] for row in payload["line_rows"]] == [
+        "上六",
+        "九五",
+        "六四",
+        "九三",
+        "六二",
+        "初九",
+    ]
+    assert all(not row["yaoci"].startswith(row["label"]) for row in payload["line_rows"])
+    assert [row["is_yang"] for row in payload["line_rows"]] == [
+        False,
+        True,
+        False,
+        True,
+        False,
+        True,
+    ]
     assert payload["sources"]
 
 

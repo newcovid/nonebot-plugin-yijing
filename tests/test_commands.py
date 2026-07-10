@@ -8,6 +8,7 @@ from nonebot_plugin_yijing.commands.main import (
     _manual_expired,
     _manual_key,
     _parse_cast_body,
+    _parse_history_cleanup_target,
     _parse_yarrow_split,
 )
 
@@ -65,3 +66,23 @@ def test_parse_yarrow_split_rejects_malformed_input(text: str) -> None:
 
 def test_manual_expired_uses_updated_at_timestamp() -> None:
     assert _manual_expired({"updated_at": 0}) is True
+
+
+@pytest.mark.parametrize(
+    ("body", "expected"),
+    [
+        ("YJ-ABC12345", "YJ-ABC12345"),
+        ("yj-abc12345", "YJ-ABC12345"),
+        ("全部", None),
+        ("全量", None),
+        ("all", None),
+    ],
+)
+def test_parse_history_cleanup_target(body: str, expected: str | None) -> None:
+    assert _parse_history_cleanup_target(body) == expected
+
+
+@pytest.mark.parametrize("body", ["", "ABC12345", "YJ-ABC-123"])
+def test_parse_history_cleanup_target_rejects_invalid_input(body: str) -> None:
+    with pytest.raises(ValueError):
+        _parse_history_cleanup_target(body)

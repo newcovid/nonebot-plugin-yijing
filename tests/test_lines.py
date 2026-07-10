@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import Counter
 
 from nonebot_plugin_yijing.core.data import load_json
+from nonebot_plugin_yijing.core.hexagram import line_label
 
 
 def test_line_slots_cover_all_hexagrams_and_positions() -> None:
@@ -21,3 +22,13 @@ def test_line_slots_are_unique() -> None:
     keys = [(int(item["hexagram_seq"]), int(item["position"])) for item in lines]
 
     assert len(keys) == len(set(keys)) == 384
+
+
+def test_line_slot_labels_use_canonical_order() -> None:
+    lines = load_json("lines.json")
+
+    assert all(item["label"] == item["line_label"] for item in lines)
+    assert line_label(1, 1) == "初九"
+    assert line_label(2, 1) == "九二"
+    assert line_label(5, 0) == "六五"
+    assert line_label(6, 0) == "上六"

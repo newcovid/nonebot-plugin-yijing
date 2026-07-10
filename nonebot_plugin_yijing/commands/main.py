@@ -50,6 +50,7 @@ from ..services.repository import (
     all_user_records,
     cooldown_remaining,
     daily_quota_count,
+    delete_user_records,
     find_similar_recent,
     get_or_create_group_config,
     get_record_for_view,
@@ -79,6 +80,7 @@ cast_matcher = on_alconna(_all_args_command("起卦"), aliases={"算卦"})
 query_matcher = on_alconna(_all_args_command("解卦"))
 history_matcher = on_alconna(Alconna("易经历史"))
 record_matcher = on_alconna(_all_args_command("易经记录"))
+history_cleanup_matcher = on_alconna(_all_args_command("易经清理"))
 random_matcher = on_alconna(Alconna("随机一卦"))
 settings_matcher = on_alconna(_all_args_command("易经设置"))
 
@@ -87,6 +89,7 @@ for matcher, service in [
     (query_matcher, query_service),
     (history_matcher, history_service),
     (record_matcher, history_service),
+    (history_cleanup_matcher, history_service),
     (random_matcher, random_service),
     (settings_matcher, settings_service),
     (help_matcher, query_service),
@@ -183,6 +186,20 @@ def _parse_positive_int(text: str, *, minimum: int = 1, maximum: int | None = No
     if maximum is not None and value > maximum:
         raise ValueError(f"数值不能大于 {maximum}。")
     return value
+
+
+def _parse_history_cleanup_target(body: str) -> str | None:
+    target = body.strip()
+    if target in {"全部", "全量"} or target.lower() == "all":
+        return None
+    record_id = target.upper()
+    if (
+        record_id.startswith("YJ-")
+        and 3 < len(record_id) <= 32
+        and record_id[3:].isalnum()
+    ):
+        return record_id
+    raise ValueError("请使用：易经清理 YJ-XXXXXXXX；全量清理请使用：易经清理 全部")
 
 
 def _history_brief(records: list[Any]) -> list[dict[str, Any]]:
@@ -377,6 +394,7 @@ async def _help(matcher: Matcher) -> None:
         {"cmd": "解卦 卦象", "desc": "查询并解释一个卦名、卦序、符号或模糊卦象，启用 LLM 时会先归一化。"},
         {"cmd": "易经历史", "desc": "查看自己的最近起卦记录。"},
         {"cmd": "易经记录 ID", "desc": "查看指定记录的完整长图。"},
+        {"cmd": "易经清理 ID / 全部", "desc": "清理自己的指定起卦记录，或清理本群全部个人历史。"},
         {"cmd": "随机一卦", "desc": "随机生成一个观察主题，保存历史但不占日限额、不触发群冷却。"},
         {"cmd": "易经设置", "desc": "查看或修改本群配置。"},
         {"cmd": "易经设置 重复窗口 30", "desc": "设置短期相似问题检测窗口，单位分钟。"},
@@ -463,6 +481,38 @@ async def _record(event: Event, matcher: Matcher, session: async_scoped_session)
     if record is None:
         await _notice(matcher, "记录不存在", f"未找到可查看的记录：{record_id}")
     await _finish_template(matcher, "card.html", build_record_payload_from_dict(record_to_dict(record)))
+
+
+@history_cleanup_matcher.handle()
+async def _history_cleanup(
+    event: Event, matcher: Matcher, session: async_scoped_session
+) -> None:
+    body = parse_command_body(get_plain_text(event), "易经清理")
+    try:
+        record_id = _parse_history_cleanup_target(body)
+    except ValueError as exc:
+        await _notice(matcher, "清理格式错误", str(exc))
+        return
+
+    count = await delete_user_records(
+        session,
+        group_id=get_group_id(event),
+        user_hash=hash_user_id(get_user_id(event)),
+        record_id=record_id,
+    )
+    if record_id is not None and count == 0:
+        await _notice(matcher, "记录不存在", f"未找到属于你的记录：{record_id}")
+        return
+    if record_id is None:
+        content = f"已清理你在本群的 {count} 条起卦历史。"
+    else:
+        content = f"已清理起卦记录：{record_id}"
+    await _notice(
+        matcher,
+        "历史已清理",
+        content,
+        "日限额和群冷却不受影响。",
+    )
 
 
 @random_matcher.handle()

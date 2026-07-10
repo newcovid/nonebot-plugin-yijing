@@ -37,8 +37,13 @@ def resolve_static_hexagram(seq: int) -> ResolvedHexagram:
 
 
 def line_label(position: int, bit: int) -> str:
-    pos_name = {1: "初", 2: "二", 3: "三", 4: "四", 5: "五", 6: "上"}[position]
-    return f"{pos_name}{'九' if bit else '六'}"
+    polarity = "九" if bit else "六"
+    if position == 1:
+        return f"初{polarity}"
+    if position == 6:
+        return f"上{polarity}"
+    pos_name = {2: "二", 3: "三", 4: "四", 5: "五"}[position]
+    return f"{polarity}{pos_name}"
 
 
 def render_line_shape(bit: int, moving: bool = False) -> str:

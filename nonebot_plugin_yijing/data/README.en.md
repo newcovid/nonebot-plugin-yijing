@@ -4,6 +4,17 @@
 
 This directory follows the principle of modeling the underlying corpus first, then gradually proofreading and filling in content. Data files are mainly JSON. JSON Schemas live in `schemas/` and define the structure and boundaries for future corpus work.
 
+Runtime configuration is not maintained separately in this directory. For the complete
+`.env` sample and configuration reference, see the project-level
+[`../../README.en.md`](../../README.en.md#configuration) and
+[`../../.env.example`](../../.env.example). Configuration keys directly related to corpus
+and history data include:
+
+- `YIJING_STORE_QUESTION`: whether original question text is stored in the database.
+- `YIJING_USER_HASH_SALT`: salt for hashing user IDs; use a private random value in production.
+- `YIJING_HISTORY_MINUTES_FOR_LLM`: recent-history window sent to LLM preprocessing.
+- `YIJING_LLM_ENABLED`, `YIJING_LLM_BASE_URL`, `YIJING_LLM_API_KEY`, `YIJING_LLM_MODEL`: whether and how user questions, corpus context, and recent history are sent to a third-party model provider.
+
 ## Current Status
 
 The current corpus is runnable and the core classical layer has been filled:

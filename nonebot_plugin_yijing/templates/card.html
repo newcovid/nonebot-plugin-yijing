@@ -23,10 +23,13 @@
     .hex-name { font-size: 28px; font-weight: 800; margin-top: 8px; }
     .palace { font-size: 18px; color: #6d563a; margin-top: 4px; }
     .lines { display: flex; flex-direction: column; gap: 10px; }
-    .line-row { display: grid; grid-template-columns: 58px 132px 80px 1fr; gap: 10px; align-items: center; padding: 12px; border-radius: 14px; background: #fffdf5; border: 1px solid #e1d1af; }
+    .line-row { display: grid; grid-template-columns: 58px 142px 80px 1fr; gap: 10px; align-items: center; padding: 12px; border-radius: 14px; background: #fffdf5; border: 1px solid #e1d1af; }
     .line-row.moving { border-color: #b66a27; background: #fff1d8; }
     .line-label { font-weight: 800; font-size: 18px; }
-    .line-shape { font-family: ui-monospace, Consolas, monospace; font-size: 18px; white-space: nowrap; }
+    .line-shape { display: flex; align-items: center; gap: 10px; width: 142px; }
+    .line-symbol { display: flex; align-items: center; gap: 14px; width: 104px; }
+    .line-segment { flex: 1 1 0; height: 8px; border-radius: 2px; background: #342517; }
+    .line-state { width: 28px; color: #715d42; font-size: 15px; white-space: nowrap; }
     .line-value { font-weight: 700; color: #8b5e25; }
     .line-text { line-height: 1.58; font-size: 17px; }
     p { line-height: 1.72; font-size: 18px; margin: 8px 0; }
@@ -102,12 +105,18 @@
     </div>
 
     <div class="section">
-      <h2>六爻结果（上爻在上，初爻在下）</h2>
+      <h2>六爻结果</h2>
       <div class="lines">
       {% for row in line_rows %}
         <div class="line-row {% if row.is_moving %}moving{% endif %}">
           <div class="line-label">{{ row.label }}</div>
-          <div class="line-shape">{{ row.shape }}</div>
+          <div class="line-shape">
+            <div class="line-symbol">
+              <span class="line-segment"></span>
+              {% if not row.is_yang %}<span class="line-segment"></span>{% endif %}
+            </div>
+            <span class="line-state">{% if row.is_moving %}动{% else %}静{% endif %}</span>
+          </div>
           <div class="line-value">{{ row.value }} · {{ row.name }}</div>
           <div class="line-text">{{ row.change }}；{{ row.yaoci }}</div>
         </div>

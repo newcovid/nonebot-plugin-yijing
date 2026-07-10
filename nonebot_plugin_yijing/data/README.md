@@ -4,6 +4,15 @@
 
 本目录按“底层资料库先完整建模、内容逐步校勘补录”的原则组织。数据文件以 JSON 为主，配套 JSON Schema 位于 `schemas/`，用于约束资料结构和后续补录边界。
 
+运行时配置不在本目录单独维护。完整 `.env` 示例和所有配置项说明见项目根目录
+[`../../README.md`](../../README.md#配置) 与 [`../../.env.example`](../../.env.example)。
+与资料和历史存储直接相关的配置包括：
+
+- `YIJING_STORE_QUESTION`：是否在数据库中保存原始问题文本。
+- `YIJING_USER_HASH_SALT`：用户 ID 哈希盐，生产环境应改成私有随机字符串。
+- `YIJING_HISTORY_MINUTES_FOR_LLM`：传给 LLM 预处理的近期历史窗口。
+- `YIJING_LLM_ENABLED`、`YIJING_LLM_BASE_URL`、`YIJING_LLM_API_KEY`、`YIJING_LLM_MODEL`：是否以及如何把问题、卦象资料和近期历史发送给第三方模型服务。
+
 ## 当前状态
 
 当前资料库已可运行，并完成核心经传层补录：

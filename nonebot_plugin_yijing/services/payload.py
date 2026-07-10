@@ -23,6 +23,16 @@ METHOD_NAME = {
 }
 
 
+def _yaoci_body(item: dict[str, Any], label: str) -> str:
+    text = str(item.get("text") or "爻辞待补录。").strip()
+    stored_label = str(item.get("line_label") or label)
+    for prefix in dict.fromkeys((stored_label, label)):
+        if prefix and text.startswith(prefix):
+            body = text[len(prefix) :].lstrip(" ：:，,、")
+            return body or text
+    return text
+
+
 def classic_text_for(resolved: ResolvedHexagram) -> dict[str, Any]:
     primary = get_hexagram_text(int(resolved.primary["seq"]))
     changed = get_hexagram_text(int(resolved.changed["seq"])) if resolved.changed else None
@@ -51,16 +61,18 @@ def build_record_card_payload(
         primary_bit = resolved.primary_bits[pos - 1]
         changed_bit = resolved.changed_bits[pos - 1]
         yaoci = primary_text["yaoci"][pos - 1]
+        label = line_label(pos, primary_bit)
         rows.append(
             {
                 "position": pos,
-                "label": line_label(pos, primary_bit),
+                "label": label,
                 "shape": render_line_shape(primary_bit, value in (6, 9)),
                 "changed_shape": render_line_shape(changed_bit, False),
+                "is_yang": bool(primary_bit),
                 "value": value,
                 "name": LINE_NAME[value],
                 "change": LINE_CHANGE[value],
-                "yaoci": yaoci.get("text", "爻辞待补录。"),
+                "yaoci": _yaoci_body(yaoci, label),
                 "is_moving": value in (6, 9),
             }
         )

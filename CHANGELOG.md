@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.1.4 - 2026-07-10
+
+### Added
+
+- Add `易经清理 ID` and `易经清理 全部` for user-scoped history cleanup in the
+  current group without resetting quota or cooldown state.
+
+### Changed
+
+- Render yin and yang lines with fixed-width geometric segments so their left and right
+  edges align consistently.
+- Keep the six-line result heading concise and remove the redundant orientation note.
+- Honor the configured render width and scale, and document the complete runtime ENV
+  reference in the Chinese and English guides.
+
+### Fixed
+
+- Use canonical line labels such as `九五` and `六五` throughout runtime payloads and
+  structured line-slot data.
+- Avoid repeating line labels in the classical six-line section when the source text
+  already includes its own label.
+- Confirm and regression-test that similar-question detection uses the configured
+  minute-based window, with a 30-minute default.
+
 ## 0.1.3 - 2026-07-09
 
 ### Added

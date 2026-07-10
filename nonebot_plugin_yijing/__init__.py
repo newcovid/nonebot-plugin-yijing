@@ -26,6 +26,7 @@ __plugin_meta__ = PluginMetadata(
 解卦 <卦名/卦象>
 易经历史
 易经记录 <ID>
+易经清理 <ID|全部>
 随机一卦
 易经设置
 """.strip(),

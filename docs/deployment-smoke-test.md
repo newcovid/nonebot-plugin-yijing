@@ -42,7 +42,7 @@ runtime image.
 Install the exact package version under test:
 
 ```bash
-python -m pip install -U nonebot-plugin-yijing==0.1.2
+python -m pip install -U nonebot-plugin-yijing==0.1.4
 ```
 
 For commit-level validation before a release:

@@ -5,7 +5,7 @@ import secrets
 from datetime import timedelta
 from typing import Any
 
-from sqlalchemy import Select, func, select
+from sqlalchemy import Select, delete, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from ..config import plugin_config
@@ -175,6 +175,24 @@ async def all_user_records(
 ) -> list[CastRecord]:
     stmt = _record_stmt(group_id, user_hash).limit(limit)
     return list((await session.execute(stmt)).scalars().all())
+
+
+async def delete_user_records(
+    session: AsyncSession,
+    *,
+    group_id: str,
+    user_hash: str,
+    record_id: str | None = None,
+) -> int:
+    stmt = delete(CastRecord).where(
+        CastRecord.group_id == group_id,
+        CastRecord.user_id_hash == user_hash,
+    )
+    if record_id is not None:
+        stmt = stmt.where(CastRecord.id == record_id.upper())
+    result = await session.execute(stmt)
+    await session.commit()
+    return max(0, int(result.rowcount or 0))
 
 
 async def find_similar_recent(

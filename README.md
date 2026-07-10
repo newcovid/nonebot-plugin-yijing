@@ -91,15 +91,28 @@ ALEMBIC_STARTUP_CHECK=false
 
 ## 配置
 
-### 基础配置
+配置写入 NoneBot 项目的 `.env` 或对应环境配置文件。完整示例见 [`.env.example`](.env.example)。
+
+### ENV 示例
 
 ```env
+# NoneBot / ORM
 SQLALCHEMY_DATABASE_URL=sqlite+aiosqlite:///./data/yijing.sqlite3
 
+# 仅在本地排查 ORM 迁移问题时临时使用；常规部署不要关闭。
+# ALEMBIC_STARTUP_CHECK=false
+
+# access-control
 ACCESS_CONTROL_AUTO_PATCH_ENABLED=true
 ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED=true
 ACCESS_CONTROL_REPLY_ON_RATE_LIMITED_ENABLED=true
 
+# htmlrender / Playwright: local development baseline
+RENDER_BACKEND=playwright
+RENDER_STARTUP_MODE=probe
+RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":false,"close_on_exit":true,"launch_args":"--no-sandbox --disable-dev-shm-usage --disable-gpu"}
+
+# Yijing global defaults; group settings are initialized from these values and can be changed by command.
 YIJING_DEFAULT_METHOD=coin
 YIJING_POSITIVE_FACE=正
 YIJING_NEGATIVE_FACE=反
@@ -109,13 +122,55 @@ YIJING_GROUP_DEFAULT_ENABLED=true
 YIJING_COOLDOWN_SECONDS=60
 YIJING_DAILY_LIMIT_PER_USER=10
 YIJING_DUPLICATE_WINDOW_MINUTES=30
+YIJING_HISTORY_MINUTES_FOR_LLM=120
+YIJING_MANUAL_SESSION_TIMEOUT_SECONDS=900
 YIJING_STORE_QUESTION=true
+YIJING_USER_HASH_SALT=change-me
+YIJING_RENDER_SCALE=2.0
+YIJING_RENDER_WIDTH=900
 
 YIJING_LLM_ENABLED=false
 # YIJING_LLM_BASE_URL=https://api.openai.com/v1
 # YIJING_LLM_API_KEY=sk-xxx
 # YIJING_LLM_MODEL=gpt-4o-mini
+# YIJING_LLM_TIMEOUT_SECONDS=30
 ```
+
+### 配置项说明
+
+| 配置项 | 默认值 | 说明 |
+| --- | --- | --- |
+| `SQLALCHEMY_DATABASE_URL` | 由宿主项目决定 | `nonebot-plugin-orm` 数据库连接串；SQLite 部署可使用示例值。 |
+| `ALEMBIC_STARTUP_CHECK` | `true` | ORM 启动迁移检查；只建议在本地临时排查迁移问题时设为 `false`。 |
+| `ACCESS_CONTROL_AUTO_PATCH_ENABLED` | access-control 默认值 | 是否自动接入 access-control 权限补丁；推荐保持 `true`。 |
+| `ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED` | access-control 默认值 | 权限拒绝时是否由 access-control 回复提示。 |
+| `ACCESS_CONTROL_REPLY_ON_RATE_LIMITED_ENABLED` | access-control 默认值 | 被 access-control 限流时是否回复提示。 |
+| `RENDER_BACKEND` | htmlrender 默认值 | htmlrender 后端；本插件推荐 `playwright`。 |
+| `RENDER_STARTUP_MODE` | htmlrender 默认值 | htmlrender 启动时浏览器探测策略；示例使用 `probe`。 |
+| `RENDER_STORAGE_PATH` | htmlrender 默认值 | Playwright 浏览器缓存/安装目录；Docker 预装浏览器时可设为 `/ms-playwright`。 |
+| `RENDER_PLAYWRIGHT` | htmlrender 默认值 | Playwright JSON 配置，包括浏览器引擎、是否跳过安装和启动参数。 |
+| `YIJING_DEFAULT_METHOD` | `coin` | 新群默认起卦方式；可选 `coin` 三枚铜钱法，或 `yarrow` 大衍筮法模拟。 |
+| `YIJING_POSITIVE_FACE` | `正` | 手动铜钱输入中代表正面的文本。 |
+| `YIJING_NEGATIVE_FACE` | `反` | 手动铜钱输入中代表反面的文本。 |
+| `YIJING_POSITIVE_VALUE` | `3` | 正面计数值；默认与传统铜钱法的正面数值一致。 |
+| `YIJING_NEGATIVE_VALUE` | `2` | 反面计数值；默认与传统铜钱法的反面数值一致。 |
+| `YIJING_GROUP_DEFAULT_ENABLED` | `true` | 新群首次写入群配置时是否默认启用插件。 |
+| `YIJING_COOLDOWN_SECONDS` | `60` | 新群默认群级起卦冷却秒数；`0` 表示不启用冷却。 |
+| `YIJING_DAILY_LIMIT_PER_USER` | `10` | 新群默认单用户 24 小时起卦次数上限，最小值为 `1`。 |
+| `YIJING_DUPLICATE_WINDOW_MINUTES` | `30` | 新群默认短期相似问题检测窗口，单位分钟。 |
+| `YIJING_HISTORY_MINUTES_FOR_LLM` | `120` | 新群默认传给 LLM 预处理的近期历史窗口，单位分钟。 |
+| `YIJING_MANUAL_SESSION_TIMEOUT_SECONDS` | `900` | 手动起卦会话超时时间，单位秒，最小值为 `60`。 |
+| `YIJING_STORE_QUESTION` | `true` | 是否保存原始问题文本；设为 `false` 时仍保存卦象、哈希和结构化结果。 |
+| `YIJING_USER_HASH_SALT` | `change-me` | 用户 ID 哈希盐；生产环境应改成私有随机字符串，修改后旧记录无法再按同一用户哈希匹配。 |
+| `YIJING_RENDER_SCALE` | `2.0` | 长图截图倍率，范围 `1.0` 到 `4.0`；越高图片越清晰也越耗资源。 |
+| `YIJING_RENDER_WIDTH` | `900` | 长图视口宽度，范围 `640` 到 `1600`，影响图片排版宽度。 |
+| `YIJING_LLM_ENABLED` | `false` | 全局是否启用 OpenAI 兼容 LLM；还需要群配置开启 LLM 才会在群内使用。 |
+| `YIJING_LLM_BASE_URL` | 空 | OpenAI 兼容接口 base URL，例如 `https://api.openai.com/v1`。 |
+| `YIJING_LLM_API_KEY` | 空 | LLM API Key；不要提交到仓库。 |
+| `YIJING_LLM_MODEL` | 空 | 调用的模型名，例如 `gpt-4o-mini` 或你的兼容服务模型名。 |
+| `YIJING_LLM_TIMEOUT_SECONDS` | `30` | LLM 请求总超时秒数，范围 `3` 到 `120`。 |
+
+群配置表会在群首次使用时从这些 `YIJING_*` 全局默认值初始化。其中启用状态、默认起卦方式、冷却、日限额、重复窗口、LLM 历史窗口和本群 LLM 开关，可通过 `易经设置` 在群内继续调整。
 
 ### htmlrender / Playwright
 
@@ -152,6 +207,8 @@ RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":true,"close_on_exi
 | `解卦 卦象` | 查询/解释指定卦象 |
 | `易经历史` | 查看自己的历史记录 |
 | `易经记录 ID` | 查看指定记录 |
+| `易经清理 ID` | 清理自己在当前群的指定起卦记录 |
+| `易经清理 全部` | 清理自己在当前群的全部起卦历史，不重置日限额和群冷却 |
 | `随机一卦` | 随机生成一个观察主题，保存历史但不占日限额、不触发冷却 |
 | `易经设置` | 查看或修改本群配置 |
 
