@@ -97,42 +97,77 @@ ALEMBIC_STARTUP_CHECK=false
 
 ```env
 # NoneBot / ORM
+# nonebot-plugin-orm 使用的 SQLite 数据库地址；使用其他数据库时请替换。
 SQLALCHEMY_DATABASE_URL=sqlite+aiosqlite:///./data/yijing.sqlite3
 
-# 仅在本地排查 ORM 迁移问题时临时使用；常规部署不要关闭。
+# 仅在本地排查 ORM 迁移失败时关闭启动迁移检查，常规部署不要设置。
 # ALEMBIC_STARTUP_CHECK=false
 
 # access-control
+# 自动为插件命令接入 access-control 的权限与限流规则。
 ACCESS_CONTROL_AUTO_PATCH_ENABLED=true
+# 权限不足时向用户回复拒绝提示。
 ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED=true
+# 命令触发 access-control 限流时向用户回复提示。
 ACCESS_CONTROL_REPLY_ON_RATE_LIMITED_ENABLED=true
 
-# htmlrender / Playwright: local development baseline
+# htmlrender / Playwright 本地开发基线
+# 使用 Playwright 作为 HTML 截图渲染后端。
 RENDER_BACKEND=playwright
+# htmlrender 启动时探测浏览器是否可用。
 RENDER_STARTUP_MODE=probe
+# 使用本地 Chromium；缺失时允许安装，并附加适合容器的启动参数。
 RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":false,"close_on_exit":true,"launch_args":"--no-sandbox --disable-dev-shm-usage --disable-gpu"}
 
-# Yijing global defaults; group settings are initialized from these values and can be changed by command.
+# Docker 镜像已将 Chromium 预装到 /ms-playwright 时，可改用以下三项。
+# 从容器内的这个路径读取预装 Playwright 浏览器。
+# RENDER_STORAGE_PATH=/ms-playwright
+# 探测预装浏览器是否可用；与上方本地配置相同，可直接保留。
+# RENDER_STARTUP_MODE=probe
+# 跳过浏览器安装，因为生产镜像已经包含 Chromium。
+# RENDER_PLAYWRIGHT={"engine":"chromium","skip_browser_install":true,"close_on_exit":true,"cleanup_legacy_cache":true,"launch_args":"--no-sandbox --disable-dev-shm-usage --disable-gpu"}
+
+# 易经插件全局默认值
+# 新群首次初始化时的默认起卦方式：coin（铜钱）或 yarrow（大衍）。
 YIJING_DEFAULT_METHOD=coin
+# 手动铜钱起卦中表示正面的文字。
 YIJING_POSITIVE_FACE=正
+# 手动铜钱起卦中表示反面的文字。
 YIJING_NEGATIVE_FACE=反
+# 铜钱正面的计数值。
 YIJING_POSITIVE_VALUE=3
+# 铜钱反面的计数值。
 YIJING_NEGATIVE_VALUE=2
+# 新群首次初始化时是否默认启用插件。
 YIJING_GROUP_DEFAULT_ENABLED=true
+# 每次起卦后的群级冷却秒数；设为 0 可关闭冷却。
 YIJING_COOLDOWN_SECONDS=60
+# 单用户在单群滚动 24 小时内允许的最大起卦次数。
 YIJING_DAILY_LIMIT_PER_USER=10
+# 相似问题检测窗口，单位分钟。
 YIJING_DUPLICATE_WINDOW_MINUTES=30
+# 发送给 LLM 预处理的近期历史窗口，单位分钟。
 YIJING_HISTORY_MINUTES_FOR_LLM=120
+# 引导式手动起卦会话的超时秒数。
 YIJING_MANUAL_SESSION_TIMEOUT_SECONDS=900
+# 为 true 时在历史记录中保存原始问题文本。
 YIJING_STORE_QUESTION=true
+# 用户 ID 哈希盐；生产环境必须替换成私有随机值。
 YIJING_USER_HASH_SALT=change-me
+# 图片渲染倍率，允许范围 1.0 到 4.0。
 YIJING_RENDER_SCALE=2.0
+# 长图渲染视口宽度，允许范围 640 到 1600 像素。
 YIJING_RENDER_WIDTH=900
 
+# 是否在全局启用 OpenAI 兼容 LLM 集成。
 YIJING_LLM_ENABLED=false
+# 可选 OpenAI 兼容接口的基础 URL。
 # YIJING_LLM_BASE_URL=https://api.openai.com/v1
+# 可选 LLM 服务商的 API Key；不要提交真实密钥。
 # YIJING_LLM_API_KEY=sk-xxx
+# 可选 LLM 服务商提供的模型名称。
 # YIJING_LLM_MODEL=gpt-4o-mini
+# 单次 LLM 请求总超时秒数，允许范围 3 到 120。
 # YIJING_LLM_TIMEOUT_SECONDS=30
 ```
 

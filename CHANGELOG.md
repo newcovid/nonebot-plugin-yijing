@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- Migrate package licensing metadata to the PEP 639 SPDX format and require a compatible
+  setuptools build backend.
+- Add a field-specific comment before every setting in the README ENV samples and
+  `.env.example` so copied configurations remain self-explanatory.
+
 ## 0.1.4 - 2026-07-10
 
 ### Added

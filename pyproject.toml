@@ -7,12 +7,12 @@ authors = [
 ]
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
 keywords = ["nonebot", "nonebot2", "yijing", "iching", "zhouyi", "qqbot"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Framework :: AsyncIO",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -50,7 +50,7 @@ Repository = "https://github.com/newcovid/nonebot-plugin-yijing"
 Issues = "https://github.com/newcovid/nonebot-plugin-yijing/issues"
 
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=77.0.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
