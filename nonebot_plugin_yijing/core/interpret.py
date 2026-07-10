@@ -4,6 +4,7 @@ from typing import Any
 
 from .data import get_hexagram_text, relations
 from .hexagram import ResolvedHexagram
+from .llm_models import InterpretationResult, PreprocessResult, model_dump
 
 SENSITIVE_KEYWORDS = {
     "疾病", "病", "癌", "手术", "吃药", "药", "法律", "官司", "诉讼", "判刑", "投资", "股票", "基金",
@@ -34,14 +35,15 @@ def local_preprocess(question: str | None, history: list[dict[str, Any]] | None 
     sensitive = detect_sensitive(q)
     if sensitive:
         warnings.append("问题涉及敏感领域，结果仅供传统文化文本解释；请咨询专业人士。")
-    return {
-        "allowed": allowed,
-        "reason": reason,
-        "warnings": warnings,
-        "sensitive_keywords": sensitive,
-        "llm_used": False,
-        "history_count": len(history or []),
-    }
+    return model_dump(
+        PreprocessResult(
+            allowed=allowed,
+            reason=reason,
+            warnings=warnings,
+            sensitive_keywords=sensitive,
+            history_count=len(history or []),
+        )
+    )
 
 
 def build_local_interpretation(
@@ -60,7 +62,7 @@ def build_local_interpretation(
         summary = f"所问之事以 {p_name} 为当前格局，动爻在 {','.join(map(str, moving))} 爻，变化趋势指向 {c_name}。"
     else:
         summary = f"所问之事以 {p_name} 为主，无动爻，宜重点参考本卦卦辞与大象。"
-    advice = []
+    advice: list[str] = []
     if moving:
         advice.append("先看本卦所示处境，再看动爻提示的关键节点，最后看变卦所示趋势。")
     else:
@@ -70,13 +72,29 @@ def build_local_interpretation(
     if preprocess and preprocess.get("sensitive_keywords"):
         risks.append("涉及疾病、法律、投资、人身安全等问题时，请咨询专业人士。")
     rels = [r for r in relations() if r["hexagram_seq"] == int(resolved.primary["seq"])]
-    return {
-        "summary": summary,
-        "current_situation": f"{p_name}：{primary_text['guaci']['text']}",
-        "change_trend": f"变卦：{c_name}" if resolved.changed else "无变卦：局势重在守持当前原则。",
-        "advice": advice,
-        "risks": risks,
-        "relations": rels[:3],
-        "llm_used": False,
-        "disclaimer": "本结果为《周易》文本与传统文化规则的娱乐性解释，不构成医疗、法律、投资或安全建议。",
-    }
+    lower = resolved.primary.get("lower_trigram", "")
+    upper = resolved.primary.get("upper_trigram", "")
+    changing_focus = (
+        f"第 {','.join(map(str, moving))} 爻为动爻，应结合对应爻辞观察变化节点。"
+        if moving
+        else "本次无动爻，重点观察本卦所示的当前格局。"
+    )
+    return model_dump(
+        InterpretationResult(
+            summary=summary,
+            answer_to_question=summary,
+            hexagram_structure=f"{p_name}卦由{lower}下、{upper}上构成。",
+            current_situation=f"{p_name}：{primary_text['guaci']['text']}",
+            changing_line_focus=changing_focus,
+            change_trend=(
+                f"变卦：{c_name}" if resolved.changed else "无变卦：局势重在守持当前原则。"
+            ),
+            actionable_advice=advice,
+            risks=risks,
+            relations=rels[:3],
+            disclaimer=(
+                "本结果为《周易》文本与传统文化规则的娱乐性解释，"
+                "不构成医疗、法律、投资或安全建议。"
+            ),
+        )
+    )

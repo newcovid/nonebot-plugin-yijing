@@ -20,6 +20,18 @@ The plugin works with local rule-based interpretation by default. An optional Op
 - Timestamped casting records for cooldowns, daily limits, and short-term similar-question checks.
 - Data model prepared for the classical corpus, relations, sources, casting rules, interpretation rules, and later traditional-method extensions.
 
+## Preview
+
+### Cast record with synthesized LLM interpretation
+
+![Cast record with synthesized LLM interpretation](https://raw.githubusercontent.com/newcovid/nonebot-plugin-yijing/main/docs/images/feature-cast.png)
+
+| Command help | History |
+| --- | --- |
+| ![Command help](https://raw.githubusercontent.com/newcovid/nonebot-plugin-yijing/main/docs/images/feature-help.png) | ![History](https://raw.githubusercontent.com/newcovid/nonebot-plugin-yijing/main/docs/images/feature-history.png) |
+| Manual casting | Group settings |
+| ![Manual casting](https://raw.githubusercontent.com/newcovid/nonebot-plugin-yijing/main/docs/images/feature-manual.png) | ![Group settings](https://raw.githubusercontent.com/newcovid/nonebot-plugin-yijing/main/docs/images/feature-settings.png) |
+
 ## Installation
 
 ### NoneBot Plugin Store
@@ -73,6 +85,8 @@ your deployment. See [`.env.example`](.env.example) for the complete sample.
 # NoneBot / ORM
 # SQLite database URL used by nonebot-plugin-orm; replace it when using another database.
 SQLALCHEMY_DATABASE_URL=sqlite+aiosqlite:///./data/yijing.sqlite3
+# Rendering backend used by nonebot-plugin-htmlrender.
+RENDER_BACKEND=playwright
 
 # access-control
 # Automatically apply access-control permission and rate-limit rules to plugin matchers.
@@ -131,6 +145,7 @@ YIJING_LLM_ENABLED=false
 | Key | Default | Description |
 | --- | --- | --- |
 | `SQLALCHEMY_DATABASE_URL` | Set by the host project | Database URL for `nonebot-plugin-orm`; the sample value is suitable for SQLite deployments. |
+| `RENDER_BACKEND` | htmlrender default | Image renderer backend; this plugin recommends and validates `playwright`. |
 | `ACCESS_CONTROL_AUTO_PATCH_ENABLED` | access-control default | Whether access-control automatically patches matchers; keeping `true` is recommended. |
 | `ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED` | access-control default | Whether access-control replies when permission is denied. |
 | `ACCESS_CONTROL_REPLY_ON_RATE_LIMITED_ENABLED` | access-control default | Whether access-control replies when a request is rate-limited. |
@@ -170,6 +185,7 @@ and group-level LLM switch can later be changed with `易经设置`.
 | `起卦 问题 铜钱` | Use the three-coin method explicitly |
 | `起卦 问题 大衍` | Use probabilistic yarrow-stalk simulation |
 | `起卦 问题 手动` | Start guided manual casting |
+| `起卦 问题 [method] --force` | Bypass repeat reuse only; three-don'ts, quota, and cooldown still apply |
 | `解卦 卦象` | Query or interpret a specified hexagram |
 | `易经历史` | View your own history |
 | `易经记录 ID` | View a specific record |
@@ -246,12 +262,23 @@ When LLM support is enabled, `起卦 问题` runs preprocessing before casting:
 - Compares parameterized recent history to find short-term repeated or similar questions.
 - Marks sensitive areas such as medical, legal, investment, and personal-safety topics.
 
+After an allowed question is cast, the plugin makes a second LLM request with the question
+and the minimum required primary, changing-line, changed-hexagram, and classical context.
+The result card identifies LLM interpretation, local interpretation, or safe fallback and
+separates the direct answer, structure, changing-line focus, trend, actions, and risks.
+
 The LLM endpoint is OpenAI-compatible `/chat/completions`. Failures fall back to local rules and do not block casting.
+
+When a similar question is found in the short-term window, the previous full record card is
+returned without an LLM request, a new record, or quota usage. Append `--force` only when a
+fresh cast is genuinely required.
 
 Privacy notes:
 
 - When `YIJING_LLM_ENABLED=false`, no LLM request is sent.
 - When LLM is enabled, the user question, hexagram data, preprocessing fields, and selected recent history may be sent to the configured third-party model provider.
+- Normal history context contains question text only; sensitive questions send no history. Group, user, bot, and record identifiers are never sent to the LLM.
+- The first `易经设置 LLM 开启` in a group enables LLM immediately and shows a one-time privacy notice.
 - `YIJING_STORE_QUESTION=true` stores the original question text in the database for history review and similar-question checks.
 - Set `YIJING_STORE_QUESTION=false` to reduce sensitive text storage. History keeps hexagram and structured result data, but not the original question text.
 - The plugin only provides local fallback logic. It does not proxy or change the model provider's data-handling policy. Add group notices or privacy text according to the provider you use.

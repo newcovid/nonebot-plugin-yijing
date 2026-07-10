@@ -1,2 +1,18 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><style>
-body{margin:0;padding:32px;background:#efe7d3;font-family:"Microsoft YaHei",sans-serif;color:#2b2118}.page{width:820px;margin:auto;background:#fffaf0;border:2px solid #d8c29a;border-radius:26px;padding:34px;box-shadow:0 18px 60px rgba(79,55,26,.24)}h1{font-size:34px;margin:0 0 18px}table{width:100%;border-collapse:collapse;font-size:18px;background:#fffdf5;border-radius:16px;overflow:hidden}td,th{padding:14px;border-bottom:1px solid #e3d0aa;text-align:left}.cmd{margin-top:18px;font-size:16px;line-height:1.8;color:#715d42}</style></head><body><div class="page"><h1>易经设置</h1><table><tr><th>项目</th><th>当前值</th></tr>{% for row in rows %}<tr><td>{{ row.name }}</td><td>{{ row.value }}</td></tr>{% endfor %}</table><div class="cmd">支持：易经设置 开启｜关闭｜冷却 秒数｜日限额 次数｜重复窗口 分钟｜历史窗口 分钟｜默认 铜钱/大衍｜LLM 开启/关闭。设置类命令仅限群主、管理员或 superuser 使用。</div></div></body></html>
+{% extends "base.html" %}
+{% block extra_style %}
+<style>
+  .page { width: 820px; }
+  table { width: 100%; overflow: hidden; background: var(--paper-soft); border: 1px solid var(--border-soft); border-collapse: separate; border-spacing: 0; border-radius: 16px; font-size: 18px; }
+  td, th { padding: 14px; border-bottom: 1px solid var(--border-soft); text-align: left; }
+  th { color: #5b3b15; background: #f4ead3; }
+  tr:last-child td { border-bottom: 0; }
+  .cmd { margin-top: 18px; padding: 14px; color: var(--ink-soft); background: #f4ead3; border-radius: 12px; font-size: 16px; line-height: 1.8; }
+</style>
+{% endblock %}
+{% block content %}
+<main class="page">
+  <h1>易经设置</h1>
+  <table><tr><th>项目</th><th>当前值</th></tr>{% for row in rows %}<tr><td>{{ row.name }}</td><td>{{ row.value }}</td></tr>{% endfor %}</table>
+  <div class="cmd">支持：易经设置 开启｜关闭｜冷却 秒数｜日限额 次数｜重复窗口 分钟｜历史窗口 分钟｜默认 铜钱/大衍｜LLM 开启/关闭。设置类命令仅限群主、管理员或 superuser 使用。</div>
+</main>
+{% endblock %}

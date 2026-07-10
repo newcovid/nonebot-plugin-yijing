@@ -18,6 +18,7 @@ def test_group_config_has_window_settings() -> None:
 
     assert "duplicate_window_minutes" in columns
     assert "history_minutes_for_llm" in columns
+    assert "llm_privacy_notice_shown" in columns
     assert columns["duplicate_window_minutes"].default is not None
     assert columns["history_minutes_for_llm"].default is not None
 

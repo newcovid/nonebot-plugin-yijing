@@ -13,15 +13,13 @@ from nonebot_plugin_orm import async_scoped_session
 
 from ..config import plugin_config
 from ..core.caster import (
-    calculate_yarrow_change,
     cast_coin,
     cast_random_hexagram,
     cast_yarrow,
-    parse_manual_coin_line,
-    yarrow_line_value,
 )
 from ..core.hexagram import resolve_by_lines
 from ..core.interpret import local_preprocess
+from ..core.manual import advance_manual_coin, advance_manual_yarrow, parse_yarrow_split
 from ..permissions import (
     cast_service,
     history_service,
@@ -35,6 +33,7 @@ from ..render.message import image_message
 from ..services.llm import (
     interpret_hexagram_query,
     interpret_with_llm,
+    llm_config_ready,
     parse_hexagram_query,
     preprocess_question,
 )
@@ -106,8 +105,10 @@ async def _notice(matcher: Matcher, title: str, content: str, hint: str = "") ->
     await _finish_template(matcher, "notice.html", {"title": title, "content": content, "hint": hint})
 
 
-def _parse_cast_body(body: str) -> tuple[str, str]:
-    body = body.strip()
+def _parse_cast_body(body: str) -> tuple[str, str, bool]:
+    parts = body.strip().split()
+    force = "--force" in parts
+    body = " ".join(part for part in parts if part != "--force")
     method = "default"
     suffix_map = [
         ("大衍", "yarrow"),
@@ -122,8 +123,8 @@ def _parse_cast_body(body: str) -> tuple[str, str]:
             body = body[: -len(suffix)].strip()
             break
     if not body and method != "manual":
-        return "", method
-    return body, method
+        return "", method, force
+    return body, method, force
 
 
 def _manual_key(bot: Bot, event: Event) -> tuple[str, str, str, str]:
@@ -144,15 +145,7 @@ def _touch_manual(state: dict[str, Any]) -> None:
     state["updated_at"] = time.time()
 
 
-def _parse_yarrow_split(text: str) -> tuple[int, int]:
-    parts = [part for part in text.replace("，", " ").replace(",", " ").split() if part]
-    if len(parts) != 2:
-        raise ValueError("请只输入左右两堆数量，例如：24 25。")
-    try:
-        left, right = int(parts[0]), int(parts[1])
-    except ValueError as exc:
-        raise ValueError("左右两堆数量必须是整数。") from exc
-    return left, right
+_parse_yarrow_split = parse_yarrow_split
 
 
 def _yarrow_prompt(state: dict[str, Any]) -> tuple[str, str]:
@@ -202,6 +195,16 @@ def _parse_history_cleanup_target(body: str) -> str | None:
     raise ValueError("请使用：易经清理 YJ-XXXXXXXX；全量清理请使用：易经清理 全部")
 
 
+def _set_group_llm_enabled(cfg: Any, enabling: bool) -> bool:
+    """Set the group switch and return whether the one-time privacy notice is due."""
+
+    cfg.llm_enabled = enabling
+    if enabling and not cfg.llm_privacy_notice_shown:
+        cfg.llm_privacy_notice_shown = True
+        return True
+    return False
+
+
 def _history_brief(records: list[Any]) -> list[dict[str, Any]]:
     items = []
     for r in records:
@@ -231,6 +234,7 @@ async def _run_cast(
     manual_coins: list[list[str]] | None = None,
     manual_trace: dict[str, Any] | None = None,
     random_mode: bool = False,
+    force_recast: bool = False,
 ) -> None:
     group_id = get_group_id(event)
     user_hash = hash_user_id(get_user_id(event))
@@ -239,6 +243,23 @@ async def _run_cast(
         await _notice(matcher, "易经插件已关闭", "本群已关闭易经插件。")
     if method == "default":
         method = cfg.default_method
+
+    if question and not random_mode and not force_recast:
+        similar = await find_similar_recent(
+            session,
+            group_id=group_id,
+            user_hash=user_hash,
+            question=question,
+            minutes=cfg.duplicate_window_minutes,
+        )
+        if similar:
+            record, _score = similar
+            await _finish_template(
+                matcher,
+                "card.html",
+                build_record_payload_from_dict(record_to_dict(record)),
+            )
+            return
 
     if random_mode:
         preprocess = {
@@ -265,22 +286,6 @@ async def _run_cast(
                 "本次未起卦",
                 str(preprocess.get("reason") or "根据三不占预处理规则，本次不建议起卦。"),
                 "你可以重新整理成一个明确、正当且确有疑问的问题。",
-            )
-        similar = await find_similar_recent(
-            session,
-            group_id=group_id,
-            user_hash=user_hash,
-            question=question,
-            minutes=cfg.duplicate_window_minutes,
-        )
-        if similar:
-            record, score = similar
-            await _notice(
-                matcher,
-                "发现短期相似问题",
-                f"{cfg.duplicate_window_minutes} 分钟内你已问过相近问题。\n"
-                f"记录ID：{record.id}\n相似度：{score:.2f}\n建议使用：易经记录 {record.id}",
-                "如确实要重新起卦，可稍后再问，或由管理员调整冷却/重复窗口策略。",
             )
     else:
         preprocess = local_preprocess(question or "", [])
@@ -385,7 +390,7 @@ async def _run_cast(
 
 HELP_COMMANDS = [
     {"cmd": "易经帮助", "desc": "查看所有交互命令。"},
-    {"cmd": "起卦 问题", "desc": "使用本群默认起卦方式自动起卦并输出长图。"},
+    {"cmd": "起卦 问题 [--force]", "desc": "默认起卦；--force 仅用于跳过重复问题复用。"},
     {"cmd": "起卦 问题 铜钱", "desc": "精确指定三枚铜钱法。"},
     {"cmd": "起卦 问题 大衍", "desc": "使用大衍筮法概率模拟。"},
     {"cmd": "起卦 问题 手动", "desc": "进入手动引导：铜钱逐爻录入，大衍按十八变录入左右分堆。"},
@@ -421,7 +426,7 @@ async def _cast(bot: Bot, event: Event, matcher: Matcher, session: async_scoped_
     body = parse_command_body(raw, "起卦")
     if raw.strip().startswith("算卦") or raw.strip().startswith("/算卦"):
         body = parse_command_body(raw, "算卦")
-    question, method = _parse_cast_body(body)
+    question, method, force = _parse_cast_body(body)
     if method == "manual":
         if not question:
             await _notice(matcher, "缺少问题", "请使用：起卦 你的问题 手动")
@@ -429,8 +434,26 @@ async def _cast(bot: Bot, event: Event, matcher: Matcher, session: async_scoped_
         existing = _MANUAL_SESSIONS.get(key)
         if existing and not _manual_expired(existing):
             await _notice(matcher, "已有手动起卦", "你当前已有未完成的手动起卦。发送“取消”可退出。")
+        cfg = await get_or_create_group_config(session, get_group_id(event))
+        if not force:
+            similar = await find_similar_recent(
+                session,
+                group_id=get_group_id(event),
+                user_hash=hash_user_id(get_user_id(event)),
+                question=question,
+                minutes=cfg.duplicate_window_minutes,
+            )
+            if similar:
+                record, _score = similar
+                await _finish_template(
+                    matcher,
+                    "card.html",
+                    build_record_payload_from_dict(record_to_dict(record)),
+                )
+                return
         _MANUAL_SESSIONS[key] = {
             "question": question,
+            "force_recast": True,
             "stage": "method",
             "started_at": time.time(),
             "updated_at": time.time(),
@@ -444,7 +467,15 @@ async def _cast(bot: Bot, event: Event, matcher: Matcher, session: async_scoped_
         )
     if not question:
         await _notice(matcher, "缺少问题", "请使用：起卦 你的问题\n例如：起卦 此行去山西实习一程怎么样")
-    await _run_cast(matcher=matcher, bot=bot, event=event, session=session, question=question, method=method)
+    await _run_cast(
+        matcher=matcher,
+        bot=bot,
+        event=event,
+        session=session,
+        question=question,
+        method=method,
+        force_recast=force,
+    )
 
 
 @query_matcher.handle()
@@ -546,6 +577,7 @@ async def _settings(event: Event, matcher: Matcher, session: async_scoped_sessio
     cfg = await get_or_create_group_config(session, group_id)
     body = parse_command_body(get_plain_text(event), "易经设置").strip()
     changed = False
+    show_llm_privacy_notice = False
     if body:
         if not event_is_group_admin(event):
             await _notice(matcher, "无权限", "设置类命令仅允许群主、管理员或 superuser 使用。")
@@ -573,7 +605,8 @@ async def _settings(event: Event, matcher: Matcher, session: async_scoped_sessio
                 cfg.default_method = "yarrow" if parts[1] in {"大衍", "蓍草", "yarrow"} else "coin"
                 changed = True
             elif len(parts) >= 2 and parts[0].upper() == "LLM":
-                cfg.llm_enabled = parts[1] in {"开启", "启用", "on", "true", "1"}
+                enabling = parts[1] in {"开启", "启用", "on", "true", "1"}
+                show_llm_privacy_notice = _set_group_llm_enabled(cfg, enabling)
                 changed = True
             else:
                 await _notice(
@@ -587,6 +620,17 @@ async def _settings(event: Event, matcher: Matcher, session: async_scoped_sessio
         cfg.updated_at = utcnow()
         await session.commit()
         await session.refresh(cfg)
+    if show_llm_privacy_notice:
+        readiness = "配置完整，可调用模型" if llm_config_ready() else "全局配置尚不完整，将使用本地降级"
+        await _notice(
+            matcher,
+            "LLM 已开启 · 隐私提示",
+            "本群问题可能会发送给管理员配置的第三方模型服务商。\n"
+            "发送内容限于当前问题、必要卦象与经典文本；普通问题可能附带近期问题文本，"
+            "敏感问题不会附带历史问题。\n"
+            "不会发送群ID、用户ID、机器人ID或历史记录ID。",
+            f"当前状态：{readiness}。关闭请使用：易经设置 LLM 关闭",
+        )
     rows = [
         {"name": "群ID", "value": group_id},
         {"name": "是否启用", "value": "是" if cfg.enabled else "否"},
@@ -596,7 +640,8 @@ async def _settings(event: Event, matcher: Matcher, session: async_scoped_sessio
         {"name": "重复问题窗口", "value": f"{cfg.duplicate_window_minutes} 分钟"},
         {"name": "LLM历史窗口", "value": f"{cfg.history_minutes_for_llm} 分钟"},
         {"name": "本群LLM解读", "value": "开启" if cfg.llm_enabled else "关闭"},
-        {"name": "全局LLM配置", "value": "开启" if plugin_config.yijing_llm_enabled else "关闭"},
+        {"name": "全局LLM开关", "value": "开启" if plugin_config.yijing_llm_enabled else "关闭"},
+        {"name": "全局LLM就绪", "value": "是" if llm_config_ready() else "否（配置不完整）"},
         {"name": "随机一卦策略", "value": "保存历史，不占日限额，不触发冷却"},
         {"name": "手动会话超时", "value": f"{plugin_config.yijing_manual_session_timeout_seconds} 秒"},
         {"name": "铜钱输入", "value": f"{plugin_config.yijing_positive_face}/{plugin_config.yijing_negative_face}"},
@@ -659,21 +704,31 @@ async def _manual_input(bot: Bot, event: Event, matcher: Matcher, session: async
 
     if state.get("stage") == "coin_line":
         try:
-            value, faces = parse_manual_coin_line(text)
+            step = advance_manual_coin(state, text)
         except Exception as exc:  # noqa: BLE001
-            await _notice(matcher, "输入格式错误", str(exc), "发送“取消”可退出手动起卦。")
-        state["coins"].append(faces)
-        state["values"].append(value)
-        line = int(state["line"])
-        if line < 6:
-            state["line"] = line + 1
+            await _notice(
+                matcher,
+                "输入格式错误",
+                str(exc),
+                f"请重试当前爻，例如：{plugin_config.yijing_positive_face}"
+                f"{plugin_config.yijing_negative_face}{plugin_config.yijing_positive_face}。"
+                "发送“取消”可退出。",
+            )
+            return
+        state.clear()
+        state.update(step.state)
+        line = int(step.accepted["position"])
+        value = int(step.accepted["value"])
+        faces = list(step.accepted["faces"])
+        if not step.completed:
             await _notice(
                 matcher,
                 f"手动铜钱第 {line + 1} 爻",
-                f"已记录第 {line} 爻：{text} → {value}。\n"
+                f"已记录第 {line} 爻：{''.join(faces)} → {value}（进度 {line}/6）。\n"
                 f"请继续输入第 {line + 1} 爻的 3 个"
                 f"{plugin_config.yijing_positive_face}/{plugin_config.yijing_negative_face}。",
             )
+            return
         values = list(state["values"])
         coins = list(state["coins"])
         _MANUAL_SESSIONS.pop(key, None)
@@ -687,60 +742,41 @@ async def _manual_input(bot: Bot, event: Event, matcher: Matcher, session: async
             manual_values=values,
             manual_coins=coins,
             manual_trace=_manual_coin_trace(values, coins),
+            force_recast=bool(state.get("force_recast")),
         )
 
     if state.get("stage") == "yarrow_change":
         try:
-            left, right = _parse_yarrow_split(text)
-            change_result = calculate_yarrow_change(
-                line_number=int(state["line"]),
-                change_number=int(state["change"]),
-                total_before=int(state["current_total"]),
-                left=left,
-                right=right,
-            )
+            step = advance_manual_yarrow(state, text)
         except Exception as exc:  # noqa: BLE001
-            await _notice(matcher, "输入格式错误", str(exc), "发送“取消”可退出手动起卦。")
+            _title, retry_content = _yarrow_prompt(state)
+            await _notice(matcher, "输入格式错误", str(exc), retry_content)
+            return
 
-        current_line = list(state.get("current_line_changes", []))
-        current_line.append(
-            {
-                "change": change_result.change_number,
-                "total_before": change_result.total_before,
-                "left": change_result.left,
-                "right": change_result.right,
-                "removed": change_result.removed,
-                "total_after": change_result.total_after,
-                **change_result.detail,
-            }
-        )
-        state["current_line_changes"] = current_line
-        state["current_total"] = change_result.total_after
-        if int(state["change"]) < 3:
-            state["change"] = int(state["change"]) + 1
+        state.clear()
+        state.update(step.state)
+        removed = int(step.accepted["removed"])
+        total_after = int(step.accepted["total_after"])
+        if not step.line_completed:
             title, content = _yarrow_prompt(state)
             await _notice(
                 matcher,
                 title,
-                f"上一变去除 {change_result.removed} 根，余 {change_result.total_after} 根。\n{content}",
+                f"上一变去除 {removed} 根，余 {total_after} 根。\n{content}",
             )
+            return
 
-        value = yarrow_line_value(change_result.total_after)
-        line = int(state["line"])
-        state["values"].append(value)
-        state["yarrow_lines"].append({"position": line, "value": value, "changes": current_line})
-        state.pop("current_line_changes", None)
-        if line < 6:
-            state["line"] = line + 1
-            state["change"] = 1
-            state["current_total"] = 49
+        value = int(step.accepted["value"])
+        line = int(step.accepted["position"])
+        if not step.completed:
             title, content = _yarrow_prompt(state)
             await _notice(
                 matcher,
                 f"第 {line} 爻完成",
-                f"第 {line} 爻三变后余 {change_result.total_after} 根，得爻值 {value}。\n"
+                f"第 {line} 爻三变后余 {total_after} 根，得爻值 {value}（进度 {line}/6）。\n"
                 f"现在开始第 {line + 1} 爻。\n{content}",
             )
+            return
 
         values = list(state["values"])
         trace = {"kind": "manual_yarrow", "lines_bottom_up": list(state["yarrow_lines"])}
@@ -755,4 +791,5 @@ async def _manual_input(bot: Bot, event: Event, matcher: Matcher, session: async
             manual_values=values,
             manual_coins=[],
             manual_trace=trace,
+            force_recast=bool(state.get("force_recast")),
         )

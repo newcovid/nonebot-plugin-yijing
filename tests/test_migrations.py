@@ -1,11 +1,16 @@
 from __future__ import annotations
 
 from importlib import util as importlib_util
+import importlib
 import importlib.resources as resources
 from pathlib import Path
 
 from alembic.config import Config
+from alembic.migration import MigrationContext
+from alembic.operations import Operations
 from alembic.script import ScriptDirectory
+import pytest
+import sqlalchemy as sa
 
 from nonebot_plugin_yijing.models import CastRecord, GroupConfig, GroupCooldown, RuntimeQuota
 
@@ -13,6 +18,7 @@ from nonebot_plugin_yijing.models import CastRecord, GroupConfig, GroupCooldown,
 INITIAL_MIGRATION_FILE = "20260708_01_initial_yijing_tables.py"
 WINDOWS_MIGRATION_FILE = "20260708_02_add_group_setting_windows.py"
 CAST_TRACE_MIGRATION_FILE = "20260709_01_add_cast_trace.py"
+LLM_PRIVACY_MIGRATION_FILE = "20260710_01_add_llm_privacy_notice.py"
 LEGACY_MIGRATION_FILE = "8f2b7c4a1d00_init_yijing.py"
 
 
@@ -28,6 +34,7 @@ def test_migrations_are_packaged() -> None:
     assert (migrations / INITIAL_MIGRATION_FILE).is_file()
     assert (migrations / WINDOWS_MIGRATION_FILE).is_file()
     assert (migrations / CAST_TRACE_MIGRATION_FILE).is_file()
+    assert (migrations / LLM_PRIVACY_MIGRATION_FILE).is_file()
     assert not (migrations / LEGACY_MIGRATION_FILE).is_file()
 
 
@@ -56,10 +63,11 @@ def test_alembic_revision_graph_has_single_yijing_head() -> None:
 
         script = ScriptDirectory.from_config(config)
 
-    assert script.get_heads() == ["20260709_01"]
+    assert script.get_heads() == ["20260710_01"]
     assert script.get_revision("nonebot_plugin_yijing").revision == "20260708_01"
     assert script.get_revision("20260708_02").down_revision == "20260708_01"
     assert script.get_revision("20260709_01").down_revision == "20260708_02"
+    assert script.get_revision("20260710_01").down_revision == "20260709_01"
 
 
 def test_initial_migration_mentions_all_model_tables() -> None:
@@ -103,3 +111,44 @@ def test_cast_trace_migration_extends_windows_migration() -> None:
     assert 'down_revision: str | Sequence[str] | None = "20260708_02"' in text
     assert '"cast_trace_json"' in text
     assert 'server_default="{}"' in text
+
+
+def test_llm_privacy_migration_extends_cast_trace_migration() -> None:
+    text = _migration_text(LLM_PRIVACY_MIGRATION_FILE)
+
+    assert 'revision: str = "20260710_01"' in text
+    assert 'down_revision: str | Sequence[str] | None = "20260709_01"' in text
+    assert '"llm_privacy_notice_shown"' in text
+
+
+def test_llm_privacy_migration_upgrades_and_downgrades_sqlite(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    migration = importlib.import_module(
+        "nonebot_plugin_yijing.migrations.20260710_01_add_llm_privacy_notice"
+    )
+    engine = sa.create_engine("sqlite:///:memory:")
+    metadata = sa.MetaData()
+    sa.Table(
+        "nonebot_plugin_yijing_group_config",
+        metadata,
+        sa.Column("group_id", sa.String(128), primary_key=True),
+    )
+    metadata.create_all(engine)
+
+    with engine.begin() as connection:
+        operations = Operations(MigrationContext.configure(connection))
+        monkeypatch.setattr(migration, "op", operations)
+        migration.upgrade()
+        columns = {item["name"] for item in sa.inspect(connection).get_columns(
+            "nonebot_plugin_yijing_group_config"
+        )}
+        assert "llm_privacy_notice_shown" in columns
+
+        migration.downgrade()
+        columns = {item["name"] for item in sa.inspect(connection).get_columns(
+            "nonebot_plugin_yijing_group_config"
+        )}
+        assert "llm_privacy_notice_shown" not in columns
+
+    engine.dispose()

@@ -35,8 +35,8 @@ Validated release chain:
 
 Remaining major gaps:
 
-- Classical corpus completion and source tracking.
-- Stronger LLM output validation.
+- Automated corpus completeness reporting and release gates.
+- Advanced LLM review mode and broader provider compatibility feedback.
 - Better manual-casting interaction.
 - Reuse of recent matching records for repeated questions.
 - Product-level visual polish.
@@ -68,9 +68,9 @@ Remaining major gaps:
 
 ### P1 - Runtime UX
 
-- [ ] Show a privacy notice the first time a group enables LLM support.
-- [ ] Add `--force` or an equivalent override for repeated-question handling.
-- [ ] Return the previous record image when a short-term repeated question is detected.
+- [x] Show a privacy notice the first time a group enables LLM support.
+- [x] Add `--force` or an equivalent override for repeated-question handling.
+- [x] Return the previous record image when a short-term repeated question is detected.
 - [ ] Improve question normalization for same-user / same-group / same-topic repeats.
 - [ ] Make repeated-question thresholds configurable where useful.
 
@@ -95,11 +95,11 @@ Implemented settings:
 
 Remaining interaction work:
 
-- [ ] Show examples during manual-casting sessions.
-- [ ] Support timeout and cancel during manual-casting sessions.
-- [ ] Let users retry invalid manual input instead of ending immediately.
-- [ ] Show per-line parsing before final manual coin rendering.
-- [ ] Replace direct six-value yarrow input with a guided flow.
+- [x] Show examples during manual-casting sessions.
+- [x] Support timeout and cancel during manual-casting sessions.
+- [x] Let users retry invalid manual input instead of ending immediately.
+- [x] Show per-line parsing before final manual coin rendering.
+- [x] Replace direct six-value yarrow input with a guided flow.
 - [ ] Support random static hexagram lookup.
 - [ ] Support random observation topics.
 - [ ] Decide whether random casts should be stored by default.
@@ -110,23 +110,23 @@ Goal: make the built-in data layer useful as a structured Zhouyi/Yijing corpus.
 
 Schema and traceability:
 
-- [ ] Define JSON Schema for every data file.
-- [ ] Require `source_id` for each classical text item.
+- [x] Define JSON Schema for every data file (27/27 files covered by the manifest).
+- [x] Require `source_id` for each classical text item.
 - [ ] Add `version`, `edition`, and `collation_status` metadata where appropriate.
 - [ ] Add a corpus completeness report.
 - [ ] Make data validation part of release gates.
 
 Classical text completion:
 
-- [ ] Complete all 384 line texts.
-- [ ] Complete all 64 Tuan Zhuan records.
-- [ ] Complete all 64 Xiang Zhuan records.
-- [ ] Complete Qian/Kun Wenyan Zhuan records.
-- [ ] Complete Xici Shang.
-- [ ] Complete Xici Xia.
-- [ ] Complete Shuogua Zhuan.
-- [ ] Complete Xugua Zhuan.
-- [ ] Complete Zagua Zhuan.
+- [x] Complete all 384 line texts.
+- [x] Complete all 64 Tuan Zhuan records.
+- [x] Complete all 64 Xiang Zhuan records.
+- [x] Complete Qian/Kun Wenyan Zhuan records.
+- [x] Complete Xici Shang.
+- [x] Complete Xici Xia.
+- [x] Complete Shuogua Zhuan.
+- [x] Complete Xugua Zhuan.
+- [x] Complete Zagua Zhuan.
 
 Data integrity:
 
@@ -134,8 +134,8 @@ Data integrity:
 - [x] Ensure every hexagram has six structured line records.
 - [x] Ensure core JSON files can be loaded from package resources.
 - [x] Ensure every relation target references an existing hexagram.
-- [ ] Ensure every classical text record has a valid source.
-- [ ] Disallow placeholder text for corpus files marked complete.
+- [x] Ensure every classical text record has a valid source.
+- [x] Disallow placeholder text for corpus files marked complete.
 
 Modern explanation data:
 
@@ -148,25 +148,25 @@ Modern explanation data:
 
 Goal: make LLM behavior structured, auditable, and predictable.
 
-- [ ] Use Pydantic models for LLM preprocessing output.
-- [ ] Use Pydantic models for LLM interpretation output.
-- [ ] Fill safe defaults for missing optional fields.
-- [ ] Reject or downgrade invalid fields.
-- [ ] Prevent LLM output from rewriting classical source text.
-- [ ] Pass only necessary fields for sensitive questions.
-- [ ] Keep local and LLM "three don'ts" behavior consistent.
+- [x] Use Pydantic models for LLM preprocessing output.
+- [x] Use Pydantic models for LLM interpretation output.
+- [x] Fill safe defaults for missing optional fields.
+- [x] Reject or downgrade invalid fields.
+- [x] Prevent LLM output from rewriting classical source text.
+- [x] Pass only necessary fields for sensitive questions.
+- [x] Keep local and LLM "three don'ts" behavior consistent.
 - [ ] Add a documented advanced review mode that summarizes more history only when explicitly requested.
 
 Expected interpretation sections:
 
-- [ ] Classical text.
-- [ ] Hexagram structure.
-- [ ] Changing-line focus.
-- [ ] Changed-hexagram trend.
-- [ ] Answer to the user's question.
-- [ ] Actionable suggestions.
-- [ ] Risk and uncertainty.
-- [ ] Disclaimer.
+- [x] Classical text.
+- [x] Hexagram structure.
+- [x] Changing-line focus.
+- [x] Changed-hexagram trend.
+- [x] Answer to the user's question.
+- [x] Actionable suggestions.
+- [x] Risk and uncertainty.
+- [x] Disclaimer.
 
 ## v0.5.0+ - Advanced Traditional Systems
 
@@ -186,12 +186,12 @@ Do not start these before v0.3.0 corpus integrity and v0.4.0 LLM schema are stab
 
 ## Visual Polish
 
-- [ ] Use a unified visual system across all rendered cards.
-- [ ] Replace text-only coin output with clearer visual coin marks.
-- [ ] Make changing/stable and yin/yang lines easier to scan.
-- [ ] Improve original/changed hexagram comparison.
-- [ ] Align notice, error, refusal, settings, history, and record-card styles.
-- [ ] Improve long-text spacing and hierarchy.
+- [x] Use a unified visual system across all rendered cards.
+- [x] Replace text-only coin output with clearer visual coin marks.
+- [x] Make changing/stable and yin/yang lines easier to scan.
+- [x] Improve original/changed hexagram comparison.
+- [x] Align notice, error, refusal, settings, history, and record-card styles.
+- [x] Improve long-text spacing and hierarchy.
 - [ ] Add screenshot-based visual regression tests if the rendering setup becomes stable enough.
 
 ## Public Repository Standards

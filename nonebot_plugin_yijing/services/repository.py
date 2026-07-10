@@ -29,6 +29,7 @@ async def get_or_create_group_config(session: AsyncSession, group_id: str) -> Gr
             duplicate_window_minutes=plugin_config.yijing_duplicate_window_minutes,
             history_minutes_for_llm=plugin_config.yijing_history_minutes_for_llm,
             llm_enabled=plugin_config.yijing_llm_enabled,
+            llm_privacy_notice_shown=False,
         )
         session.add(cfg)
         await session.commit()

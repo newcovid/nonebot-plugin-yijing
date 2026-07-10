@@ -20,6 +20,18 @@
 - 起卦记录包含时间信息，可用于冷却、日限额与短期相似问题判断。
 - 资料库预留完整经传、关系、来源、起卦规则、解读规则与后续术数扩展字段。
 
+## 效果预览
+
+### 起卦记录与 LLM 综合解读
+
+![起卦记录与 LLM 综合解读](https://raw.githubusercontent.com/newcovid/nonebot-plugin-yijing/main/docs/images/feature-cast.png)
+
+| 命令帮助 | 历史记录 |
+| --- | --- |
+| ![命令帮助](https://raw.githubusercontent.com/newcovid/nonebot-plugin-yijing/main/docs/images/feature-help.png) | ![历史记录](https://raw.githubusercontent.com/newcovid/nonebot-plugin-yijing/main/docs/images/feature-history.png) |
+| 手动起卦 | 群设置 |
+| ![手动起卦](https://raw.githubusercontent.com/newcovid/nonebot-plugin-yijing/main/docs/images/feature-manual.png) | ![群设置](https://raw.githubusercontent.com/newcovid/nonebot-plugin-yijing/main/docs/images/feature-settings.png) |
+
 ## 安装
 
 ### NoneBot 插件商店
@@ -72,6 +84,8 @@ nb orm check
 # NoneBot / ORM
 # nonebot-plugin-orm 使用的 SQLite 数据库地址；使用其他数据库时请替换。
 SQLALCHEMY_DATABASE_URL=sqlite+aiosqlite:///./data/yijing.sqlite3
+# nonebot-plugin-htmlrender 的渲染后端。
+RENDER_BACKEND=playwright
 
 # access-control
 # 自动为插件命令接入 access-control 的权限与限流规则。
@@ -130,6 +144,7 @@ YIJING_LLM_ENABLED=false
 | 配置项 | 默认值 | 说明 |
 | --- | --- | --- |
 | `SQLALCHEMY_DATABASE_URL` | 由宿主项目决定 | `nonebot-plugin-orm` 数据库连接串；SQLite 部署可使用示例值。 |
+| `RENDER_BACKEND` | 由 htmlrender 决定 | 图片渲染后端；本插件推荐并验证 `playwright`。 |
 | `ACCESS_CONTROL_AUTO_PATCH_ENABLED` | access-control 默认值 | 是否自动接入 access-control 权限补丁；推荐保持 `true`。 |
 | `ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED` | access-control 默认值 | 权限拒绝时是否由 access-control 回复提示。 |
 | `ACCESS_CONTROL_REPLY_ON_RATE_LIMITED_ENABLED` | access-control 默认值 | 被 access-control 限流时是否回复提示。 |
@@ -167,6 +182,7 @@ YIJING_LLM_ENABLED=false
 | `起卦 问题 铜钱` | 精确指定铜钱法 |
 | `起卦 问题 大衍` | 使用大衍筮法概率模拟 |
 | `起卦 问题 手动` | 进入手动起卦引导 |
+| `起卦 问题 [方式] --force` | 仅跳过重复问题复用；仍遵守三不占、日限额和冷却 |
 | `解卦 卦象` | 查询/解释指定卦象 |
 | `易经历史` | 查看自己的历史记录 |
 | `易经记录 ID` | 查看指定记录 |
@@ -243,12 +259,22 @@ nonebot_plugin_yijing.manual
 - 对照参数化历史记录，识别短期重复或相似问题。
 - 标注医疗、法律、投资、人身安全等敏感领域。
 
+问题通过预处理并完成起卦后，插件会再次调用 LLM，把原问题与必要的本卦、动爻、
+变卦和经传上下文组合成结构化解释。结果卡会明确标注“LLM 综合解读”、
+“本地规则解读”或“LLM 不可用，已安全降级”，并分别展示针对所问、卦象结构、
+动爻重点、变化趋势、行动建议和风险提示。
+
 LLM 接口为 OpenAI 兼容 `/chat/completions`，失败会自动降级到本地规则，不阻塞起卦核心流程。
+
+短期内再次提出相似问题时，插件会直接返回此前的完整记录卡，不调用 LLM、
+不新增记录，也不消耗限额。确需重新起卦时可追加 `--force`。
 
 隐私注意事项：
 
 - `YIJING_LLM_ENABLED=false` 时，LLM 不会被调用。
 - 开启 LLM 后，用户问题、卦象资料、预处理字段，以及按配置选取的近期历史记录，可能会发送给你配置的第三方模型服务商。
+- 普通问题的近期上下文只发送问题文本；敏感问题不发送历史问题。群 ID、用户 ID、机器人 ID 和记录 ID 不会发送给 LLM。
+- 群管理员首次执行 `易经设置 LLM 开启` 时会看到一次隐私提示；命令会立即启用本群 LLM，之后重复开启不再提示。
 - `YIJING_STORE_QUESTION=true` 会在数据库中保存原始问题文本，便于历史回看和相似问题判断。
 - 若希望降低存储敏感内容的风险，可设置 `YIJING_STORE_QUESTION=false`。此时历史记录会保留卦象和结构化结果，但原始问题文本不会保存。
 - 本插件只提供本地降级逻辑，不代理或改变第三方模型服务商的数据处理规则。请按实际接入的模型服务商补充群公告或隐私说明。

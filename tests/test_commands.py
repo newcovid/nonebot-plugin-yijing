@@ -1,9 +1,15 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from types import SimpleNamespace
+from datetime import datetime
+from typing import Any
 
 import pytest
+from sqlalchemy import func, select
+from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
+from nonebot_plugin_yijing.commands import main as command_main
 from nonebot_plugin_yijing.commands.main import (
     HELP_COMMANDS,
     _manual_expired,
@@ -11,7 +17,10 @@ from nonebot_plugin_yijing.commands.main import (
     _parse_cast_body,
     _parse_history_cleanup_target,
     _parse_yarrow_split,
+    _set_group_llm_enabled,
 )
+from nonebot_plugin_yijing.models import CastRecord, GroupConfig, GroupCooldown, RuntimeQuota
+from nonebot_plugin_yijing.utils import hash_text, hash_user_id, normalize_question
 from nonebot_plugin_yijing.utils import get_group_id
 
 
@@ -33,14 +42,16 @@ class FakeEvent:
 @pytest.mark.parametrize(
     ("body", "expected"),
     [
-        ("项目是否顺利", ("项目是否顺利", "default")),
-        ("项目是否顺利 铜钱", ("项目是否顺利", "coin")),
-        ("项目是否顺利 大衍", ("项目是否顺利", "yarrow")),
-        ("项目是否顺利 手动", ("项目是否顺利", "manual")),
+        ("项目是否顺利", ("项目是否顺利", "default", False)),
+        ("项目是否顺利 铜钱", ("项目是否顺利", "coin", False)),
+        ("项目是否顺利 大衍", ("项目是否顺利", "yarrow", False)),
+        ("项目是否顺利 手动", ("项目是否顺利", "manual", False)),
+        ("项目是否顺利 --force 铜钱", ("项目是否顺利", "coin", True)),
+        ("项目是否顺利 手动 --force", ("项目是否顺利", "manual", True)),
     ],
 )
 def test_parse_cast_body_distinguishes_default_and_explicit_methods(
-    body: str, expected: tuple[str, str]
+    body: str, expected: tuple[str, str, bool]
 ) -> None:
     assert _parse_cast_body(body) == expected
 
@@ -125,6 +136,16 @@ def test_manual_expired_uses_updated_at_timestamp() -> None:
     assert _manual_expired({"updated_at": 0}) is True
 
 
+def test_llm_privacy_notice_is_only_shown_on_first_enable() -> None:
+    cfg = SimpleNamespace(llm_enabled=False, llm_privacy_notice_shown=False)
+
+    assert _set_group_llm_enabled(cfg, True) is True
+    assert cfg.llm_enabled is True
+    assert cfg.llm_privacy_notice_shown is True
+    assert _set_group_llm_enabled(cfg, False) is False
+    assert _set_group_llm_enabled(cfg, True) is False
+
+
 @pytest.mark.parametrize(
     ("body", "expected"),
     [
@@ -143,3 +164,92 @@ def test_parse_history_cleanup_target(body: str, expected: str | None) -> None:
 def test_parse_history_cleanup_target_rejects_invalid_input(body: str) -> None:
     with pytest.raises(ValueError):
         _parse_history_cleanup_target(body)
+
+
+@pytest.mark.asyncio
+async def test_duplicate_record_is_rendered_without_llm_or_new_record(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    engine = create_async_engine("sqlite+aiosqlite:///:memory:")
+    async with engine.begin() as connection:
+        for table in (CastRecord, GroupConfig, GroupCooldown, RuntimeQuota):
+            await connection.run_sync(table.__table__.create)
+    factory = async_sessionmaker(engine, expire_on_commit=False)
+    event = FakeEvent()
+    question = "项目是否顺利"
+    rendered: dict[str, Any] = {}
+    llm_called = False
+
+    async def _capture_finish(matcher: Any, template: str, data: dict[str, Any]) -> None:
+        rendered.update({"template": template, "data": data})
+
+    async def _unexpected_preprocess(*args: Any, **kwargs: Any) -> dict[str, Any]:
+        nonlocal llm_called
+        llm_called = bool(args or kwargs)
+        return {}
+
+    monkeypatch.setattr(command_main, "_finish_template", _capture_finish)
+    monkeypatch.setattr(command_main, "preprocess_question", _unexpected_preprocess)
+    async with factory() as session:
+        group_id = get_group_id(event)
+        user_hash = hash_user_id(event.get_user_id())
+        normalized = normalize_question(question)
+        session.add(
+            CastRecord(
+                id="YJ-OLD00001",
+                adapter="test",
+                bot_id="10000",
+                group_id=group_id,
+                user_id_hash=user_hash,
+                question_text=question,
+                question_norm=normalized,
+                question_hash=hash_text(normalized),
+                method="coin",
+                coins_json='[["A", "B", "A"]]',
+                line_values_json="[7, 7, 7, 7, 7, 7]",
+                moving_positions_json="[]",
+                cast_trace_json='{"kind": "coin"}',
+                primary_seq=1,
+                changed_seq=None,
+                preprocess_json='{"allowed": true}',
+                interpretation_json='{"summary": "旧记录", "advice": ["旧建议"]}',
+                created_at=datetime.now(),
+            )
+        )
+        await session.commit()
+
+        await command_main._run_cast(
+            matcher=SimpleNamespace(),
+            bot=FakeBot(),
+            event=event,
+            session=session,
+            question=question,
+            method="coin",
+        )
+
+        count = await session.scalar(select(func.count()).select_from(CastRecord))
+        reused_record_id = rendered["data"]["record_id"]
+        reused_coins = rendered["data"]["coins"]
+
+        async def _local_preprocess(*args: Any, **kwargs: Any) -> dict[str, Any]:
+            return command_main.local_preprocess(question, [])
+
+        monkeypatch.setattr(command_main, "preprocess_question", _local_preprocess)
+        await command_main._run_cast(
+            matcher=SimpleNamespace(),
+            bot=FakeBot(),
+            event=event,
+            session=session,
+            question=question,
+            method="coin",
+            force_recast=True,
+        )
+        forced_count = await session.scalar(select(func.count()).select_from(CastRecord))
+
+    await engine.dispose()
+    assert llm_called is False
+    assert count == 1
+    assert forced_count == 2
+    assert rendered["template"] == "card.html"
+    assert reused_record_id == "YJ-OLD00001"
+    assert reused_coins == [["正", "反", "正"]]

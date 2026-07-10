@@ -1,11 +1,6 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
+{% extends "base.html" %}
+{% block extra_style %}
   <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; padding: 32px; background: #efe7d3; font-family: "Noto Serif CJK SC", "Source Han Serif SC", "Microsoft YaHei", serif; color: #2b2118; }
-    .page { width: 840px; margin: 0 auto; background: #fffaf0; border: 2px solid #d8c29a; border-radius: 28px; padding: 34px; box-shadow: 0 18px 60px rgba(79,55,26,.24); }
     .header { display: flex; justify-content: space-between; gap: 20px; border-bottom: 3px double #b9975b; padding-bottom: 18px; margin-bottom: 22px; }
     h1 { font-size: 36px; margin: 0 0 8px; letter-spacing: .08em; }
     .muted { color: #7c6951; font-size: 18px; }
@@ -16,7 +11,11 @@
     .coins { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
     .coin-line { background: #fff8e6; border: 1px solid #dec891; border-radius: 14px; padding: 10px; text-align: center; }
     .coin-title { color: #7c6951; font-size: 14px; margin-bottom: 8px; }
-    .coin { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; margin: 2px; border-radius: 50%; border: 2px solid #b58733; background: linear-gradient(135deg,#fff0a3,#d8a235); font-weight: 700; font-size: 16px; }
+    .coin { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; height: 34px; padding: 0 5px; margin: 2px; border-radius: 50%; border: 2px solid #b58733; font-weight: 800; font-size: 15px; }
+    .coin.positive { color: #4f3210; background: linear-gradient(145deg,#fff4ae,#d8a235); box-shadow: inset 0 0 0 2px rgba(255,248,199,.55); }
+    .coin.negative { color: #fff9df; background: linear-gradient(145deg,#c58b32,#8d5a20); border-color: #8d5a20; }
+    .coin.neutral { color: #4f3210; background: linear-gradient(145deg,#f7df91,#b98431); }
+    .coin-dot { width: 9px; height: 9px; background: currentColor; border-radius: 50%; opacity: .82; }
     .hex-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .hex-card { background: #fffdf5; border: 1px solid #d8c29a; border-radius: 18px; padding: 18px; }
     .symbol { font-size: 68px; line-height: 1; }
@@ -35,12 +34,14 @@
     p { line-height: 1.72; font-size: 18px; margin: 8px 0; }
     .classic { font-size: 19px; line-height: 1.75; }
     .tag { display: inline-block; padding: 3px 9px; background: #7b4d18; color: white; border-radius: 999px; font-size: 14px; margin-right: 6px; }
+    .source-badge { display: inline-block; padding: 5px 11px; border-radius: 999px; background: #6f4b24; color: #fffaf0; font-size: 14px; margin-bottom: 10px; }
+    .source-badge.fallback { background: #a15e2a; }
     ul { margin: 6px 0 0 26px; padding: 0; font-size: 18px; line-height: 1.75; }
     .warning { border-color: #d49a52; background: #fff0d9; }
     .footer { margin-top: 20px; color: #86745a; font-size: 14px; line-height: 1.6; }
   </style>
-</head>
-<body>
+{% endblock %}
+{% block content %}
   <div class="page">
     <div class="header">
       <div>
@@ -63,10 +64,10 @@
       {% if has_coins %}
       <p>铜钱状态按自下而上记录。</p>
       <div class="coins">
-      {% for group in coins %}
+      {% for group in coin_rows %}
         <div class="coin-line">
           <div class="coin-title">第 {{ loop.index }} 爻</div>
-          {% for face in group %}<span class="coin">{{ face }}</span>{% endfor %}
+          {% for face in group %}<span class="coin {{ face.side }}">{% if face.label %}{{ face.label }}{% else %}<span class="coin-dot"></span>{% endif %}</span>{% endfor %}
         </div>
       {% endfor %}
       </div>
@@ -156,12 +157,16 @@
 
     <div class="section">
       <h2>综合分析</h2>
+      <div class="source-badge {% if interpretation.is_fallback %}fallback{% endif %}">{{ interpretation.source_label }}</div>
       <p>{{ interpretation.summary }}</p>
+      <p><strong>针对所问：</strong>{{ interpretation.answer_to_question }}</p>
+      <p><strong>卦象结构：</strong>{{ interpretation.hexagram_structure }}</p>
       <p><strong>当前处境：</strong>{{ interpretation.current_situation }}</p>
+      <p><strong>动爻重点：</strong>{{ interpretation.changing_line_focus }}</p>
       <p><strong>变化趋势：</strong>{{ interpretation.change_trend }}</p>
-      {% if interpretation.advice %}
-      <p><strong>建议：</strong></p>
-      <ul>{% for item in interpretation.advice %}<li>{{ item }}</li>{% endfor %}</ul>
+      {% if interpretation.actionable_advice %}
+      <p><strong>行动建议：</strong></p>
+      <ul>{% for item in interpretation.actionable_advice %}<li>{{ item }}</li>{% endfor %}</ul>
       {% endif %}
     </div>
 
@@ -180,5 +185,4 @@
       资料库来源标注：Wikisource 公有领域文本与本地整理数据；后续扩展资料层已预留但不以 AI 生成正文。
     </div>
   </div>
-</body>
-</html>
+{% endblock %}

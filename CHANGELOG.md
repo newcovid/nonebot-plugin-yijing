@@ -2,6 +2,33 @@
 
 ## Unreleased
 
+## 0.3.0 - 2026-07-10
+
+### Added
+
+- Add strict versioned Pydantic contracts for LLM preprocessing and post-cast interpretation.
+- Show a one-time privacy notice when a group first enables LLM support.
+- Render direct answers, hexagram structure, changing-line focus, actionable advice, and the
+  interpretation source on record cards.
+- Add `--force` to bypass repeated-question reuse without bypassing safety, quota, or cooldown.
+- Add real rendered feature previews to the Chinese and English README files.
+
+### Changed
+
+- Minimize LLM payloads and omit recent history entirely for sensitive questions.
+- Return a matching recent record card before making any LLM request or consuming quota.
+- Make manual coin and yarrow state transitions independently testable and show progress after
+  every accepted input.
+- Unify all rendered cards on a shared parchment theme and visually distinguish coin faces.
+- Preserve local refusals and visibly distinguish configuration, request, and validation
+  fallbacks without exposing provider errors.
+
+### Fixed
+
+- Render legacy internal `A/B` coin markers with the configured positive and negative face text.
+- Hide the built-in coin center dot whenever face text is available, while retaining it as a
+  safe fallback for missing or invalid labels.
+
 ## 0.2.0 - 2026-07-10
 
 ### Added

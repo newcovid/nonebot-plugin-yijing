@@ -1,2 +1,17 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><style>
-body{margin:0;padding:32px;background:#efe7d3;font-family:"Microsoft YaHei",sans-serif;color:#2b2118}.page{width:840px;margin:auto;background:#fffaf0;border:2px solid #d8c29a;border-radius:26px;padding:34px;box-shadow:0 18px 60px rgba(79,55,26,.24)}h1{font-size:34px;margin:0 0 18px}.record{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:16px;border:1px solid #e3d0aa;border-radius:16px;margin:12px 0;background:#fffdf5}.symbol{font-size:56px;text-align:center}.id{font-family:Consolas,monospace;color:#8b5e25;font-weight:700}.q{font-size:18px;line-height:1.55}.meta{color:#715d42;font-size:15px}.empty{font-size:20px;padding:20px;background:#fffdf5;border-radius:16px}</style></head><body><div class="page"><h1>{{ title }}</h1>{% if not items %}<div class="empty">暂无历史记录。</div>{% endif %}{% for item in items %}<div class="record"><div><div class="symbol">{{ item.primary.symbol }}</div></div><div><div class="id">{{ item.id }}</div><div class="q">{{ item.question }}</div><div class="meta">{{ item.created_at }} · {{ item.method }} · 本卦 {{ item.primary.name }}{% if item.changed %} → {{ item.changed.name }}{% endif %} · 动爻 {{ item.moving_positions }}</div></div></div>{% endfor %}</div></body></html>
+{% extends "base.html" %}
+{% block extra_style %}
+<style>
+  .record { display: grid; grid-template-columns: 110px 1fr; gap: 12px; padding: 16px; margin: 12px 0; background: var(--paper-soft); border: 1px solid var(--border-soft); border-radius: 16px; }
+  .symbol { font-size: 56px; text-align: center; }
+  .id { color: #8b5e25; font-family: Consolas, monospace; font-weight: 700; }
+  .q { font-size: 18px; line-height: 1.55; }
+  .meta { font-size: 15px; line-height: 1.6; }
+</style>
+{% endblock %}
+{% block content %}
+<main class="page">
+  <h1>{{ title }}</h1>
+  {% if not items %}<div class="empty">暂无历史记录。</div>{% endif %}
+  {% for item in items %}<div class="record"><div class="symbol">{{ item.primary.symbol }}</div><div><div class="id">{{ item.id }}</div><div class="q">{{ item.question }}</div><div class="meta">{{ item.created_at }} · {{ item.method }} · 本卦 {{ item.primary.name }}{% if item.changed %} → {{ item.changed.name }}{% endif %} · 动爻 {{ item.moving_positions }}</div></div></div>{% endfor %}
+</main>
+{% endblock %}

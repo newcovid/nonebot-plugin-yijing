@@ -5,10 +5,20 @@ from typing import Any
 
 import aiohttp
 from nonebot.log import logger
+from pydantic import ValidationError
 
 from ..config import plugin_config
-from ..core.interpret import build_local_interpretation, local_preprocess
 from ..core.hexagram import ResolvedHexagram
+from ..core.interpret import build_local_interpretation, local_preprocess
+from ..core.llm_models import (
+    InterpretationLLMOutput,
+    InterpretationResult,
+    LLMStatus,
+    PreprocessLLMOutput,
+    PreprocessResult,
+    model_dump,
+    model_validate,
+)
 
 
 class LLMUnavailable(RuntimeError):
@@ -22,6 +32,12 @@ def _enabled() -> bool:
         and plugin_config.yijing_llm_model
         and plugin_config.yijing_llm_api_key
     )
+
+
+def llm_config_ready() -> bool:
+    """Return whether the global provider configuration is complete."""
+
+    return _enabled()
 
 
 async def _chat_json(system: str, user_payload: dict[str, Any]) -> dict[str, Any]:
@@ -49,22 +65,75 @@ async def _chat_json(system: str, user_payload: dict[str, Any]) -> dict[str, Any
     content = data["choices"][0]["message"]["content"]
     if isinstance(content, str):
         return json.loads(content)
+    if not isinstance(content, dict):
+        raise TypeError("LLM response content must be an object")
     return content
 
 
-async def preprocess_question(question: str, history: list[dict[str, Any]], *, use_llm: bool = True) -> dict[str, Any]:
+def _fallback_preprocess(
+    local: dict[str, Any], status: LLMStatus, reason: str
+) -> dict[str, Any]:
+    return model_dump(
+        model_validate(
+            PreprocessResult,
+            {
+                **local,
+                "llm_used": False,
+                "llm_status": status,
+                "fallback_reason": reason,
+            }
+        )
+    )
+
+
+def _fallback_interpretation(
+    fallback: dict[str, Any], status: LLMStatus, reason: str
+) -> dict[str, Any]:
+    return model_dump(
+        model_validate(
+            InterpretationResult,
+            {
+                **fallback,
+                "llm_used": False,
+                "llm_status": status,
+                "fallback_reason": reason,
+            }
+        )
+    )
+
+
+def _is_invalid_response_error(exc: Exception) -> bool:
+    return isinstance(exc, (ValidationError, json.JSONDecodeError, KeyError, TypeError, ValueError))
+
+
+def _merge_unique(*groups: list[str]) -> list[str]:
+    return list(dict.fromkeys(item for group in groups for item in group if item))
+
+
+async def preprocess_question(
+    question: str, history: list[dict[str, Any]], *, use_llm: bool = True
+) -> dict[str, Any]:
     local = local_preprocess(question, history)
-    if not use_llm or not _enabled():
+    if not local["allowed"] or not use_llm:
         return local
+    if not _enabled():
+        return _fallback_preprocess(local, "fallback_config", "incomplete_config")
+
+    history_questions = []
+    if not local["sensitive_keywords"]:
+        history_questions = [
+            str(item.get("question") or "").strip()
+            for item in history
+            if str(item.get("question") or "").strip()
+        ]
     system = (
         "你是一个NoneBot易经插件的安全预处理器。必须只输出JSON。"
-        "任务：判断用户问题是否适合起卦；遵循三不占：不诚不占、不义不占、不疑不占；"
-        "识别短期相似问题、敏感领域、是否需要提示专业建议。"
-        "不要进行正式解卦，不要编造卦象。"
+        "判断问题是否适合起卦，遵循不诚不占、不义不占、不疑不占；"
+        "只能输出要求的字段，不要解卦，不要编造卦象。"
     )
     payload = {
         "question": question,
-        "history": history,
+        "recent_questions": history_questions,
         "required_schema": {
             "allowed": "bool",
             "reason": "str",
@@ -75,14 +144,83 @@ async def preprocess_question(question: str, history: list[dict[str, Any]], *, u
         },
     }
     try:
-        result = await _chat_json(system, payload)
-        merged = {**local, **result, "llm_used": True, "history_count": len(history)}
-        if "warnings" not in merged or not isinstance(merged["warnings"], list):
-            merged["warnings"] = local.get("warnings", [])
-        return merged
+        raw = await _chat_json(system, payload)
+        output = model_validate(PreprocessLLMOutput, raw)
+        output_data = model_dump(output, exclude_none=True)
+        merged = {
+            **local,
+            **output_data,
+            "allowed": bool(local["allowed"] and output_data.get("allowed", True)),
+            "warnings": _merge_unique(local["warnings"], output_data.get("warnings", [])),
+            "sensitive_keywords": _merge_unique(
+                local["sensitive_keywords"], output_data.get("sensitive_keywords", [])
+            ),
+            "history_count": len(history),
+            "llm_used": True,
+            "llm_status": "success",
+            "fallback_reason": None,
+        }
+        return model_dump(model_validate(PreprocessResult, merged))
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"Yijing LLM preprocess failed: {exc}")
-        return local
+        if _is_invalid_response_error(exc):
+            return _fallback_preprocess(local, "fallback_invalid", "invalid_response")
+        return _fallback_preprocess(local, "fallback_request", "request_failed")
+
+
+def _minimal_classic_context(
+    resolved: ResolvedHexagram, classic_text: dict[str, Any]
+) -> dict[str, Any]:
+    primary = classic_text["primary"]
+    changed = classic_text.get("changed")
+    moving_lines = []
+    for position in resolved.moving_positions:
+        item = primary.get("yaoci", [])[position - 1]
+        moving_lines.append(
+            {
+                "position": position,
+                "label": item.get("line_label", ""),
+                "text": item.get("text", ""),
+            }
+        )
+    context: dict[str, Any] = {
+        "primary": {
+            "seq": resolved.primary["seq"],
+            "name": resolved.primary["name"],
+            "lower_trigram": resolved.primary.get("lower_trigram", ""),
+            "upper_trigram": resolved.primary.get("upper_trigram", ""),
+            "guaci": primary.get("guaci", {}).get("text", ""),
+            "daxiang": primary.get("xiang", {}).get("daxiang", ""),
+        },
+        "line_values_bottom_up": resolved.line_values,
+        "moving_lines": moving_lines,
+    }
+    if resolved.changed and changed:
+        context["changed"] = {
+            "seq": resolved.changed["seq"],
+            "name": resolved.changed["name"],
+            "lower_trigram": resolved.changed.get("lower_trigram", ""),
+            "upper_trigram": resolved.changed.get("upper_trigram", ""),
+            "guaci": changed.get("guaci", {}).get("text", ""),
+            "daxiang": changed.get("xiang", {}).get("daxiang", ""),
+        }
+    return context
+
+
+def _merge_interpretation(
+    fallback: dict[str, Any], output: InterpretationLLMOutput
+) -> dict[str, Any]:
+    output_data = model_dump(output, exclude_none=True)
+    merged = {
+        **fallback,
+        **output_data,
+        "risks": _merge_unique(fallback["risks"], output_data.get("risks", [])),
+        "disclaimer": fallback["disclaimer"],
+        "llm_used": True,
+        "llm_status": "success",
+        "fallback_reason": None,
+    }
+    return model_dump(model_validate(InterpretationResult, merged))
 
 
 async def interpret_with_llm(
@@ -95,38 +233,43 @@ async def interpret_with_llm(
     use_llm: bool = True,
 ) -> dict[str, Any]:
     fallback = build_local_interpretation(question, resolved, preprocess, random_mode=random_mode)
-    if random_mode or not use_llm or not _enabled():
+    if random_mode or not use_llm:
         return fallback
+    if not _enabled():
+        return _fallback_interpretation(fallback, "fallback_config", "incomplete_config")
     system = (
-        "你是一个《周易》文本解释助手。必须只输出JSON。"
-        "只能基于用户问题、卦象、卦辞、象辞、爻辞进行解释；"
-        "必须区分经典文本与现代建议；不得给出确定性预测；"
-        "不得代替医生、律师、财务顾问或安全专业人士。"
+        "你是《周易》文本解释助手。必须只输出JSON。"
+        "基于用户问题和提供的最小经典上下文作现代解释；"
+        "不得输出或改写经典原文字段，不得给出确定性预测，"
+        "不得替代医疗、法律、财务或安全专业人士。"
     )
     payload = {
         "question": question,
-        "primary_hexagram": resolved.primary,
-        "changed_hexagram": resolved.changed,
-        "line_values_bottom_up": resolved.line_values,
-        "moving_positions": resolved.moving_positions,
-        "classic_text": classic_text,
-        "preprocess": preprocess,
+        "hexagram_context": _minimal_classic_context(resolved, classic_text),
+        "preprocess": {
+            "warnings": preprocess.get("warnings", []),
+            "sensitive_keywords": preprocess.get("sensitive_keywords", []),
+        },
         "required_schema": {
             "summary": "str",
+            "answer_to_question": "str",
+            "hexagram_structure": "str",
             "current_situation": "str",
+            "changing_line_focus": "str",
             "change_trend": "str",
-            "advice": "list[str]",
+            "actionable_advice": "list[str]",
             "risks": "list[str]",
             "disclaimer": "str",
         },
     }
     try:
-        result = await _chat_json(system, payload)
-        result["llm_used"] = True
-        return {**fallback, **result}
+        raw = await _chat_json(system, payload)
+        return _merge_interpretation(fallback, model_validate(InterpretationLLMOutput, raw))
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"Yijing LLM interpretation failed: {exc}")
-        return fallback
+        if _is_invalid_response_error(exc):
+            return _fallback_interpretation(fallback, "fallback_invalid", "invalid_response")
+        return _fallback_interpretation(fallback, "fallback_request", "request_failed")
 
 
 async def parse_hexagram_query(query: str) -> dict[str, Any]:
@@ -149,39 +292,41 @@ async def interpret_hexagram_query(
     classic_text: dict[str, Any],
     use_llm: bool = True,
 ) -> dict[str, Any]:
-    fallback = {
-        "summary": f"你查询的是 {resolved.primary['name']} 卦。当前为静卦查询，不针对具体问题推演。",
-        "current_situation": classic_text["primary"]["guaci"].get("text", ""),
-        "change_trend": "静态查卦不产生变卦。",
-        "advice": ["可结合卦辞、大象和六爻位置理解该卦。"],
-        "risks": [],
-        "llm_used": False,
-        "disclaimer": "本结果为传统文本解释，不构成现实决策建议。",
-    }
-    if not use_llm or not _enabled():
+    fallback = build_local_interpretation(f"查询：{query}", resolved)
+    fallback["answer_to_question"] = (
+        f"你查询的是 {resolved.primary['name']} 卦；静态查卦不针对具体事件作预测。"
+    )
+    fallback["change_trend"] = "静态查卦不产生变卦。"
+    fallback["actionable_advice"] = ["可结合卦辞、大象和六爻位置理解该卦。"]
+    fallback = model_dump(model_validate(InterpretationResult, fallback))
+    if not use_llm:
         return fallback
+    if not _enabled():
+        return _fallback_interpretation(fallback, "fallback_config", "incomplete_config")
     system = (
         "你是《周易》静态卦象解释助手。必须只输出JSON。"
-        "只能基于查询词、卦象、卦辞、象辞、彖传、爻辞解释；"
-        "不得编造起卦过程，不得给出确定性预测。"
+        "只能基于查询词和提供的经典上下文解释，不得编造起卦过程或确定性预测。"
     )
     payload = {
         "query": query,
-        "primary_hexagram": resolved.primary,
-        "classic_text": classic_text,
+        "hexagram_context": _minimal_classic_context(resolved, classic_text),
         "required_schema": {
             "summary": "str",
+            "answer_to_question": "str",
+            "hexagram_structure": "str",
             "current_situation": "str",
+            "changing_line_focus": "str",
             "change_trend": "str",
-            "advice": "list[str]",
+            "actionable_advice": "list[str]",
             "risks": "list[str]",
             "disclaimer": "str",
         },
     }
     try:
-        result = await _chat_json(system, payload)
-        result["llm_used"] = True
-        return {**fallback, **result}
+        raw = await _chat_json(system, payload)
+        return _merge_interpretation(fallback, model_validate(InterpretationLLMOutput, raw))
     except Exception as exc:  # noqa: BLE001
         logger.warning(f"Yijing LLM query interpretation failed: {exc}")
-        return fallback
+        if _is_invalid_response_error(exc):
+            return _fallback_interpretation(fallback, "fallback_invalid", "invalid_response")
+        return _fallback_interpretation(fallback, "fallback_request", "request_failed")

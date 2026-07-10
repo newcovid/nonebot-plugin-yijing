@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from ..config import plugin_config
 from ..core.data import find_hexagram, get_hexagram_text, hexagram_by_seq, sources
 from ..core.hexagram import (
     ResolvedHexagram,
@@ -21,6 +22,49 @@ METHOD_NAME = {
     "manual_yarrow": "手动大衍筮法",
     "random": "随机一卦",
 }
+INTERPRETATION_SOURCE = {
+    "success": "LLM 综合解读",
+    "not_requested": "本地规则解读",
+    "fallback_config": "LLM 不可用，已安全降级",
+    "fallback_request": "LLM 不可用，已安全降级",
+    "fallback_invalid": "LLM 不可用，已安全降级",
+}
+
+
+def _display_coin_faces(coins: list[list[str]]) -> list[list[str]]:
+    """Convert legacy internal A/B markers to the configured face labels."""
+
+    legacy_labels = {
+        "A": plugin_config.yijing_positive_face,
+        "B": plugin_config.yijing_negative_face,
+    }
+    rows: list[list[str]] = []
+    for group in coins:
+        row = []
+        for face in group:
+            text = "" if face is None else str(face).strip()
+            row.append(legacy_labels.get(text.upper(), text))
+        rows.append(row)
+    return rows
+
+
+def _coin_rows(coins: list[list[str]]) -> list[list[dict[str, str]]]:
+    return [
+        [
+            {
+                "label": face,
+                "side": (
+                    "positive"
+                    if face == plugin_config.yijing_positive_face
+                    else "negative"
+                    if face == plugin_config.yijing_negative_face
+                    else "neutral"
+                ),
+            }
+            for face in group
+        ]
+        for group in coins
+    ]
 
 
 def _yaoci_body(item: dict[str, Any], label: str) -> str:
@@ -31,6 +75,46 @@ def _yaoci_body(item: dict[str, Any], label: str) -> str:
             body = text[len(prefix) :].lstrip(" ：:，,、")
             return body or text
     return text
+
+
+def _normalize_interpretation(value: dict[str, Any]) -> dict[str, Any]:
+    """Read both the v2 interpretation contract and legacy record JSON."""
+
+    result = dict(value or {})
+    summary = str(result.get("summary") or "")
+    old_advice = result.pop("advice", [])
+    advice = result.get("actionable_advice", old_advice)
+    if not isinstance(advice, list):
+        advice = []
+    llm_used = bool(result.get("llm_used", False))
+    status = str(result.get("llm_status") or ("success" if llm_used else "not_requested"))
+    result.update(
+        {
+            "schema_version": int(result.get("schema_version") or 1),
+            "summary": summary,
+            "answer_to_question": str(result.get("answer_to_question") or summary),
+            "hexagram_structure": str(
+                result.get("hexagram_structure") or result.get("current_situation") or summary
+            ),
+            "current_situation": str(result.get("current_situation") or summary),
+            "changing_line_focus": str(
+                result.get("changing_line_focus") or "旧记录未保存独立的动爻重点说明。"
+            ),
+            "change_trend": str(result.get("change_trend") or ""),
+            "actionable_advice": [str(item) for item in advice if str(item).strip()],
+            "risks": result.get("risks", []) if isinstance(result.get("risks", []), list) else [],
+            "relations": (
+                result.get("relations", []) if isinstance(result.get("relations", []), list) else []
+            ),
+            "disclaimer": str(result.get("disclaimer") or "本结果仅供传统文化学习与反思。"),
+            "llm_used": llm_used,
+            "llm_status": status,
+            "fallback_reason": result.get("fallback_reason"),
+            "source_label": INTERPRETATION_SOURCE.get(status, "本地规则解读"),
+            "is_fallback": status.startswith("fallback_"),
+        }
+    )
+    return result
 
 
 def classic_text_for(resolved: ResolvedHexagram) -> dict[str, Any]:
@@ -53,6 +137,8 @@ def build_record_card_payload(
     random_mode: bool = False,
 ) -> dict[str, Any]:
     classic = classic_text_for(resolved)
+    display_coins = _display_coin_faces(coins)
+    display_interpretation = _normalize_interpretation(interpretation)
     primary_text = classic["primary"]
     changed_text = classic["changed"]
     rows = []
@@ -83,9 +169,10 @@ def build_record_card_payload(
         "question": question or "（未提供具体问题）",
         "method": METHOD_NAME.get(method, method),
         "method_raw": method,
-        "coins": coins,
+        "coins": display_coins,
+        "coin_rows": _coin_rows(display_coins),
         "cast_trace": cast_trace or {},
-        "has_coins": bool(coins),
+        "has_coins": bool(display_coins),
         "has_yarrow_trace": (cast_trace or {}).get("kind") == "manual_yarrow",
         "line_values": resolved.line_values,
         "moving_positions": resolved.moving_positions,
@@ -95,7 +182,7 @@ def build_record_card_payload(
         "changed_text": changed_text,
         "line_rows": rows,
         "preprocess": preprocess,
-        "interpretation": interpretation,
+        "interpretation": display_interpretation,
         "sources": sources(),
     }
 
@@ -144,9 +231,12 @@ def build_hexagram_query_payload(query: str, interpretation: dict[str, Any] | No
     resolved = resolve_static_hexagram(int(hexagram["seq"]))
     interpretation = interpretation or {
         "summary": f"你查询的是 {hexagram['name']} 卦。当前为静卦查询，不针对具体问题推演。",
+        "answer_to_question": f"你查询的是 {hexagram['name']} 卦。",
+        "hexagram_structure": "静态卦象查询。",
         "current_situation": get_hexagram_text(int(hexagram["seq"]))["guaci"].get("text", ""),
+        "changing_line_focus": "静态查卦无动爻。",
         "change_trend": "静态查卦不产生变卦。",
-        "advice": ["可结合卦辞、大象和六爻位置理解该卦。"],
+        "actionable_advice": ["可结合卦辞、大象和六爻位置理解该卦。"],
         "risks": [],
         "disclaimer": "本结果为传统文本解释，不构成现实决策建议。",
     }

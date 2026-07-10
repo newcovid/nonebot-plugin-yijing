@@ -2,6 +2,9 @@ from __future__ import annotations
 
 from datetime import datetime
 
+import pytest
+
+from nonebot_plugin_yijing.config import plugin_config
 from nonebot_plugin_yijing.core.hexagram import resolve_by_lines
 from nonebot_plugin_yijing.models import CastRecord
 from nonebot_plugin_yijing.services.payload import (
@@ -80,6 +83,27 @@ def test_record_card_payload_contains_template_sections() -> None:
         True,
     ]
     assert payload["sources"]
+
+
+def test_record_card_payload_replaces_legacy_coin_markers_with_configured_faces(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(plugin_config, "yijing_positive_face", "字")
+    monkeypatch.setattr(plugin_config, "yijing_negative_face", "花")
+    resolved = resolve_by_lines([8, 7, 8, 7, 8, 7])
+
+    payload = build_record_card_payload(
+        record_id="YJ-LEGACY01",
+        question="旧记录兼容测试",
+        method="coin",
+        coins=[["A", "B", "A"]],
+        resolved=resolved,
+        preprocess={"allowed": True, "warnings": [], "llm_used": False},
+        interpretation={"summary": "测试摘要", "advice": []},
+        cast_trace={"kind": "coin"},
+    )
+
+    assert payload["coins"] == [["字", "花", "字"]]
 
 
 def test_history_payload_supports_empty_records() -> None:
