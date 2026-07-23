@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## 0.3.1 - 2026-07-23
+
+### Changed
+
+- Explicitly declare support for all NoneBot adapters in the plugin metadata.
+- Leave the `nonebot-plugin-orm` database backend choice to the host project instead of forcing
+  a backend extra at runtime.
+- Run database integration tests against the CI-provided test service without publishing its
+  driver as a runtime dependency.
+
 ## 0.3.0 - 2026-07-10
 
 ### Added
@@ -139,7 +149,7 @@
 
 - Initial runnable NoneBot2 plugin scaffold.
 - Alconna command parsing.
-- ORM + SQLite persistence for records, group config, quotas, and cooldowns.
+- ORM persistence for records, group config, quotas, and cooldowns.
 - htmlrender image output.
 - access-control service registration.
 - Coin, yarrow, manual, and random casting flows.

@@ -13,7 +13,7 @@ The plugin works with local rule-based interpretation by default. An optional Op
 ## Features
 
 - Command parsing with `nonebot-plugin-alconna`.
-- History, settings, quota, and cooldown persistence with `nonebot-plugin-orm[sqlite]` and SQLite.
+- History, settings, quota, and cooldown persistence with `nonebot-plugin-orm`; the host project chooses the database backend.
 - Image output for help, casting, lookup, and history views through `nonebot-plugin-htmlrender`.
 - Plugin-level and feature-level permission control through `nonebot-plugin-access-control` and `nonebot-plugin-access-control-api`.
 - Three-coin casting, probabilistic yarrow-stalk simulation, manual input, and random hexagram generation.
@@ -65,6 +65,9 @@ plugins = ["nonebot_plugin_yijing"]
 
 Runtime dependencies are installed automatically. The plugin does not require a specific adapter; install and configure the adapter for the platform used by the host NoneBot project.
 
+The plugin depends only on the `nonebot-plugin-orm` core package and does not force a database
+backend. The host project manages its database driver and connection configuration.
+
 ## ORM Setup
 
 Run after first install or upgrade:
@@ -82,9 +85,6 @@ See [`.env.example`](.env.example) for the complete sample.
 ### ENV sample
 
 ```env
-# NoneBot / ORM
-# SQLite database URL used by nonebot-plugin-orm; replace it when using another database.
-SQLALCHEMY_DATABASE_URL=sqlite+aiosqlite:///./data/yijing.sqlite3
 # Rendering backend used by nonebot-plugin-htmlrender.
 RENDER_BACKEND=playwright
 
@@ -144,7 +144,6 @@ YIJING_LLM_ENABLED=false
 
 | Key | Default | Description |
 | --- | --- | --- |
-| `SQLALCHEMY_DATABASE_URL` | Set by the host project | Database URL for `nonebot-plugin-orm`; the sample value is suitable for SQLite projects. |
 | `RENDER_BACKEND` | htmlrender default | Image renderer backend; this plugin recommends and validates `playwright`. |
 | `ACCESS_CONTROL_AUTO_PATCH_ENABLED` | access-control default | Whether access-control automatically patches matchers; keeping `true` is recommended. |
 | `ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED` | access-control default | Whether access-control replies when permission is denied. |

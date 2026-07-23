@@ -121,19 +121,21 @@ def test_llm_privacy_migration_extends_cast_trace_migration() -> None:
     assert '"llm_privacy_notice_shown"' in text
 
 
-def test_llm_privacy_migration_upgrades_and_downgrades_sqlite(
+def test_llm_privacy_migration_upgrades_and_downgrades(
     monkeypatch: pytest.MonkeyPatch,
+    test_sync_database_url: str,
 ) -> None:
     migration = importlib.import_module(
         "nonebot_plugin_yijing.migrations.20260710_01_add_llm_privacy_notice"
     )
-    engine = sa.create_engine("sqlite:///:memory:")
+    engine = sa.create_engine(test_sync_database_url)
     metadata = sa.MetaData()
     sa.Table(
         "nonebot_plugin_yijing_group_config",
         metadata,
         sa.Column("group_id", sa.String(128), primary_key=True),
     )
+    metadata.drop_all(engine, checkfirst=True)
     metadata.create_all(engine)
 
     with engine.begin() as connection:
@@ -151,4 +153,5 @@ def test_llm_privacy_migration_upgrades_and_downgrades_sqlite(
         )}
         assert "llm_privacy_notice_shown" not in columns
 
+    metadata.drop_all(engine, checkfirst=True)
     engine.dispose()

@@ -33,6 +33,7 @@ __plugin_meta__ = PluginMetadata(
     type="application",
     homepage="https://github.com/newcovid/nonebot-plugin-yijing",
     config=YijingConfig,
+    supported_adapters=None,
 )
 
 from . import commands as _commands  # noqa: E402,F401

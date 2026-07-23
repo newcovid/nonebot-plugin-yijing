@@ -13,7 +13,7 @@
 ## 功能
 
 - 使用 `nonebot-plugin-alconna` 解析命令。
-- 使用 `nonebot-plugin-orm[sqlite]` + SQLite 存储历史、配置、限额与冷却。
+- 使用 `nonebot-plugin-orm` 存储历史、配置、限额与冷却，数据库后端由宿主项目选择。
 - 使用 `nonebot-plugin-htmlrender` 将帮助、起卦、查卦、历史等输出渲染为图片。
 - 使用 `nonebot-plugin-access-control` 与 `nonebot-plugin-access-control-api` 管理插件级和功能级权限。
 - 支持三枚铜钱法、大衍筮法概率模拟、手动输入与随机一卦。
@@ -65,6 +65,8 @@ plugins = ["nonebot_plugin_yijing"]
 
 运行依赖会随插件自动安装。插件不绑定具体适配器，请在宿主 NoneBot 项目中按实际平台安装并配置适配器。
 
+插件仅依赖 `nonebot-plugin-orm` 核心包，不强制安装数据库后端。数据库驱动和连接配置由宿主项目统一管理。
+
 ## ORM 初始化
 
 首次使用或升级后执行：
@@ -81,9 +83,6 @@ nb orm check
 ### ENV 示例
 
 ```env
-# NoneBot / ORM
-# nonebot-plugin-orm 使用的 SQLite 数据库地址；使用其他数据库时请替换。
-SQLALCHEMY_DATABASE_URL=sqlite+aiosqlite:///./data/yijing.sqlite3
 # nonebot-plugin-htmlrender 的渲染后端。
 RENDER_BACKEND=playwright
 
@@ -143,7 +142,6 @@ YIJING_LLM_ENABLED=false
 
 | 配置项 | 默认值 | 说明 |
 | --- | --- | --- |
-| `SQLALCHEMY_DATABASE_URL` | 由宿主项目决定 | `nonebot-plugin-orm` 数据库连接串；SQLite 项目可使用示例值。 |
 | `RENDER_BACKEND` | 由 htmlrender 决定 | 图片渲染后端；本插件推荐并验证 `playwright`。 |
 | `ACCESS_CONTROL_AUTO_PATCH_ENABLED` | access-control 默认值 | 是否自动接入 access-control 权限补丁；推荐保持 `true`。 |
 | `ACCESS_CONTROL_REPLY_ON_PERMISSION_DENIED_ENABLED` | access-control 默认值 | 权限拒绝时是否由 access-control 回复提示。 |

@@ -35,8 +35,8 @@ service identifiers under the `nonebot_plugin_yijing` namespace.
 
 Add focused tests under `tests/test_*.py`. Prefer deterministic tests for core casting,
 schema validation, payload construction, migrations, and data loading. `tests/conftest.py`
-initializes a minimal NoneBot driver with in-memory SQLite and LLM disabled, so tests
-should not require external services by default. Run `pytest -q` before submitting changes;
+initializes a minimal NoneBot driver with the test database URL and LLM disabled. Database
+integration tests require the configured test service. Run `pytest -q` before submitting changes;
 run Ruff and compile checks when touching shared code or packaging.
 
 ## Commit & Pull Request Guidelines
@@ -50,5 +50,5 @@ output screenshots when HTML templates or image rendering change.
 ## Security & Configuration Tips
 
 Use `.env.example` as the configuration reference. Do not commit real bot tokens, database
-URLs, API keys, or private group IDs. Keep tests on in-memory SQLite unless a change
-explicitly needs another backend.
+URLs, API keys, or private group IDs. Keep database backend selection outside runtime plugin
+dependencies.

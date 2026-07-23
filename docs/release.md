@@ -30,7 +30,7 @@ Also confirm:
 - `CHANGELOG.md` has a release entry.
 - `README.md` describes current limitations accurately.
 - `LICENSE` and `pyproject.toml` license metadata match.
-- No private `.env`, SQLite database, logs, cache, or machine-specific path is included.
+- No private `.env`, local database, logs, cache, or machine-specific path is included.
 - `nonebot_plugin_yijing/data/`, `templates/`, and `migrations/` are included in the wheel.
 
 ## 3. Wheel content inspection

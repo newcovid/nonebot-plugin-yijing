@@ -169,9 +169,12 @@ def test_parse_history_cleanup_target_rejects_invalid_input(body: str) -> None:
 @pytest.mark.asyncio
 async def test_duplicate_record_is_rendered_without_llm_or_new_record(
     monkeypatch: pytest.MonkeyPatch,
+    test_database_url: str,
 ) -> None:
-    engine = create_async_engine("sqlite+aiosqlite:///:memory:")
+    engine = create_async_engine(test_database_url)
     async with engine.begin() as connection:
+        for table in (CastRecord, GroupConfig, GroupCooldown, RuntimeQuota):
+            await connection.run_sync(table.__table__.drop, checkfirst=True)
         for table in (CastRecord, GroupConfig, GroupCooldown, RuntimeQuota):
             await connection.run_sync(table.__table__.create)
     factory = async_sessionmaker(engine, expire_on_commit=False)
@@ -246,6 +249,9 @@ async def test_duplicate_record_is_rendered_without_llm_or_new_record(
         )
         forced_count = await session.scalar(select(func.count()).select_from(CastRecord))
 
+    async with engine.begin() as connection:
+        for table in reversed((CastRecord, GroupConfig, GroupCooldown, RuntimeQuota)):
+            await connection.run_sync(table.__table__.drop, checkfirst=True)
     await engine.dispose()
     assert llm_called is False
     assert count == 1

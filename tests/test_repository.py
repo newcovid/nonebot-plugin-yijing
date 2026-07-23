@@ -12,14 +12,19 @@ from nonebot_plugin_yijing.services.repository import delete_user_records, find_
 
 
 @pytest.fixture
-async def session() -> AsyncSession:
-    engine = create_async_engine("sqlite+aiosqlite:///:memory:")
+async def session(test_database_url: str) -> AsyncSession:
+    engine = create_async_engine(test_database_url)
     async with engine.begin() as connection:
+        await connection.run_sync(CastRecord.__table__.drop, checkfirst=True)
         await connection.run_sync(CastRecord.__table__.create)
     factory = async_sessionmaker(engine, expire_on_commit=False)
-    async with factory() as value:
-        yield value
-    await engine.dispose()
+    try:
+        async with factory() as value:
+            yield value
+    finally:
+        async with engine.begin() as connection:
+            await connection.run_sync(CastRecord.__table__.drop, checkfirst=True)
+        await engine.dispose()
 
 
 def _record(
