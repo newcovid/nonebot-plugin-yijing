@@ -3,7 +3,7 @@ name = "nonebot-plugin-yijing"
 version = "0.3.1"
 description = "群内自助进行基于《周易》的起卦、查卦与解卦的 NoneBot2 插件"
 authors = [
-    { name = "YG W" },
+    { name = "newcovid" },
 ]
 readme = "README.md"
 requires-python = ">=3.10"
