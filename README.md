@@ -63,7 +63,7 @@ plugins = ["nonebot_plugin_yijing"]
 
 ## 依赖
 
-运行依赖会随插件自动安装。插件不绑定具体适配器，请在宿主 NoneBot 项目中按实际平台安装并配置适配器。
+运行依赖会随插件自动安装。插件通过 `inherit_supported_adapters` 继承 `nonebot-plugin-alconna` 的适配器支持范围，本身不依赖具体适配器，请在宿主 NoneBot 项目中按实际平台安装并配置适配器。
 
 插件仅依赖 `nonebot-plugin-orm` 核心包，不强制安装数据库后端。数据库驱动和连接配置由宿主项目统一管理。
 

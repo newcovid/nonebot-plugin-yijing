@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from nonebot.plugin import inherit_supported_adapters
 
 from nonebot_plugin_yijing import __plugin_meta__
 from nonebot_plugin_yijing.render import message as message_module
@@ -25,15 +26,17 @@ async def test_image_message_uses_current_adapter_export(monkeypatch: pytest.Mon
     assert captured["message"][0].raw == b"image-bytes"
 
 
-def test_package_declares_all_adapters_without_forcing_platform_dependencies() -> None:
+def test_package_inherits_alconna_adapters_without_forcing_platform_dependencies() -> None:
     project_root = Path(__file__).resolve().parent.parent
     plugin_init = (project_root / "nonebot_plugin_yijing" / "__init__.py").read_text(
         encoding="utf-8"
     )
     pyproject = (project_root / "pyproject.toml").read_text(encoding="utf-8")
 
-    assert __plugin_meta__.supported_adapters is None
-    assert "supported_adapters=None" in plugin_init
+    assert __plugin_meta__.supported_adapters == inherit_supported_adapters(
+        "nonebot_plugin_alconna"
+    )
+    assert 'inherit_supported_adapters("nonebot_plugin_alconna")' in plugin_init
     assert "nonebot-adapter-" not in pyproject
     assert '"nonebot-plugin-orm>=0.7.0"' in pyproject
 

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from nonebot import require
-from nonebot.plugin import PluginMetadata
+from nonebot.plugin import PluginMetadata, inherit_supported_adapters
 
 from .config import YijingConfig
 
@@ -33,7 +33,7 @@ __plugin_meta__ = PluginMetadata(
     type="application",
     homepage="https://github.com/newcovid/nonebot-plugin-yijing",
     config=YijingConfig,
-    supported_adapters=None,
+    supported_adapters=inherit_supported_adapters("nonebot_plugin_alconna"),
 )
 
 from . import commands as _commands  # noqa: E402,F401

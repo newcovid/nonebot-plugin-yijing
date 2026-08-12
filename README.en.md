@@ -63,7 +63,9 @@ plugins = ["nonebot_plugin_yijing"]
 
 ## Dependencies
 
-Runtime dependencies are installed automatically. The plugin does not require a specific adapter; install and configure the adapter for the platform used by the host NoneBot project.
+Runtime dependencies are installed automatically. The plugin inherits its supported adapters from
+`nonebot-plugin-alconna` through `inherit_supported_adapters` and does not depend on any specific
+adapter itself; install and configure the adapter for the platform used by the host NoneBot project.
 
 The plugin depends only on the `nonebot-plugin-orm` core package and does not force a database
 backend. The host project manages its database driver and connection configuration.

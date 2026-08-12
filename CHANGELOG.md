@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.3.2 - 2026-08-12
+
+### Changed
+
+- Inherit the supported adapters from `nonebot-plugin-alconna` via `inherit_supported_adapters`
+  instead of declaring `supported_adapters=None`.
+
 ## 0.3.1 - 2026-07-23
 
 ### Changed
